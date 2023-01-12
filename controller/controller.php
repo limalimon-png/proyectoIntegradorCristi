@@ -16,6 +16,7 @@ class Controller
     var $body;
     var $productosCarrito;
     var $mensaje;
+    var $contenido;
 
     // function __construct()
     // {
@@ -77,7 +78,27 @@ class Controller
         require("vistas/index.php");
     }
 
-    
+    public function tabla($name)
+    {
+        require("vistas/$name");
+    }
+
+    public function listaProductos()
+    {
+        if (isset($_GET['tabla'])) {
+            
+            $bd=new Bd();
+            return( json_encode($bd->getProductos()));
+          }else{
+            return "no llega nada";
+          }
+    }
+
+    // public function cargarVista($contenido, $plantilla)
+    // {
+    //     $this->contenido=$contenido;
+    //     require_once($plantilla);
+    // }
 
     public function autentication()
     {
@@ -92,19 +113,23 @@ class Controller
         $this->mensaje = $aut->getMensaje();
         if ($this->mensaje == 'correcto') {
             // pasa a la siguiente pestaña
-            
-             header('location:../control');
+
+            header('location:../control');
+            // $this->cargarVista('contenido.php', 'index.php');
+            // //    include('menulateral.php');
+            // require('vistas/index.php');
         } else {
             //vuelve
-            $this->mensaje="prueba";
+            $this->mensaje = "prueba";
             // require('view/login.php');
-            
-               header('location:../login');
-            
-           
+
+            header('location:../login');
         }
     }
 
+
+
+    
 
     public function categorias()
     {
@@ -120,7 +145,7 @@ class Controller
         $this->productos = $bd->getProductos($prod);
         $this->categoria = $bd->getCategoria($prod);
         $this->cat = $prod;
-      
+
         require('view/productos.php');
 
 
@@ -137,7 +162,7 @@ class Controller
     public function verCarrito()
     {
         Cabecera::control();
-   
+
         if (isset($_SESSION['carrito'])) {
 
             if (!empty($_SESSION['carrito'])) {
@@ -152,15 +177,14 @@ class Controller
 
                 require('view/carrito.php');
             } else {
-         
-                require("view/categorias.php"); 
+
+                require("view/categorias.php");
             }
         } else {
-            require("view/categorias.php"); 
+            require("view/categorias.php");
         }
 
         echo Cabecera::menuCarrito();
-        
     }
 
 
@@ -169,19 +193,19 @@ class Controller
     {
         Cabecera::control();
         $procesar = new Procesar();
-        $this->pedidoValido=$procesar->getValido();
-       
-       
+        $this->pedidoValido = $procesar->getValido();
+
+
         if ($this->pedidoValido) {
             $this->pedidoValido = false;
-        
+
 
             Cabecera::control();
 
             $mail = new Mailer();
             $bd = new Bd();
             $this->pedido = $bd->getPedido();
-          
+
             $this->body = $_SESSION['credenciales'][0] . "ha realizado el pedido $this->pedido";
             $mail->enviarEmail(
                 'guillermomartinez1222@gmail.com',
@@ -196,21 +220,20 @@ class Controller
     public function cerrarSesion()
     {
 
-        $logout=new Logout();
+        $logout = new Logout();
         require('vistas/login.php');
-      
     }
 
 
-    public function actualizarProducto( )
+    public function actualizarProducto()
     {
         $actualizar = new Eliminar();
     }
 
 
-    public function registroProcess() 
+    public function registroProcess()
     {
-       
+
 
         $user[0] = $_POST["user"];
         $user[1] = $_POST["pass"];
@@ -221,24 +244,23 @@ class Controller
         $this->mensaje = $aut->getMensaje();
         if ($this->mensaje == 'correcto') {
             // pasa a la siguiente pestaña
-            $_POST["mensaje"]="";
-            
+            $_POST["mensaje"] = "";
+
             header('location:../categorias');
-            
         } else {
             //vuelve
-            $_POST["mensaje"]=$this->mensaje;
+            $_POST["mensaje"] = $this->mensaje;
             echo $_POST["mensaje"];
-             header('location:../registro');
+            header('location:../registro');
         }
     }
-    public function registro() 
+    public function registro()
     {
         require("view/registro.php");
     }
 
 
-    public function resetearFormulario() 
+    public function resetearFormulario()
     {
         require("view/formulario.php");
     }
@@ -247,38 +269,36 @@ class Controller
     public function enviarMail()
     {
 
-            $mail = new Mailer();
-           
-          $email=sha1($_POST["email"]);
-        
-            $mail->enviarEmail(
-                $_POST["email"],
-                $_POST["email"],
-                "<a href='localhost/proyecto/practica13/index.php/password/regenerar/formulario?id=$email'>Resetear constraseña</a>",
-                "gomzra@gmail.com"
-            );
-            // require('view/correo.php');
-        
+        $mail = new Mailer();
+
+        $email = sha1($_POST["email"]);
+
+        $mail->enviarEmail(
+            $_POST["email"],
+            $_POST["email"],
+            "<a href='localhost/proyecto/practica13/index.php/password/regenerar/formulario?id=$email'>Resetear constraseña</a>",
+            "gomzra@gmail.com"
+        );
+        // require('view/correo.php');
+
     }
     public function formularioPass()
     {
 
-           require("view/formularioResetear.php");
-        
+        require("view/formularioResetear.php");
     }
     public function comprobar()
     {
 
-        $comprobar=new Reseteo();
-        $resultado=$comprobar->getResulado();
+        $comprobar = new Reseteo();
+        $resultado = $comprobar->getResulado();
 
-        if($resultado){
+        if ($resultado) {
             echo "se cambio correctamente";
-           echo" <a href='../../../login'>Volver al login</a>";
-        }else{
+            echo " <a href='../../../login'>Volver al login</a>";
+        } else {
             echo "lo sentimos el email no es correcto";
-            echo" <a href='../../../login'>Volver al login</a>";
+            echo " <a href='../../../login'>Volver al login</a>";
         }
-        
     }
 }

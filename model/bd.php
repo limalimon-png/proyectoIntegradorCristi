@@ -76,37 +76,37 @@ class Bd
     }
 
 
-    public function getProductos($cod)
-    {
-        try {
+    // public function getProductos($cod)
+    // {
+    //     try {
 
-            $db = $this->conexion();
-            $sql = "SELECT * FROM producto where sha1(codCat)=?";
-            $stmt = $db->prepare($sql);
-            $stmt->execute(array($cod));
-
-
-            $catalogo = [$stmt->rowCount()];
-            $contador = 0;
-            foreach ($stmt as $res) {
-
-                $producto = [];
-                $producto[0] = $res["nombre"];
-                $producto[1] = $res["descripcion"];
-                $producto[2] = $res["peso"];
-                $producto[3] = $res["stock"];
-                $producto[4] = $res["codProd"];
+    //         $db = $this->conexion();
+    //         $sql = "SELECT * FROM producto where sha1(codCat)=?";
+    //         $stmt = $db->prepare($sql);
+    //         $stmt->execute(array($cod));
 
 
-                $catalogo[$contador] = $producto;
-                $contador++;
-            }
-            $db = null;
-            return $catalogo;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
+    //         $catalogo = [$stmt->rowCount()];
+    //         $contador = 0;
+    //         foreach ($stmt as $res) {
+
+    //             $producto = [];
+    //             $producto[0] = $res["nombre"];
+    //             $producto[1] = $res["descripcion"];
+    //             $producto[2] = $res["peso"];
+    //             $producto[3] = $res["stock"];
+    //             $producto[4] = $res["codProd"];
+
+
+    //             $catalogo[$contador] = $producto;
+    //             $contador++;
+    //         }
+    //         $db = null;
+    //         return $catalogo;
+    //     } catch (PDOException $e) {
+    //         echo $e->getMessage();
+    //     }
+    // }
     public  function getProductosCarrito($carrito)
     {
         $cadena = "";
@@ -277,6 +277,41 @@ class Bd
         }
      
     }
+
+
+    public function getProductos(){
+        try {
+
+            $db = $this->conexion();
+            $sql = "SELECT * FROM objeto";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $producto = [];
+                $producto[0] = $res["nombre"];
+                $producto[1] = $res["descripcion"];
+                $producto[2] = $res["precio"];
+                $producto[3] = $res["puntuacion_comentarios"];
+
+
+                $catalogo[$contador] = $producto;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+    }
+
+
+
 }
 
 
