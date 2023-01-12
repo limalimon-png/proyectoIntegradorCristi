@@ -64,8 +64,20 @@ class Controller
 
     public function login()
     {
-        require("view/login.php");
+        require("vistas/login.php");
     }
+
+    public function forgetAdmin()
+    {
+        require("vistas/forget.php");
+    }
+
+    public function panelControl()
+    {
+        require("vistas/index.php");
+    }
+
+    
 
     public function autentication()
     {
@@ -81,7 +93,7 @@ class Controller
         if ($this->mensaje == 'correcto') {
             // pasa a la siguiente pestaña
             
-            header('location:../categorias');
+             header('location:../control');
         } else {
             //vuelve
             $this->mensaje="prueba";
@@ -185,7 +197,7 @@ class Controller
     {
 
         $logout=new Logout();
-        require('view/login.php');
+        require('vistas/login.php');
       
     }
 

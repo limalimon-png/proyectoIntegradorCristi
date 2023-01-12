@@ -88,7 +88,7 @@ class Sesion
         try {
             $db = Bd::conexion();
 
-            $sql = "select * from restaurante where correo=? and clave=?; ";
+            $sql = "select email,password from usuario where email=? and password=?; ";
             $stmt = $db->prepare($sql);
             $stmt->execute($user);
 
@@ -99,8 +99,8 @@ class Sesion
             foreach ($stmt as $res) {
 
 
-                if ($user[0] == $res['correo'] && $user[1] == $res['clave']) {
-                    $resultado = [true, $res['codRes']];
+                if ($user[0] == $res['email'] && $user[1] == $res['password']) {
+                    $resultado = [true, 8];
                 }
             }
 

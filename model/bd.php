@@ -13,7 +13,7 @@ class Bd
     public static function conexion()
     {
 
-        return new PDO('mysql:host=localhost;dbname=practica12', 'root', '');
+        return new PDO('mysql:host=localhost;dbname=metabase', 'root', '');
     }
 
 
