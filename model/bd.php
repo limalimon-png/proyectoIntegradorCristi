@@ -4,10 +4,11 @@ class Bd
 {
     private $ultimoId;
 
-    public function getPedido(){
+    public function getPedido()
+    {
         $pedido = file_get_contents('store');
-        
-        $this->ultimoId=unserialize($pedido);
+
+        $this->ultimoId = unserialize($pedido);
         return $this->ultimoId;
     }
     public static function conexion()
@@ -17,35 +18,35 @@ class Bd
     }
 
 
-    public function getCategorias()
-    {
-        try {
+    // public function getCategorias()
+    // {
+    //     try {
 
-            $db = $this->conexion();
-            $sql = "SELECT * FROM categoria";
-            $stmt = $db->prepare($sql);
-            $stmt->execute();
-
-
-            $catalogo = [$stmt->rowCount()];
-            $contador = 0;
-            foreach ($stmt as $res) {
-
-                $categoria = [];
-                $categoria[0] = $res["nombre"];
-                $categoria[1] = $res["codCat"];
-                $categoria[2] = $res["descripcion"];
+    //         $db = $this->conexion();
+    //         $sql = "SELECT * FROM categoria";
+    //         $stmt = $db->prepare($sql);
+    //         $stmt->execute();
 
 
-                $catalogo[$contador] = $categoria;
-                $contador++;
-            }
-            $db = null;
-            return $catalogo;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
+    //         $catalogo = [$stmt->rowCount()];
+    //         $contador = 0;
+    //         foreach ($stmt as $res) {
+
+    //             $categoria = [];
+    //             $categoria[0] = $res["nombre"];
+    //             $categoria[1] = $res["codCat"];
+    //             $categoria[2] = $res["descripcion"];
+
+
+    //             $catalogo[$contador] = $categoria;
+    //             $contador++;
+    //         }
+    //         $db = null;
+    //         return $catalogo;
+    //     } catch (PDOException $e) {
+    //         echo $e->getMessage();
+    //     }
+    // }
     public function getCategoria($cat)
     {
         try {
@@ -161,11 +162,11 @@ class Bd
     {
 
 
-       
+
         try {
 
             $db = $this->conexion();
-           
+
             $datos[0] = $this->ultimoId;
             $datos[1] = $codigo;
             $datos[2] = $unidades;
@@ -180,12 +181,13 @@ class Bd
     }
 
 
-    public function procesarPedidos ($codRes){
-        
+    public function procesarPedidos($codRes)
+    {
+
         $datos[0] = date('Y-m-d');
         $datos[1] = $codRes;
 
-        
+
         try {
 
             $db = $this->conexion();
@@ -195,22 +197,21 @@ class Bd
             $stmt->execute($datos);
             //cogemos el ultimo insertado
             $this->ultimoId = $db->lastInsertId();
-            $pedido=serialize($this->ultimoId);
+            $pedido = serialize($this->ultimoId);
             file_put_contents('store', $pedido);
 
             $db = null;
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-    
-
     }
 
-    public function pedidoEnviado (){
-        
-       $array[0]=$this->ultimoId;
+    public function pedidoEnviado()
+    {
 
-        
+        $array[0] = $this->ultimoId;
+
+
         try {
 
             $db = $this->conexion();
@@ -218,19 +219,17 @@ class Bd
             $sql = "update  pedido set enviado=enviado where codPed=?";
             $stmt = $db->prepare($sql);
             $stmt->execute($array);
-           
-           
+
+
             $db = null;
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-    
-
     }
 
 
 
-    public function resetearPass($email,$pass):bool
+    public function resetearPass($email, $pass): bool
     {
 
         try {
@@ -240,22 +239,22 @@ class Bd
             $stmt = $db->prepare($sql);
             $stmt->execute(array($email));
 
-            $id=0;
+            $id = 0;
             $contador = 0;
             foreach ($stmt as $res) {
 
-                
+
                 $id = $res["codRes"];
-               
 
 
-                
+
+
                 $contador++;
             }
             $db = null;
 
 
-            if($contador==1){
+            if ($contador == 1) {
 
 
                 $db = $this->conexion();
@@ -263,27 +262,35 @@ class Bd
                 $sql = "update  restaurante set clave=? where codRes=$id";
                 $stmt = $db->prepare($sql);
                 $stmt->execute(array($pass));
-               
-               
+
+
                 $db = null;
 
                 return true;
             }
             return false;
-            
         } catch (PDOException $e) {
             echo $e->getMessage();
             return false;
         }
-     
     }
 
 
-    public function getProductos(){
-        try {
+    public function getCategorias($pagina)
+    {
+    }
 
+    public function getProductos($pagina)
+    {
+        try {
+            $pagina = $pagina * 10;
+            $indice = 10;
+            if ($pagina != 0) {
+
+                $indice = $pagina + 10;
+            }
             $db = $this->conexion();
-            $sql = "SELECT * FROM objeto";
+            $sql = "SELECT objeto.nombre, categoria.titulo as 'categoria', objeto.descripcion, objeto.precio, objeto.latitud, objeto.longitud, objeto.puntuacion_compra,objeto.puntuacion_comentarios, objeto.puntuacion_total FROM objeto join categoria on objeto.id_categoria=categoria.id Limit $pagina,$indice";
             $stmt = $db->prepare($sql);
             $stmt->execute();
 
@@ -293,10 +300,16 @@ class Bd
             foreach ($stmt as $res) {
 
                 $producto = [];
-                $producto[0] = $res["nombre"];
-                $producto[1] = $res["descripcion"];
-                $producto[2] = $res["precio"];
-                $producto[3] = $res["puntuacion_comentarios"];
+                $producto['nombre'] = $res[0];
+                $producto['categoria'] = $res[1];
+                $producto['descripcion'] = $res[2];
+                $producto['precio'] = $res[3];
+                $producto['latitud'] = $res[4];
+                $producto['longitud'] = $res[5];
+                $producto['puntuacion_compra'] = $res[6];
+                $producto['puntuacion_comentarios'] = $res[7];
+                $producto['puntuacion_total'] = $res[8];
+
 
 
                 $catalogo[$contador] = $producto;
@@ -307,11 +320,22 @@ class Bd
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-
     }
 
-
-
+    public function getUsuarios($pagina)
+    {
+    }
+    public function getLista($pagina, $tabla)
+    {
+        switch ($tabla) {
+            case 'productos':
+                return $this->getProductos($pagina);
+            case 'categorias':
+                return $this->getCategorias($pagina);
+            case 'usuarios':
+                return $this->getUsuarios($pagina);
+        }
+    }
 }
 
 

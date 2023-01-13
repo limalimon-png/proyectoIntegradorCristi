@@ -85,10 +85,16 @@ class Controller
 
     public function listaProductos()
     {
+        $pagina=0;
         if (isset($_GET['tabla'])) {
+            $tabla=$_GET('tabla');
+
+            if(isset($_GET['pagina'])){
+                $pagina=$_GET['pagina'];
+            }
             
             $bd=new Bd();
-            return( json_encode($bd->getProductos()));
+            return( json_encode($bd->getLista($pagina,$tabla)));
           }else{
             return "no llega nada";
           }
@@ -131,14 +137,14 @@ class Controller
 
     
 
-    public function categorias()
-    {
-        $db = new Bd();
-        $this->cats = $db->getCategorias();
-        require('view/categorias.php');
-        echo Cabecera::menuCategorias();
-        Cabecera::control();
-    }
+    // public function categorias()
+    // {
+    //     $db = new Bd();
+    //     $this->cats = $db->getCategorias();
+    //     require('view/categorias.php');
+    //     echo Cabecera::menuCategorias();
+    //     Cabecera::control();
+    // }
     public function productos($prod)
     {
         $bd = new Bd();

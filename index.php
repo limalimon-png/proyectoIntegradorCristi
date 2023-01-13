@@ -62,11 +62,11 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
     $controller->tabla('tables-data.php');
 }else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "categorias"  && !isset($array_ruta[2]) ){   
     //Llamo al método ver pasándole la clave que me están pidiendo
-    $controller->tabla('tablaCategorias.php');
+    $controller->tabla('tables-data.php');
 }else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "usuarios"  && !isset($array_ruta[2]) ){   
     //Llamo al método ver pasándole la clave que me están pidiendo
-    $controller->tabla('tablaUsuarios.php');
-}else if (isset($array_ruta[0]) && $array_ruta[0] == "lista?tabla=productos" && !isset($array_ruta[1])  ){   
+    $controller->tabla('tables-data.php');
+}else if (isset($array_ruta[0])  &&preg_match("/^lista\?tabla=productos&pagina=\d+$/",$array_ruta[0])==1 && !isset($array_ruta[1])  ){   
     //Llamo al método ver pasándole la clave que me están pidiendo
     echo $controller->listaProductos();
     
@@ -83,9 +83,9 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
 
 
     
-}else if (isset($array_ruta[0]) && $array_ruta[0] == "categorias" && !isset($array_ruta[1]) ){   
-    //Llamo al método ver pasándole la clave que me están pidiendo
-    $controller->categorias();
+// }else if (isset($array_ruta[0]) && $array_ruta[0] == "categorias" && !isset($array_ruta[1]) ){   
+//     //Llamo al método ver pasándole la clave que me están pidiendo
+//     $controller->categorias();
    
 }else if(isset($array_ruta[0]) && $array_ruta[0] == "categorias" && isset($array_ruta[1])&& preg_match("/^.+$/", $array_ruta[1])==1   ){   
     //Llamo al método ver pasándole la clave que me están pidiendo}else if (isset($array_ruta[0]) && $array_ruta[0] ==
@@ -121,6 +121,7 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
     $controller->enviarMail();
     
 }else if (isset($array_ruta[0]) && $array_ruta[0] == "password" && isset($array_ruta[1]) && $array_ruta[1]=="regenerar" &&isset($array_ruta[2]) &&preg_match("/^formulario.+$/", $array_ruta[2])==1 ){   
+// }else if (isset($array_ruta[0]) && $array_ruta[0] == "password" && isset($array_ruta[1]) && $array_ruta[1]=="regenerar" &&isset($array_ruta[2]) &&preg_match("/^lista?tabla=productos&pagina=\d+$/", $array_ruta[2])==1 ){   
     //formulario para escribir la contraseña 
     $controller->formularioPass();
 }else if (isset($array_ruta[0]) && $array_ruta[0] == "password" && isset($array_ruta[1]) && $array_ruta[1]=="regenerar" &&isset($array_ruta[2]) && $array_ruta[2] =="formulario" && isset($array_ruta[3]) && $array_ruta[3] =="process"){   
