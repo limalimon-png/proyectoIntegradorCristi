@@ -1,3 +1,24 @@
+
+<?php 
+ if(session_status()!=2)
+ session_start();
+if (isset($_SESSION["credenciales"])) {
+ if (empty($_SESSION["credenciales"])) {
+     header('location:login');
+  
+ } else {
+   
+ }
+ 
+} else {
+ header('location:login');
+
+}
+
+
+?>
+
+
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -7,7 +28,7 @@
 <!--<![endif]-->
 
 <head>
-    <base href="http://localhost/proyecto2eva/proyecto/index.php/">
+    <base href="../index.php">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Sufee Admin - HTML5 Admin Template</title>
@@ -144,7 +165,7 @@
 
                             <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
 
-                            <a class="nav-link" href="#"><i class="fa fa-power-off"></i> Logout</a>
+                            <a class="nav-link" href="admin/logout"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>
 
@@ -178,7 +199,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Tabla Productos</h1>
+                        <h1 id="tituloTabla">Tabla Productos</h1>
                     </div>
                 </div>
             </div>
@@ -202,7 +223,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">Datos productos</strong>
+                                <strong class="card-title" id="tituloDatos">Datos productos</strong>
                             </div>
                             <div class="card-body">
                                 <div class="row">

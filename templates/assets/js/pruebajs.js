@@ -7,7 +7,15 @@ let tabla;
 
 window.onload = async () => {
     tabla= location.href.substring(location.href.lastIndexOf("/")+1);
-    getProductos(pagina)
+    document.getElementById("tituloTabla").innerHTML="Tabla "+tabla
+    document.getElementById("tituloDatos").innerHTML="Datos "+tabla
+   try{
+       await getProductos(pagina)
+       
+
+   }catch(noAutorizado){
+    // location.href="admin/login"
+   }
 
 
     //  setInterval(() => {
@@ -60,6 +68,7 @@ async function getProductos(pag) {
         const response = await fetch('lista?tabla='+tabla+'&pagina=' + pagina);
 
         info = await response.json();
+        
         if (primera == 0) {
             construirCabecera(info[0])
             primera++;

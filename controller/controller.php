@@ -75,6 +75,8 @@ class Controller
 
     public function panelControl()
     {
+        $control=new Cabecera();
+        $control->control();
         require("vistas/index.php");
     }
 
@@ -85,9 +87,10 @@ class Controller
 
     public function listaProductos()
     {
+        
         $pagina=0;
         if (isset($_GET['tabla'])) {
-            $tabla=$_GET('tabla');
+            $tabla=$_GET['tabla'];
 
             if(isset($_GET['pagina'])){
                 $pagina=$_GET['pagina'];

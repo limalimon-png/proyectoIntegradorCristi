@@ -27,6 +27,9 @@ $ruta = str_replace($home, "", $_SERVER["REQUEST_URI"]);
 //Creo el array de ruta (filtrando los vacíos)
 $array_ruta = array_filter(explode("/", $ruta));
 
+
+
+
 //Decido la ruta en función de los elementos del array
 if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])){   
     //Llamo al método ver pasándole la clave que me están pidiendo
@@ -66,9 +69,12 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
 }else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "usuarios"  && !isset($array_ruta[2]) ){   
     //Llamo al método ver pasándole la clave que me están pidiendo
     $controller->tabla('tables-data.php');
-}else if (isset($array_ruta[0])  &&preg_match("/^lista\?tabla=productos&pagina=\d+$/",$array_ruta[0])==1 && !isset($array_ruta[1])  ){   
+}else if (isset($array_ruta[0])  &&preg_match("/^lista\?tabla=(productos||categorias||usuarios)&pagina=\d+$/",$array_ruta[0])==1 && !isset($array_ruta[1])  ){   
     //Llamo al método ver pasándole la clave que me están pidiendo
+  
     echo $controller->listaProductos();
+   
+   
     
 
 

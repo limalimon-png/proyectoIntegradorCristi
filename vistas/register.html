@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-    <base href="http://localhost/proyecto2eva/proyecto/index.php/">
+    <base href="../index.php">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Sufee Admin - HTML5 Admin Template</title>

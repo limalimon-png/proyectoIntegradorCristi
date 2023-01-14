@@ -278,6 +278,41 @@ class Bd
 
     public function getCategorias($pagina)
     {
+
+
+        try {
+            $pagina = $pagina * 10;
+            $indice = 10;
+            if ($pagina != 0) {
+
+                $indice = $pagina + 10;
+            }
+            $db = $this->conexion();
+            $sql = "SELECT * FROM categoria  Limit $pagina,$indice";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $categoria = [];
+                $categoria['id'] = $res[0];
+                $categoria['categoria_padre'] = $res[1];
+                $categoria['titulo'] = $res[2];
+                $categoria['descripcion'] = $res[3];
+                $categoria['foto'] = $res[4];
+                $categoria['puntuacion'] = $res[5];
+              
+                $catalogo[$contador] = $categoria;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
     }
 
     public function getProductos($pagina)
@@ -324,6 +359,42 @@ class Bd
 
     public function getUsuarios($pagina)
     {
+
+        try {
+            $pagina = $pagina * 10;
+            $indice = 10;
+            if ($pagina != 0) {
+
+                $indice = $pagina + 10;
+            }
+            $db = $this->conexion();
+            $sql = "SELECT nombre, email, apellidos, monedero, foto FROM usuario Limit $pagina,$indice";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $producto = [];
+                $producto['nombre'] = $res[0];
+                $producto['email'] = $res[1];
+                $producto['apellidos'] = $res[2];
+                $producto['monedero'] = $res[3];
+                $producto['foto'] = $res[4];
+               
+
+
+
+                $catalogo[$contador] = $producto;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
     }
     public function getLista($pagina, $tabla)
     {
