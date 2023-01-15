@@ -11,30 +11,38 @@
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active">
+                    <li class="active" id="dash">
                         <a href="admin/control"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
                     <h3 class="menu-title">Tablas</h3><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Categorias</a>
+                    <li class="" id="cat">
+                        <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Categorias</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="tables-basic.html">Basic Table</a></li>
                             <li><i class="fa fa-table"></i><a href="admin/categorias">Data Table</a></li>
-                        </ul>
+                        </ul> -->
+                        <a href="admin/categorias"> <i class="menu-icon fa fa fa-table"></i>Categorias </a>
+
                     </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Productos</a>
-                        <ul class="sub-menu children dropdown-menu">
+                    <li class="" id="prod">
+                    <!-- <li class="menu-item-has-children dropdown"> -->
+                    <a href="admin/productos"> <i class="menu-icon fa fa fa-table"></i>Productos </a>
+
+                        <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Productos</a> -->
+                        <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Productos</a> -->
+                        <!-- <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="tables-basic.html">Basic Table</a></li>
                             <li><i class="fa fa-table"></i><a href="admin/productos">Data Table</a></li>
-                        </ul>
+                        </ul> -->
                     </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Usuarios</a>
+                    <li class="" id="usu">
+                        <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Usuarios</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="tables-basic.html">Basic Table</a></li>
                             <li><i class="fa fa-table"></i><a href="admin/usuarios">Data Table</a></li>
-                        </ul>
+                        </ul> -->
+                        <a href="admin/usuarios"> <i class="menu-icon fa fa fa-table"></i>Usuarios </a>
+
                     </li>
 
                     <h3 class="menu-title">Icons</h3><!-- /.menu-title -->

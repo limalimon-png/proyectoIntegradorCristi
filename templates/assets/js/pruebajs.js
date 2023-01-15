@@ -6,16 +6,18 @@ let columnas;
 let tabla;
 
 window.onload = async () => {
-    tabla= location.href.substring(location.href.lastIndexOf("/")+1);
-    document.getElementById("tituloTabla").innerHTML="Tabla "+tabla
-    document.getElementById("tituloDatos").innerHTML="Datos "+tabla
-   try{
-       await getProductos(pagina)
-       
+    tabla = location.href.substring(location.href.lastIndexOf("/") + 1);
+    document.getElementById("tituloTabla").innerHTML = "Tabla " + tabla
+    document.getElementById("tituloDatos").innerHTML = "Datos " + tabla
 
-   }catch(noAutorizado){
-    // location.href="admin/login"
-   }
+    seleccionar();
+    try {
+        await getProductos(pagina)
+
+
+    } catch (noAutorizado) {
+        // location.href="admin/login"
+    }
 
 
     //  setInterval(() => {
@@ -64,11 +66,11 @@ async function getProductos(pag) {
         info = json[pagina]
 
     } else {
-       
-        const response = await fetch('lista?tabla='+tabla+'&pagina=' + pagina);
+
+        const response = await fetch('lista?tabla=' + tabla + '&pagina=' + pagina);
 
         info = await response.json();
-        
+
         if (primera == 0) {
             construirCabecera(info[0])
             primera++;
@@ -86,9 +88,9 @@ async function getProductos(pag) {
         let td = [];
         for (let i = 0; i < columnas.length; i++) {
             td[i] = document.createElement('td');
-            td[i].textContent = element[columnas[i]];  
+            td[i].textContent = element[columnas[i]];
         }
- 
+
         tr.append(...td);
         tbody.append(tr);
     });
@@ -96,4 +98,36 @@ async function getProductos(pag) {
 
 }
 
+
+function seleccionar() {
+    switch (tabla) {
+        case 'dashboard':
+            document.getElementById("dash").classList.add("active")
+            document.getElementById("cat").classList.remove("active")
+            document.getElementById("usu").classList.remove("active")
+            document.getElementById("prod").classList.remove("active")
+            break;
+        case 'categorias':
+            document.getElementById("cat").classList.add("active")
+            document.getElementById("prod").classList.remove("active")
+            document.getElementById("usu").classList.remove("active")
+            document.getElementById("dash").classList.remove("active")            
+            break;
+            case 'usuarios':
+                document.getElementById("usu").classList.add("active")
+                document.getElementById("cat").classList.remove("active")
+                document.getElementById("prod").classList.remove("active")
+                document.getElementById("dash").classList.remove("active")                
+                break;
+                case 'productos':
+                    document.getElementById("prod").classList.add("active")
+                    document.getElementById("cat").classList.remove("active")
+                    document.getElementById("usu").classList.remove("active")
+                    document.getElementById("dash").classList.remove("active")
+                    
+            break;
+
+
+    }
+}
 
