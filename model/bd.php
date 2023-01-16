@@ -288,7 +288,7 @@ class Bd
                 $indice = $pagina + 10;
             }
             $db = $this->conexion();
-            $sql = "SELECT * FROM categoria  Limit $pagina,$indice";
+            $sql = "SELECT categoria.titulo,categoria.descripcion, cat2.titulo as categoria_padre,categoria.foto,categoria.id FROM categoria join categoria as cat2 on cat2.id=categoria.categoria_padre Limit $pagina,$indice";
             $stmt = $db->prepare($sql);
             $stmt->execute();
 
@@ -298,13 +298,13 @@ class Bd
             foreach ($stmt as $res) {
 
                 $categoria = [];
-                $categoria['id'] = $res[0];
-                $categoria['categoria_padre'] = $res[1];
-                $categoria['titulo'] = $res[2];
-                $categoria['descripcion'] = $res[3];
-                $categoria['foto'] = $res[4];
-                $categoria['puntuacion'] = $res[5];
-              
+                $categoria['titulo'] = $res[0];
+                $categoria['descripcion'] = $res[1];
+                $categoria['titulo categoria padre'] = $res[2];
+                $categoria['foto'] = $res[3];
+                $categoria['id'] = $res[4];
+           
+
                 $catalogo[$contador] = $categoria;
                 $contador++;
             }
@@ -325,7 +325,7 @@ class Bd
                 $indice = $pagina + 10;
             }
             $db = $this->conexion();
-            $sql = "SELECT objeto.nombre, categoria.titulo as 'categoria', objeto.descripcion, objeto.precio, objeto.latitud, objeto.longitud, objeto.puntuacion_compra,objeto.puntuacion_comentarios, objeto.puntuacion_total FROM objeto join categoria on objeto.id_categoria=categoria.id Limit $pagina,$indice";
+            $sql = "SELECT objeto.nombre, categoria.titulo as 'categoria', objeto.descripcion, objeto.precio, objeto.latitud, objeto.longitud, objeto.puntuacion_compra,objeto.puntuacion_comentarios, objeto.puntuacion_total , objeto.id FROM objeto join categoria on objeto.id_categoria=categoria.id Limit $pagina,$indice";
             $stmt = $db->prepare($sql);
             $stmt->execute();
 
@@ -344,6 +344,7 @@ class Bd
                 $producto['puntuacion_compra'] = $res[6];
                 $producto['puntuacion_comentarios'] = $res[7];
                 $producto['puntuacion_total'] = $res[8];
+                $producto['id'] = $res[9];
 
 
 
@@ -368,7 +369,7 @@ class Bd
                 $indice = $pagina + 10;
             }
             $db = $this->conexion();
-            $sql = "SELECT nombre, email, apellidos, monedero, foto FROM usuario Limit $pagina,$indice";
+            $sql = "SELECT nombre, email, apellidos, monedero, foto, id FROM usuario Limit $pagina,$indice";
             $stmt = $db->prepare($sql);
             $stmt->execute();
 
@@ -383,11 +384,52 @@ class Bd
                 $producto['apellidos'] = $res[2];
                 $producto['monedero'] = $res[3];
                 $producto['foto'] = $res[4];
-               
+                $producto['id'] = $res[5];
+
 
 
 
                 $catalogo[$contador] = $producto;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getComentarios($pagina)
+    {
+
+        try {
+            $pagina = $pagina * 10;
+            $indice = 10;
+            if ($pagina != 0) {
+
+                $indice = $pagina + 10;
+            }
+            $db = $this->conexion();
+            $sql = "SELECT  usuario.email as email_usuario, objeto.nombre as nombre_producto , fecha, comentario.comentario FROM comentario join usuario on comentario.id_usuario=usuario.id join objeto on objeto.id=comentario.id_objeto  Limit $pagina,$indice";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $comentarios = [];
+                $comentarios['email usuario'] = $res[0];
+                $comentarios['nombre usuario'] = $res[1];
+                $comentarios['fecha'] = $res[2];
+                $comentarios['comentario'] = $res[3];
+                $comentarios['id'] = 0;
+
+
+
+
+                $catalogo[$contador] = $comentarios;
                 $contador++;
             }
             $db = null;
@@ -405,6 +447,8 @@ class Bd
                 return $this->getCategorias($pagina);
             case 'usuarios':
                 return $this->getUsuarios($pagina);
+            case 'comentarios':
+                return $this->getComentarios($pagina);
         }
     }
 }

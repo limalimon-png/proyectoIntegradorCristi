@@ -1,24 +1,3 @@
-
-<?php 
- if(session_status()!=2)
- session_start();
-if (isset($_SESSION["credenciales"])) {
- if (empty($_SESSION["credenciales"])) {
-     header('location:login');
-  
- } else {
-   
- }
- 
-} else {
- header('location:login');
-
-}
-
-
-?>
-
-
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -28,7 +7,7 @@ if (isset($_SESSION["credenciales"])) {
 <!--<![endif]-->
 
 <head>
-    <base href="../index.php">
+    <base href="../../index.php">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Sufee Admin - HTML5 Admin Template</title>
@@ -44,24 +23,20 @@ if (isset($_SESSION["credenciales"])) {
     <link rel="stylesheet" href="../templates/vendors/themify-icons/css/themify-icons.css">
     <link rel="stylesheet" href="../templates/vendors/flag-icon-css/css/flag-icon.min.css">
     <link rel="stylesheet" href="../templates/vendors/selectFX/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="../templates/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="../templates/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
 
     <link rel="stylesheet" href="../templates/assets/css/style.css">
-    <link rel="stylesheet" href="../templates/assets/css/tabla.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
 
 
 </head>
 
 <body>
     <!-- Left Panel -->
-
-
     <?php
-    include('menuLateral.php');
+    include('menuLateral.php')
+
     ?>
     <!-- /#left-panel -->
 
@@ -166,7 +141,7 @@ if (isset($_SESSION["credenciales"])) {
 
                             <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
 
-                            <a class="nav-link" href="admin/logout"><i class="fa fa-power-off"></i> Logout</a>
+                            <a class="nav-link" href="#"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>
 
@@ -193,15 +168,14 @@ if (isset($_SESSION["credenciales"])) {
                 </div>
             </div>
 
-        </header>
-        <!-- /header -->
+        </header><!-- /header -->
         <!-- Header-->
 
         <div class="breadcrumbs">
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1 id="tituloTabla">Tabla Productos</h1>
+                        <h1>Dashboard</h1>
                     </div>
                 </div>
             </div>
@@ -210,8 +184,8 @@ if (isset($_SESSION["credenciales"])) {
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Table</a></li>
-                            <li class="active">Data table</li>
+                            <li><a href="#">Forms</a></li>
+                            <li class="active">Basic</li>
                         </ol>
                     </div>
                 </div>
@@ -220,90 +194,86 @@ if (isset($_SESSION["credenciales"])) {
 
         <div class="content mt-3">
             <div class="animated fadeIn">
+
+
                 <div class="row">
 
-                    <div class="col-md-12">
+
+                    <div class="col-lg-12">
+
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title" id="tituloDatos">Datos productos</strong>
+                                <strong>Basic Form</strong> Elements
                             </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-6">
-                                        <div class="dataTables_length" id="bootstrap-data-table-export_length"><label>Show <select name="bootstrap-data-table-export_length" aria-controls="bootstrap-data-table-export" class="custom-select custom-select-sm form-control form-control-sm">
-                                                    <option value="10">10</option>
-                                                    <option value="25">25</option>
-                                                    <option value="50">50</option>
-                                                    <option value="-1">All</option>
-                                                </select> entries</label></div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6">
-                                        <div id="bootstrap-data-table-export_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="bootstrap-data-table-export"></label></div>
-                                    </div>
-                                </div>
-                                <table id="" class="table table-striped table-bordered">
-                                    <thead id="cabecera">
-                                      
-                                    </thead>
-                                    <tbody id="bodyLista">
+                            <div class="card-body card-block">
+                                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
 
-                                    </tbody>
-                                </table>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-5">
-                                        <div class="dataTables_info" id="bootstrap-data-table-export_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                                  <div class="row form-group">
+                                      <br>
+                                      <br>
+                                      
+                                      <div class="col col-md-3">
+                                      <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="../templates/images/admin.jpg">
+                                      <label for="file-input" class=" form-control-label">Imagen</label>
                                     </div>
-                                    <div class="col-sm-12 col-md-7">
-                                        <div class="dataTables_paginate paging_simple_numbers" id="bootstrap-data-table-export_paginate">
-                                            <ul class="pagination">
-                                                <li class="paginate_button page-item previous " id="bootstrap-data-table-export_previous"><a  onclick="getProductos(-1)" aria-controls="bootstrap-data-table-export" data-dt-idx="0" tabindex="0" class="page-link">Anterior</a></li>
-                                                <li class="paginate_button page-item active"><a href="#" aria-controls="bootstrap-data-table-export" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                                <li class="paginate_button page-item "><a href="#" aria-controls="bootstrap-data-table-export" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                                <li class="paginate_button page-item "><a href="#" aria-controls="bootstrap-data-table-export" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                                <li class="paginate_button page-item "><a href="#" aria-controls="bootstrap-data-table-export" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                                <li class="paginate_button page-item "><a href="#" aria-controls="bootstrap-data-table-export" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                                <li class="paginate_button page-item "><a href="#" aria-controls="bootstrap-data-table-export" data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-                                                <li class="paginate_button page-item next" id="bootstrap-data-table-export_next"><a onclick="getProductos(1)" aria-controls="bootstrap-data-table-export" data-dt-idx="7" tabindex="0" class="page-link">Siguiente</a></li>
-                                            </ul>
-                                        </div>
+                                        <div class="col-12 col-md-9"><input type="file" id="file-input" name="file-input" class="form-control-file"></div>
+
                                     </div>
-                                </div>
+                                   
+                                
+                                <div class="row form-group">
+                                        <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">Id</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="Disabled" disabled="" class="form-control"></div>
+                                    </div>
+                               
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Usuario</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="text-input" name="text-input" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Apellidos</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="text-input" name="text-input" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="email-input" class=" form-control-label">Correo</label></div>
+                                        <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="Enter Email" class="form-control"><small class="help-block form-text">Please enter your email</small></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="password-input" class=" form-control-label">Contraseña</label></div>
+                                        <div class="col-12 col-md-9"><input type="password" id="password-input" name="password-input" placeholder="Password" class="form-control"><small class="help-block form-text">Please enter a complex password</small></div>
+                                    </div>
+
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="monedero-input" class=" form-control-label">ondero</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="monedero-input" name="monedero-input" placeholder="Password" class="form-control"><small class="help-block form-text">Please enter a complex password</small></div>
+                                    </div>
+
+                                   
+                                </form>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-dot-circle-o"></i> Submit
+                                </button>
+                                <button type="reset" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-ban"></i> Reset
+                                </button>
                             </div>
                         </div>
-                    </div>
+
+                    </div><!-- .content -->
+                </div><!-- /#right-panel -->
+                <!-- Right Panel -->
 
 
-                </div>
-            </div><!-- .animated -->
-        </div><!-- .content -->
+                <script src="../templates/vendors/jquery/dist/jquery.min.js"></script>
+                <script src="../templates/vendors/popper.js/dist/umd/popper.min.js"></script>
 
+                <script src="../templates/vendors/jquery-validation/dist/jquery.validate.min.js"></script>
+                <script src="../templates/vendors/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
 
-    </div><!-- /#right-panel -->
-
-    <!-- Right Panel -->
-
-
-    <script src="../templates/assets/js/tablas.js"></script>
-
-    <script src="../templates/vendors/jquery/dist/jquery.min.js"></script>
-    <script src="../templates/vendors/popper.js/dist/umd/popper.min.js"></script>
-    <script src="../templates/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="../templates/assets/js/main.js"></script>
-
-
-    <script src="../templates/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="../templates/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="../templates/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../templates/vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
-    <script src="../templates/vendors/jszip/dist/jszip.min.js"></script>
-    <script src="../templates/vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="../templates/vendors/pdfmake/build/vfs_fonts.js"></script>
-    <script src="../templates/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="../templates/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="../templates/vendors/datatables.net-buttons/js/buttons.colVis.min.js"></script>
-    <script src="../templates/assets/js/init-scripts/data-table/datatables-init.js"></script>
-
-
+                <script src="../templates/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+                <script src="../templates/assets/js/main.js"></script>
 </body>
 
 </html>

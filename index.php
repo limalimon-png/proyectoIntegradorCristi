@@ -60,22 +60,33 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
     //Llamo al método ver pasándole la clave que me están pidiendo
     $controller->panelControl();
 
-}else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "productos"  && !isset($array_ruta[2]) ){   
+
+}else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" &&preg_match("/^(productos||categorias||usuarios||comentarios)$/",$array_ruta[1])==1  && !isset($array_ruta[2]) ){   
     //Llamo al método ver pasándole la clave que me están pidiendo
     $controller->tabla('tables-data.php');
-}else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "categorias"  && !isset($array_ruta[2]) ){   
-    //Llamo al método ver pasándole la clave que me están pidiendo
-    $controller->tabla('tables-data.php');
-}else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "usuarios"  && !isset($array_ruta[2]) ){   
-    //Llamo al método ver pasándole la clave que me están pidiendo
-    $controller->tabla('tables-data.php');
-}else if (isset($array_ruta[0])  &&preg_match("/^lista\?tabla=(productos||categorias||usuarios)&pagina=\d+$/",$array_ruta[0])==1 && !isset($array_ruta[1])  ){   
+}else if (isset($array_ruta[0])  &&preg_match("/^lista\?tabla=(productos||categorias||usuarios||comentarios)&pagina=\d+$/",$array_ruta[0])==1 && !isset($array_ruta[1])  ){   
     //Llamo al método ver pasándole la clave que me están pidiendo
   
     echo $controller->listaProductos();
    
    
     
+}else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "usuarios" && preg_match("/^\d+$/",$array_ruta[2])==1 && !isset($array_ruta[3])  ){   
+    //Llamo al método ver pasándole la clave que me están pidiendo
+  
+    $controller->verFicha('Usuario');
+   
+}else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "categorias" && preg_match("/^\d+$/",$array_ruta[2])==1 && !isset($array_ruta[3])  ){   
+    //Llamo al método ver pasándole la clave que me están pidiendo
+  
+    $controller->verFicha('Categoria');
+
+}else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "productos" && preg_match("/^\d+$/",$array_ruta[2])==1 && !isset($array_ruta[3])  ){   
+    //Llamo al método ver pasándole la clave que me están pidiendo
+  
+    $controller->verFicha('Objeto');
+    
+
 
 
 

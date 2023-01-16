@@ -30,13 +30,12 @@ window.onload = async () => {
 }
 
 function construirCabecera(column) {
+   
     columnas = Object.keys(column)
-
-
-
+    
     cabecera = document.createElement('tr');
 
-    for (let i = 0; i < columnas.length; i++) {
+    for (let i = 0; i < columnas.length-1; i++) {
 
         var titulo = document.createElement('th');
         var texto = document.createTextNode(columnas[i]);
@@ -50,6 +49,7 @@ function construirCabecera(column) {
         cabecera.appendChild(titulo);
 
     }
+
 
     document.getElementById('cabecera').append(cabecera);
 
@@ -86,12 +86,19 @@ async function getProductos(pag) {
     info.forEach(element => {
         let tr = document.createElement("tr");
         let td = [];
-        for (let i = 0; i < columnas.length; i++) {
+        for (let i = 0; i < columnas.length-1; i++) {
             td[i] = document.createElement('td');
             td[i].textContent = element[columnas[i]];
         }
 
         tr.append(...td);
+        if(tabla!="comentarios"){
+            
+            tr.onclick=()=>{
+                location.href="admin/"+tabla+'/'+element['id'];
+    
+            }
+        }
         tbody.append(tr);
     });
 
@@ -106,22 +113,34 @@ function seleccionar() {
             document.getElementById("cat").classList.remove("active")
             document.getElementById("usu").classList.remove("active")
             document.getElementById("prod").classList.remove("active")
+            document.getElementById("coment").classList.remove("active")
             break;
         case 'categorias':
             document.getElementById("cat").classList.add("active")
             document.getElementById("prod").classList.remove("active")
             document.getElementById("usu").classList.remove("active")
             document.getElementById("dash").classList.remove("active")            
+            document.getElementById("coment").classList.remove("active")
             break;
             case 'usuarios':
                 document.getElementById("usu").classList.add("active")
                 document.getElementById("cat").classList.remove("active")
                 document.getElementById("prod").classList.remove("active")
                 document.getElementById("dash").classList.remove("active")                
+                document.getElementById("coment").classList.remove("active")
                 break;
                 case 'productos':
                     document.getElementById("prod").classList.add("active")
                     document.getElementById("cat").classList.remove("active")
+                    document.getElementById("usu").classList.remove("active")
+                    document.getElementById("dash").classList.remove("active")
+                    document.getElementById("coment").classList.remove("active")
+                    
+            break;
+            case 'comentarios':
+                    document.getElementById("coment").classList.add("active")
+                    document.getElementById("cat").classList.remove("active")
+                    document.getElementById("prod").classList.remove("active")
                     document.getElementById("usu").classList.remove("active")
                     document.getElementById("dash").classList.remove("active")
                     

@@ -103,6 +103,12 @@ class Controller
           }
     }
 
+
+    public function verFicha($info)
+    {
+        require("vistas/ficha$info.php");
+    }
+
     // public function cargarVista($contenido, $plantilla)
     // {
     //     $this->contenido=$contenido;
