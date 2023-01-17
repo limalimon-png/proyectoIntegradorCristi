@@ -102,6 +102,34 @@ class Controller
             return "no llega nada";
           }
     }
+    public function infoUsuario()
+    {
+        
+   
+        if (isset($_GET['id'])) {
+            $id=$_GET['id'];
+
+            
+            
+            $bd=new Bd();
+            return( json_encode($bd->getUsuario($id)));
+          }else{
+            return "no llega nada";
+          }
+    }
+
+
+    public function ActualizarUsuario(){
+   
+ 
+
+
+
+         $act=new Actualizar();
+
+    }
+
+
 
 
     public function verFicha($info)

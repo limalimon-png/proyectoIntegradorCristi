@@ -451,6 +451,78 @@ class Bd
                 return $this->getComentarios($pagina);
         }
     }
+
+
+
+
+    public function getUsuario($id)
+    {
+
+
+        try {
+          
+            $db = $this->conexion();
+            $sql = "SELECT * from usuario where id=$id";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $categoria = [];
+                $categoria[0] = $res['foto'];
+                $categoria[1] = $res['id'];
+                $categoria[2] = $res['nombre'];
+                $categoria[3] = $res['apellidos'];
+                $categoria[4] = $res['email'];
+                $categoria[5] = $res['password'];
+                $categoria[6] = $res['monedero'];
+           
+
+                $catalogo[$contador] = $categoria;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+
+    public function actualizar_usuario($datos)
+    {
+
+        $consulta="";
+        if(sizeof($datos)==6){
+            $consulta="update  usuario set email=? , password=sha1(?) , nombre=? , apellidos=? , monedero=? where id=?";
+
+        }else{
+            $consulta="update  usuario set email=? , password=sha1(?) , nombre=? , apellidos=? , monedero=? , foto=? where id=?";
+            
+        }
+
+
+        try {
+
+            $db = $this->conexion();
+            //insertamos el pedido
+            $sql = $consulta;
+            $stmt = $db->prepare($sql);
+            $stmt->execute($datos);
+
+
+            $db = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+
+
+
 }
 
 

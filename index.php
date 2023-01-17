@@ -10,6 +10,7 @@ require "model/logout.php";
 require "model/eliminar.php";
 require "model/procesar_pedido.php";
 require "model/comprobarReseteo.php";
+require "model/actualizarUsuario.php";
 
 
 require("./controller/controller.php");
@@ -87,8 +88,15 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
     $controller->verFicha('Objeto');
     
 
-
-
+}else if (isset($array_ruta[0])  &&preg_match("/^infousuario\?id=\d+$/",$array_ruta[0])==1 && !isset($array_ruta[1])  ){   
+    //Llamo al método ver pasándole la clave que me están pidiendo
+  
+    echo $controller->infoUsuario();
+   
+}else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "usuarios" && preg_match("/^\d+$/",$array_ruta[2])==1 && isset($array_ruta[3]) && $array_ruta[3]=='process' && !isset($array_ruta[4]) ){   
+    //Llamo al método ver pasándole la clave que me están pidiendo
+  
+    $controller->ActualizarUsuario();
 
 
 
