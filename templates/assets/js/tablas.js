@@ -92,13 +92,13 @@ async function getProductos(pag) {
         }
 
         tr.append(...td);
-        if(tabla!="comentarios"){
+  
             
             tr.onclick=()=>{
                 location.href="admin/"+tabla+'/'+element['id'];
     
             }
-        }
+        
         tbody.append(tr);
     });
 

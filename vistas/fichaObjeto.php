@@ -192,6 +192,15 @@
             </div>
         </div>
 
+
+
+
+
+
+
+
+
+
         <div class="content mt-3">
             <div class="animated fadeIn">
 
@@ -217,13 +226,13 @@
 
                                         <div class="col-12 col-md-9">
                                             <label for="img" class=" form-control-label">
-                                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" id="img-preview" src="../templates/images/admin.jpg">
+                                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" id="img-preview1" src="../templates/images/admin.jpg">
                                             </label>
                                             <label for="img2" class=" form-control-label">
-                                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" id="img-preview" src="../templates/images/admin.jpg">
+                                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" id="img-preview2" src="../templates/images/admin.jpg">
                                             </label>
                                             <label for="img3" class=" form-control-label">
-                                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" id="img-preview" src="../templates/images/admin.jpg">
+                                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" id="img-preview3" src="../templates/images/admin.jpg">
                                             </label>
 
                                             <div class="col-12 col-md-9"><input type="file" id="img" name="img" accept="image/*" class=" form-control-file" hidden></div>
@@ -239,28 +248,50 @@
                                         <div class="col col-md-3"><label for="id-preview" class=" form-control-label">Id</label></div>
                                         <div class="col-12 col-md-9"><input type="text" id="id-preview" name="id-preview" placeholder="Disabled" disabled="" class="form-control"></div>
                                     </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="categoria" class=" form-control-label">Categoria</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="categoria" name="categoria" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                    </div>
 
                                     <div class="row form-group">
-                                        <div class="col col-md-3"><label for="nombre" class=" form-control-label">Usuario</label></div>
+                                        <div class="col col-md-3"><label for="nombre" class=" form-control-label">Nombre</label></div>
                                         <div class="col-12 col-md-9"><input type="text" id="nombre" name="nombre" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col col-md-3"><label for="apellidos" class=" form-control-label">Apellidos</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="apellidos" name="apellidos" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                        <div class="col col-md-3"><label for="descripcion" class=" form-control-label">Descripcion</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="descripcion" name="descripcion" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col col-md-3"><label for="email" class=" form-control-label">Correo</label></div>
-                                        <div class="col-12 col-md-9"><input type="email" id="email" name="email" placeholder="Enter Email" class="form-control"><small class="help-block form-text">Please enter your email</small></div>
+                                        <div class="col col-md-3"><label for="precio" class=" form-control-label">Precio</label></div>
+                                        <div class="col-12 col-md-9"><input type="number" id="precio" name="precio" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                    </div>
+                                    
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="latitud" class=" form-control-label">latitud</label></div>
+                                        <div class="col-12 col-md-9"><input type="number" id="latitud" name="latitud" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                    </div>
+                                    
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="longitud" class=" form-control-label">longitud</label></div>
+                                        <div class="col-12 col-md-9"><input type="number" id="longitud" name="longitud" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                    </div>
+                                    
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="puntuacion_compra" class=" form-control-label">Puntuación compra</label></div>
+                                        <div class="col-12 col-md-9"><input type="number" id="puntuacion_compra" name="puntuacion_compra" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                    </div>
+                                    
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="puntuacion_comentarios" class=" form-control-label">Puntuación reseña</label></div>
+                                        <div class="col-12 col-md-9"><input type="number" id="puntuacion_comentarios" name="puntuacion_comentarios" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col col-md-3"><label for="pass" class=" form-control-label">Contraseña</label></div>
-                                        <div class="col-12 col-md-9"><input type="password" id="pass" name="pass" placeholder="Password" class="form-control"><small class="help-block form-text">Please enter a complex password</small></div>
+                                        <div class="col col-md-3"><label for="puntuacion_total" class=" form-control-label">Puntuación total</label></div>
+                                        <div class="col-12 col-md-9"><input type="number" id="puntuacion_total" name="puntuacion_total" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
                                     </div>
-
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="monedero" class=" form-control-label">Monedero</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="monedero" name="monedero" placeholder="Password" class="form-control"><small class="help-block form-text">Please enter a complex password</small></div>
-                                    </div>
+                                    
+                                    
+                                  
 
                                     <input type="hidden" name="id" id="id">
                                     <div class="card-footer">
@@ -275,6 +306,9 @@
                                         </button>
                                         <button type="new" class="btn btn-success btn-sm">
                                             <i class="fa fa-plus-square-o"></i> Nuevo
+                                        </button>
+                                        <button type="new" class="btn btn-success btn-sm">
+                                            <i class="fa fa-plus-square-o"></i> Ver reseñas
                                         </button>
 
                                     </div>
@@ -298,7 +332,7 @@
 
                     <script src="../templates/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
                     <script src="../templates/assets/js/main.js"></script>
-                    <script src="../templates/assets/js/fichaUsuario.js"></script>
+                    <script src="../templates/assets/js/fichaObjetos.js"></script>
 </body>
 
 </html>

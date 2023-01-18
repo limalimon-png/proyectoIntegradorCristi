@@ -255,13 +255,13 @@
                                         <button type="submit" class="btn btn-primary btn-sm">
                                             <i class="fa fa-dot-circle-o"></i> Actualizar
                                         </button>
-                                        <button type="reset" class="btn btn-danger btn-sm">
+                                        <button type="button" class="btn btn-danger btn-sm" onclick="eliminar()">
                                             <i class="fa fa-ban"></i> Eliminar
                                         </button>
-                                        <button type="back" class="btn btn-secondary btn-sm">
+                                        <button type="button" class="btn btn-secondary btn-sm" onclick="volver()">
                                             <i class="fa fa-arrow-circle-o-left"></i> Volver
                                         </button>
-                                        <button type="new" class="btn btn-success btn-sm">
+                                        <button type="button" class="btn btn-success btn-sm" onclick="nuevo()">
                                             <i class="fa fa-plus-square-o"></i> Nuevo
                                         </button>
                                     

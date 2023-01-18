@@ -118,38 +118,6 @@ class Controller
           }
     }
 
-    public function infoProducto()
-    {
-        
-   
-        if (isset($_GET['id'])) {
-            $id=$_GET['id'];
-
-            
-            
-            $bd=new Bd();
-            return( json_encode($bd->getProducto($id)));
-          }else{
-            return "no llega nada";
-          }
-    }
-
-    public function infoCategoria()
-    {
-        
-   
-        if (isset($_GET['id'])) {
-            $id=$_GET['id'];
-
-            
-            
-            $bd=new Bd();
-            return( json_encode($bd->getCategoria($id)));
-          }else{
-            return "no llega nada";
-          }
-    }
-
 
     public function ActualizarUsuario(){
    

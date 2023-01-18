@@ -31,7 +31,7 @@ async function getProductos() {
       
  
    
-    document.getElementById('img-preview').src="../vistas/galeria/usuarios/"+id+"/"+info[0][0];
+    document.getElementById('img-preview').src="../vistas/galeria/"+id+"/"+info[0][0];
     document.getElementById('id-preview').value=info[0][1];
     document.getElementById('id').value=info[0][1];
     document.getElementById('nombre').value=info[0][2];

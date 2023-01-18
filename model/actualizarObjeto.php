@@ -82,7 +82,7 @@ class Actualizar
             echo "archivo muy grande excede 20 megas ";
         } else {
             $aux= substr(dirname(__FILE__),0,strlen(dirname(__FILE__))-5);
-            $dir = $aux."vistas/galeria/usuarios/$this->id/";
+            $dir = $aux."vistas/galeria/$this->id/";
 
             $temporal = $this->img["tmp_name"];
             $path = "$dir" . $this->img["name"];
