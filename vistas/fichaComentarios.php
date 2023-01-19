@@ -212,35 +212,23 @@
 
 
                                     <div class="row form-group">
-                                        <div class="col col-md-3"><label for="idUsuario-preview" class=" form-control-label">Id</label></div>
+                                        <div class="col col-md-3"><label for="idUsuario-preview" class=" form-control-label">Email usuario</label></div>
                                         <div class="col-12 col-md-9"><input type="text" id="idUsuario-preview" name="idUsuario-preview" placeholder="Disabled" disabled="" class="form-control"></div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col col-md-3"><label for="idObjeto-preview" class=" form-control-label">Id</label></div>
+                                        <div class="col col-md-3"><label for="idObjeto-preview" class=" form-control-label">Nombre Objeto</label></div>
                                         <div class="col-12 col-md-9"><input type="text" id="idObjeto-preview" name="idObjeto-preview" placeholder="Disabled" disabled="" class="form-control"></div>
                                     </div>
 
                                     <div class="row form-group">
-                                        <div class="col col-md-3"><label for="nombre" class=" form-control-label">Usuario</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="nombre" name="nombre" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                        <div class="col col-md-3"><label for="fecha" class=" form-control-label">Fecha</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="fecha" name="fecha" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col col-md-3"><label for="apellidos" class=" form-control-label">Apellidos</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="apellidos" name="apellidos" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                        <div class="col col-md-3"><label for="comentario" class=" form-control-label">Reseña</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="comentario" name="comentario" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
                                     </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="email" class=" form-control-label">Correo</label></div>
-                                        <div class="col-12 col-md-9"><input type="email" id="email" name="email" placeholder="Enter Email" class="form-control"><small class="help-block form-text">Please enter your email</small></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="pass" class=" form-control-label">Contraseña</label></div>
-                                        <div class="col-12 col-md-9"><input type="password" id="pass" name="pass" placeholder="Password" class="form-control"><small class="help-block form-text">Please enter a complex password</small></div>
-                                    </div>
-
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="monedero" class=" form-control-label">Monedero</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="monedero" name="monedero" placeholder="Password" class="form-control"><small class="help-block form-text">Please enter a complex password</small></div>
-                                    </div>
+                               
 
                                     <input type="hidden" name="idUsuario" id="idUsuario">
                                     <input type="hidden" name="idObjeto" id="idObjeto">

@@ -324,7 +324,7 @@ class Bd
                 $indice = $pagina + 10;
             }
             $db = $this->conexion();
-            $sql = "SELECT  usuario.email as email_usuario, objeto.nombre as nombre_producto , fecha, comentario.comentario FROM comentario join usuario on comentario.id_usuario=usuario.id join objeto on objeto.id=comentario.id_objeto  Limit $pagina,$indice";
+            $sql = "SELECT  usuario.email as email_usuario, objeto.nombre as nombre_producto , fecha, comentario.comentario , id_usuario, id_objeto FROM comentario join usuario on comentario.id_usuario=usuario.id join objeto on objeto.id=comentario.id_objeto  Limit $pagina,$indice";
             $stmt = $db->prepare($sql);
             $stmt->execute();
 
@@ -338,7 +338,7 @@ class Bd
                 $comentarios['nombre usuario'] = $res[1];
                 $comentarios['fecha'] = $res[2];
                 $comentarios['comentario'] = $res[3];
-                $comentarios['id'] = 0;
+                $comentarios['id'] = $res[4]."_".$res[5];
 
 
 
@@ -489,7 +489,7 @@ class Bd
         try {
           
             $db = $this->conexion();
-            $sql = "SELECT  usuario.email as email_usuario, objeto.nombre as nombre_producto , fecha, comentario.comentario FROM comentario join usuario on comentario.id_usuario=usuario.id join objeto on objeto.id=comentario.id_objeto  where id_usuario=? and id_objeto=?";
+            $sql = "SELECT  usuario.email as email_usuario, objeto.nombre as nombre_producto , fecha, comentario.comentario ,comentario.id_usuario , comentario.id_objeto FROM comentario join usuario on comentario.id_usuario=usuario.id join objeto on objeto.id=comentario.id_objeto  where id_usuario=? and id_objeto=?";
             $stmt = $db->prepare($sql);
             $stmt->execute($datos);
 
@@ -503,7 +503,7 @@ class Bd
                 $comentarios['nombre usuario'] = $res[1];
                 $comentarios['fecha'] = $res[2];
                 $comentarios['comentario'] = $res[3];
-                $comentarios['id'] = 0;
+                $comentarios['id'] = $res[4]."_".$res[5];
 
 
 

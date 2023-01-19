@@ -215,7 +215,7 @@
                                 <strong>Basic Form</strong> Elements
                             </div>
                             <div class="card-body card-block">
-                                <form action="admin/usuarios/1/process" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <form action="admin/productos/actualizar" method="post" enctype="multipart/form-data" class="form-horizontal">
 
                                     <div class="row form-group">
 
@@ -226,13 +226,13 @@
 
                                         <div class="col-12 col-md-9">
                                             <label for="img" class=" form-control-label">
-                                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" id="img-preview1" src="../templates/images/admin.jpg">
+                                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" id="img-preview1" src="../templates/images/noImage.png">
                                             </label>
                                             <label for="img2" class=" form-control-label">
-                                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" id="img-preview2" src="../templates/images/admin.jpg">
+                                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" id="img-preview2" src="../templates/images/noImage.png">
                                             </label>
                                             <label for="img3" class=" form-control-label">
-                                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" id="img-preview3" src="../templates/images/admin.jpg">
+                                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" id="img-preview3" src="../templates/images/noImage.png">
                                             </label>
 
                                             <div class="col-12 col-md-9"><input type="file" id="img" name="img" accept="image/*" class=" form-control-file" hidden></div>

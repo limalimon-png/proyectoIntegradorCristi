@@ -4,16 +4,17 @@
 // $a=$_GET["apellidos"];
 
 
-class Actualizar
+class ActualizarObj
 {
     var $mega = 1024 * 1024;
     var $id;
-    var $img;
+    var $img,$img2,$img3;
     var $nombre;
-    var $apellidos;
-    var $pass;
-    var $monedero;
-    var $email;
+    var $descripcion;
+    var $precio;
+    var $latitud;
+    var $longitud;
+    var $categoria;
 
 
     public function __construct()
@@ -33,18 +34,20 @@ class Actualizar
             $i=0;
           
             $datos=[];
-            $datos[$i]=$this->email;
-            $i=$i+1;
-            $datos[$i]=$this->pass;
-            $i=$i+1;
             $datos[$i]=$this->nombre;
             $i=$i+1;
-            $datos[$i]=$this->apellidos;
+            $datos[$i]=$this->descripcion;
             $i=$i+1;
-            $datos[$i]=$this->monedero;
+            $datos[$i]=$this->precio;
+            $i=$i+1;
+            $datos[$i]=$this->latitud;
+            $i=$i+1;
+            $datos[$i]=$this->longitud;
+            $i=$i+1;
+            $datos[$i]=$this->categoria;
             $i=$i+1;
            
-           
+           //ver como actualizamos la foto especifica
 
             $bd=new Bd();
             if (isset($_FILES['img']) && $_FILES['img']['size']!=0 && preg_match("/^image\//",$_FILES['img']['type'])==1) {
@@ -74,7 +77,7 @@ class Actualizar
     }
 
 
-
+//necesitamos 
     private function subirImagen()
     {
         $tam = $_FILES["img"]["size"];
@@ -116,26 +119,32 @@ class Actualizar
         } else {
             return false;
         }
-        if (isset($_POST['apellidos'])) {
-            $this->apellidos = $_POST['apellidos'];
+        if (isset($_POST['descripcion'])) {
+            $this->descripcion = $_POST['descripcion'];
         } else {
             return false;
         }
-        if (isset($_POST['pass'])) {
-            $this->pass = $_POST['pass'];
+        if (isset($_POST['categoria'])) {
+            $this->categoria = $_POST['categoria'];
         } else {
             return false;
         }
-        if (isset($_POST['email'])) {
-            $this->email = $_POST['email'];
+        if (isset($_POST['precio'])) {
+            $this->precio = $_POST['precio'];
         } else {
             return false;
         }
-        if (isset($_POST['monedero'])) {
-            $this->monedero = $_POST['monedero'];
+        if (isset($_POST['latitud'])) {
+            $this->latitud = $_POST['latitud'];
         } else {
             return false;
         }
+        if (isset($_POST['longitud'])) {
+            $this->longitud = $_POST['longitud'];
+        } else {
+            return false;
+        }
+       
 
         return true;
     }

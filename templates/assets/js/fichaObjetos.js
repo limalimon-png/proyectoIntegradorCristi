@@ -28,35 +28,35 @@ async function getProductos() {
 
         
 
-        $producto = [];
-        $producto['nombre'] = $res[0];
-        $producto['categoria'] = $res[1];
-        $producto['descripcion'] = $res[2];
-        $producto['precio'] = $res[3];
-        $producto['latitud'] = $res[4];
-        $producto['longitud'] = $res[5];
-        $producto['puntuacion_compra'] = $res[6];
-        $producto['puntuacion_comentarios'] = $res[7];
-        $producto['puntuacion_total'] = $res[8];
-        $producto['id'] = $res[9];
-        $producto['foto1'] = $res[10];
-        $producto['foto2'] = $res[11];
-        $producto['foto3'] = $res[12];
+    
  
-   
-    document.getElementById('img-preview1').src="../vistas/galeria/objetos/"+id+"/"+info[0]['foto1'];
-    document.getElementById('img-preview2').src="../vistas/galeria/objetos/"+id+"/"+info[0]['foto2'];
-    document.getElementById('img-preview3').src="../vistas/galeria/objetos/"+id+"/"+info[0]['foto3'];
-    document.getElementById('id-preview').value=info[0][1];
-    document.getElementById('id').value=info[0][1];
-    document.getElementById('nombre').value=info[0][2];
-    document.getElementById('descripcion').value=info[0][3];
-    document.getElementById('precio').value=info[0][4];
-    document.getElementById('latitud').value=info[0][5];
-    document.getElementById('longitud').value=info[0][6];
-    document.getElementById('puntuacion_compra').value=info[0][5];
-    document.getElementById('puntuacion_comentarios').value=info[0][6];
-    document.getElementById('puntuacion_total').value=info[0][6];
+   if(info[0]['foto1']==0||info[0]['foto1']==undefined||info[0]['foto1']==null){
+   }else{
+       document.getElementById('img-preview1').src="../vistas/galeria/objetos/"+id+"/"+info[0]['foto1'];
+
+   }
+   if(info[0]['foto2']==0||info[0]['foto2']==undefined||info[0]['foto2']==null){
+   }else{
+       document.getElementById('img-preview2').src="../vistas/galeria/objetos/"+id+"/"+info[0]['foto2'];
+
+   }
+   if(info[0]['foto3']==0||info[0]['foto3']==undefined||info[0]['foto3']==null){
+   }else{
+       document.getElementById('img-preview3').src="../vistas/galeria/objetos/"+id+"/"+info[0]['foto3'];
+
+   }
+  
+    document.getElementById('id-preview').value=info[0]['id'];
+    document.getElementById('id').value=info[0]['id'];
+    document.getElementById('categoria').value=info[0]['categoria'];
+    document.getElementById('nombre').value=info[0]['nombre'];
+    document.getElementById('descripcion').value=info[0]['descripcion'];
+    document.getElementById('precio').value=info[0]['precio'];
+    document.getElementById('latitud').value=info[0]['latitud'];
+    document.getElementById('longitud').value=info[0]['longitud'];
+    document.getElementById('puntuacion_compra').value=info[0]['puntuacion_compra'];
+    document.getElementById('puntuacion_comentarios').value=info[0]['puntuacion_comentarios'];
+    document.getElementById('puntuacion_total').value=info[0]['puntuacion_total'];
 
 
 

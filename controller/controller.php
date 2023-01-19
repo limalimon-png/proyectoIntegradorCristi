@@ -151,6 +151,24 @@ class Controller
     }
 
 
+    public function infoComentario()
+    {
+        
+   
+        if (isset($_GET['idU'])&&isset($_GET['idO'])) {
+            $idU=$_GET['idU'];
+            $idO=$_GET['idO'];
+
+            
+            
+            $bd=new Bd();
+            return( json_encode($bd->getComentario($idU,$idO)));
+          }else{
+            return "no llega nada";
+          }
+    }
+
+
     public function ActualizarUsuario(){
    
  
@@ -170,6 +188,10 @@ class Controller
 
     }
 
+    public function actualizarProducto()
+    {
+        $act=new ActualizarObj();
+    }
 
 
 
@@ -309,10 +331,7 @@ class Controller
     }
 
 
-    public function actualizarProducto()
-    {
-        $actualizar = new Eliminar();
-    }
+    
 
 
     public function registroProcess()

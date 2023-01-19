@@ -82,7 +82,7 @@ async function getProductos(pag) {
     let tbody = document.getElementById('bodyLista');
     tbody.innerHTML = "";
 
-
+console.log(info);
     info.forEach(element => {
         let tr = document.createElement("tr");
         let td = [];
@@ -94,9 +94,10 @@ async function getProductos(pag) {
         tr.append(...td);
   
             
-            tr.onclick=()=>{
-                location.href="admin/"+tabla+'/'+element['id'];
-    
+                tr.onclick=()=>{
+                    location.href="admin/"+tabla+'/'+element['id'];
+        
+                
             }
         
         tbody.append(tr);
