@@ -206,7 +206,7 @@
                                 <strong>Basic Form</strong> Elements
                             </div>
                             <div class="card-body card-block">
-                                <form action="admin/usuarios/1/process" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <form action="admin/categorias/actualizar" method="post" enctype="multipart/form-data" class="form-horizontal">
 
                                     
                                     <div class="row form-group">
@@ -247,7 +247,7 @@
 
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="puntuacion" class=" form-control-label">Puntuacion categoría</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="puntuacion" name="puntuacion" placeholder="Password" class="form-control"><small class="help-block form-text">Please enter a complex password</small></div>
+                                        <div class="col-12 col-md-9"><input type="text" readonly id="puntuacion" name="puntuacion" placeholder="Password" class="form-control"><small class="help-block form-text">Please enter a complex password</small></div>
                                     </div>
 
                                     <input type="hidden" name="id" id="id">

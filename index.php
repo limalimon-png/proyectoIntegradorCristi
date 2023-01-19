@@ -11,6 +11,8 @@ require "model/eliminar.php";
 require "model/procesar_pedido.php";
 require "model/comprobarReseteo.php";
 require "model/actualizarUsuario.php";
+require "model/actualizarObjeto.php";
+require "model/actualizarCategoria.php";
 
 
 require("./controller/controller.php");
@@ -114,7 +116,7 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
 }else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "usuarios" && preg_match("/^\d+$/",$array_ruta[2])==1 && isset($array_ruta[3]) && $array_ruta[3]=='process' && !isset($array_ruta[4]) ){   
     //Llamo al método ver pasándole la clave que me están pidiendo
   
-    $controller->ActualizarUsuario();
+    $controller->actualizarUsuario();
 
 
 }else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "usuarios" && preg_match("/^\d+$/",$array_ruta[2])==1 && isset($array_ruta[3]) && $array_ruta[3]=='process' && !isset($array_ruta[4]) ){   
@@ -131,6 +133,11 @@ $controller->nuevoUsuario();
 
 }else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "productos"&& isset($array_ruta[2]) && $array_ruta[2]=='actualizar' && !isset($array_ruta[3]) ){   
 $controller->actualizarProducto();
+}else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "comentarios"&& isset($array_ruta[2]) && $array_ruta[2]=='actualizar' && !isset($array_ruta[3]) ){   
+$controller->actualizarComentario();
+}else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "categorias"&& isset($array_ruta[2]) && $array_ruta[2]=='actualizar' && !isset($array_ruta[3]) ){   
+    $controller->actualizarCategoria();
+    
 
 
 

@@ -7,7 +7,15 @@ window.onload=async ()=>{
 
     document.getElementById('img').addEventListener('change', (e) => {
         const original = e.target.files[0];
-        document.getElementById("img-preview").src=URL.createObjectURL(original);
+        document.getElementById("img-preview1").src=URL.createObjectURL(original);
+    });
+    document.getElementById('img2').addEventListener('change', (e) => {
+        const original = e.target.files[0];
+        document.getElementById("img-preview2").src=URL.createObjectURL(original);
+    });
+    document.getElementById('img3').addEventListener('change', (e) => {
+        const original = e.target.files[0];
+        document.getElementById("img-preview3").src=URL.createObjectURL(original);
     });
 
     await getProductos()
@@ -32,17 +40,17 @@ async function getProductos() {
  
    if(info[0]['foto1']==0||info[0]['foto1']==undefined||info[0]['foto1']==null){
    }else{
-       document.getElementById('img-preview1').src="../vistas/galeria/objetos/"+id+"/"+info[0]['foto1'];
+       document.getElementById('img-preview1').src="../vistas/galeria/objetos/"+id+"/img1/"+info[0]['foto1'];
 
    }
    if(info[0]['foto2']==0||info[0]['foto2']==undefined||info[0]['foto2']==null){
    }else{
-       document.getElementById('img-preview2').src="../vistas/galeria/objetos/"+id+"/"+info[0]['foto2'];
+       document.getElementById('img-preview2').src="../vistas/galeria/objetos/"+id+"/img2/"+info[0]['foto2'];
 
    }
    if(info[0]['foto3']==0||info[0]['foto3']==undefined||info[0]['foto3']==null){
    }else{
-       document.getElementById('img-preview3').src="../vistas/galeria/objetos/"+id+"/"+info[0]['foto3'];
+       document.getElementById('img-preview3').src="../vistas/galeria/objetos/"+id+"/img3/"+info[0]['foto3'];
 
    }
   

@@ -206,7 +206,7 @@
                                 <strong>Basic Form</strong> Elements
                             </div>
                             <div class="card-body card-block">
-                                <form action="admin/usuarios/1/process" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <form action="admin/comentarios/actualizar" method="post" enctype="multipart/form-data" class="form-horizontal">
 
                                    
 

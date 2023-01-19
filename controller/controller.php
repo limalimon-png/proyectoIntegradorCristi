@@ -169,7 +169,7 @@ class Controller
     }
 
 
-    public function ActualizarUsuario(){
+    public function actualizarUsuario(){
    
  
 
@@ -178,6 +178,17 @@ class Controller
          $act=new Actualizar();
 
     }
+
+    public function actualizarCategoria(){
+   
+ 
+
+
+
+        $act=new ActualizarCat();
+
+   }
+    
     public function nuevoUsuario(){
    
  
@@ -191,6 +202,22 @@ class Controller
     public function actualizarProducto()
     {
         $act=new ActualizarObj();
+    }
+    public function actualizarComentario()
+    {
+
+        if(isset($_POST['idUsuario']) &&isset($_POST['idObjeto']) &&isset($_POST['fecha']) &&isset($_POST['comentario']) ){
+            $datos=[];
+            $datos[2]=$_POST['idUsuario'];
+            $datos[3]=$_POST['idObjeto'];
+            $datos[1]=$_POST['fecha'];
+            $datos[0]=$_POST['comentario'];
+            $bd=new Bd();
+            $bd->actualizar_comentarios($datos);
+        }
+        header('location:../comentarios/'.$_POST['idUsuario'].'_'.$_POST['idObjeto']);
+
+        
     }
 
 

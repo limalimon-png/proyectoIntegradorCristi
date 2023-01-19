@@ -1,19 +1,19 @@
 <?php
 
-// $n=$_GET["nombre"];
-// $a=$_GET["apellidos"];
+// $n=$_GET["titulo"];
+// $a=$_GET["descripcion"];
 
 
-class Actualizar
+class ActualizarCat
 {
     var $mega = 1024 * 1024;
     var $id;
     var $img;
-    var $nombre;
-    var $apellidos;
-    var $pass;
-    var $monedero;
-    var $email;
+    var $titulo;
+    var $descripcion;
+    var $puntuacion;
+    var $categoria_padre;
+
 
 
     public function __construct()
@@ -33,16 +33,14 @@ class Actualizar
             $i=0;
           
             $datos=[];
-            $datos[$i]=$this->email;
+            $datos[$i]=$this->puntuacion;
             $i=$i+1;
-            $datos[$i]=$this->pass;
+            $datos[$i]=$this->titulo;
             $i=$i+1;
-            $datos[$i]=$this->nombre;
+            $datos[$i]=$this->descripcion;
             $i=$i+1;
-            $datos[$i]=$this->apellidos;
-            $i=$i+1;
-            $datos[$i]=$this->monedero;
-            $i=$i+1;
+            // $datos[$i]=$this->categoria_padre;
+            // $i=$i+1;
            
            
 
@@ -60,13 +58,13 @@ class Actualizar
 
                 
 
-                $bd->actualizar_usuario($datos);
-                header('location:../'.$this->id);
+                $bd->actualizar_categoria($datos);
+                header('location:../categorias/'.$this->id);
             } else {
                 $datos[$i]=$this->id;
                 $i=$i+1;
-                $bd->actualizar_usuario($datos);
-                header('location:../'.$this->id);
+                $bd->actualizar_categoria($datos);
+                header('location:../categorias/'.$this->id);
              
                 // actualizar sin cambiar imagen
             }
@@ -111,28 +109,24 @@ class Actualizar
             return false;
         }
 
-        if (isset($_POST['nombre'])) {
-            $this->nombre = $_POST['nombre'];
+        if (isset($_POST['titulo'])) {
+            $this->titulo = $_POST['titulo'];
         } else {
             return false;
         }
-        if (isset($_POST['apellidos'])) {
-            $this->apellidos = $_POST['apellidos'];
+        if (isset($_POST['descripcion'])) {
+            $this->descripcion = $_POST['descripcion'];
         } else {
             return false;
         }
-        if (isset($_POST['pass'])) {
-            $this->pass = $_POST['pass'];
+        if (isset($_POST['puntuacion'])) {
+            $this->puntuacion = $_POST['puntuacion'];
         } else {
             return false;
         }
-        if (isset($_POST['email'])) {
-            $this->email = $_POST['email'];
-        } else {
-            return false;
-        }
-        if (isset($_POST['monedero'])) {
-            $this->monedero = $_POST['monedero'];
+      
+        if (isset($_POST['categoria_padre'])) {
+            $this->categoria_padre = $_POST['categoria_padre'];
         } else {
             return false;
         }

@@ -556,7 +556,14 @@ class Bd
     {
 
  
+        $consulta="";
+        if(sizeof($datos)==4){
+            $consulta="update  categoria set puntuacion=? , titulo=? , descripcion=?   where id=?";
 
+        }else{
+            $consulta="update  categoria set puntuacion=? , titulo=? , descripcion=? , foto=? where id=?";
+            
+        }
         
 
 
@@ -564,7 +571,7 @@ class Bd
 
             $db = $this->conexion();
             //insertamos el pedido
-            $sql = "update  categoria set categoria_padre=?, titulo=?, descripcion=? foto=? where id=?";
+            $sql = $consulta;
             $stmt = $db->prepare($sql);
             $stmt->execute($datos);
 
@@ -575,24 +582,73 @@ class Bd
         }
     }
 
+    public function actualizar_imagen1_objetos($datos)
+    {
+
+        try {
+
+            $db = $this->conexion();
+            //insertamos el pedido
+            $sql = "update  objeto set foto1=? where id=?";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($datos);
 
 
+            $db = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+    public function actualizar_imagen2_objetos($datos)
+    {
+
+        try {
+
+            $db = $this->conexion();
+            //insertamos el pedido
+            $sql = "update  objeto set foto2=? where id=?";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($datos);
+
+
+            $db = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+    public function actualizar_imagen3_objetos($datos)
+    {
+
+
+    
+
+
+      
+
+
+        try {
+
+            $db = $this->conexion();
+            //insertamos el pedido
+            $sql = "update  objeto set foto3=? where id=?";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($datos);
+
+
+            $db = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
     public function actualizar_objetos($datos)
     {
 
         $consulta="";
-        if(sizeof($datos)==7){
-            $consulta="update  objeto set id_categoria=? , nombre=? , descripcion=? , precio=? , latitud=? , longitud=? where id=?";
+       
+            $consulta="update  objeto set   nombre=? , descripcion=? , precio=? , latitud=? , longitud=? where id=?";
 
-        }elseif(sizeof($datos)==8){
-            $consulta="update  objeto set id_categoria=? , nombre=? , descripcion=? , precio=? , latitud=? , longitud=? , foto1=? where id=?";
-            
-        }elseif(sizeof($datos)==9){
-            $consulta="update  objeto set id_categoria=? , nombre=? , descripcion=? , precio=? , latitud=? , longitud=? , foto1=? , foto2=? where id=?";
-
-        }else{
-            $consulta="update  objeto set id_categoria=? , nombre=? , descripcion=? , precio=? , latitud=? , longitud=? , foto1=? , foto2=? , foto3=? where id=?";
-        }
+       
+        
 
 
         try {
