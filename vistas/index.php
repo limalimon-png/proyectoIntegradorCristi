@@ -195,7 +195,7 @@
 
             <div class="col-sm-12">
                 <div class="alert  alert-success alert-dismissible fade show" role="alert">
-                    <span class="badge badge-pill badge-success">Success</span> You successfully read this important alert message.
+                    <span class="badge badge-pill badge-success">Success</span> Bienvenido, has accedido al panel de control
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -221,7 +221,7 @@
                         <h4 class="mb-0">
                             <span class="count">10468</span>
                         </h4>
-                        <p class="text-light">Members online</p>
+                        <p class="text-light">Usuarios registrados</p>
 
                         <div class="chart-wrapper px-0" style="height:70px;" height="70">
                             <canvas id="widgetChart1"></canvas>
