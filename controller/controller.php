@@ -149,6 +149,21 @@ class Controller
             return "no llega nada";
           }
     }
+    public function infoCategorias()
+    {
+        
+   
+
+           
+
+            
+            
+            $bd=new Bd();
+            return json_encode($bd->getCategoriasSelect());
+
+            
+          
+    }
 
 
     public function infoComentario()
@@ -187,6 +202,7 @@ class Controller
 
 
         $act=new ActualizarCat();
+        $act->actualizar();
 
    }
     
@@ -207,11 +223,29 @@ class Controller
       require('vistas/altaUsuario.php');
 
     }
+    public function irAltaProducto(){
+   
+ 
+
+      require('vistas/altaObjeto.php');
+
+    }
+
+    public function nuevoProducto(){
+   
+ 
+        $act=new ActualizarObj();
+        $act->llegan_datos();
+
+
+      require('vistas/altaObjeto.php');
+
+    }
     public function nuevoCategoria(){
    
  
         $act=new ActualizarCat();
-        // $act->llegan_datos();
+         $act->llegan_datos();
 
 
       require('vistas/altaCategoria.php');
@@ -229,6 +263,7 @@ class Controller
     public function actualizarProducto()
     {
         $act=new ActualizarObj();
+        $act->actualizar();
     }
     public function actualizarComentario()
     {

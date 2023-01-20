@@ -10,7 +10,11 @@ window.onload=async ()=>{
         document.getElementById("img-preview").src=URL.createObjectURL(original);
     });
 
-    await getProductos()
+    if(id!='nuevo'){
+
+        await getProductos()
+    }
+ 
 
 
 }

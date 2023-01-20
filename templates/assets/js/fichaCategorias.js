@@ -1,5 +1,6 @@
 let id;
 let url=location.href;
+let idCat;
 
 
 window.onload=async ()=>{
@@ -9,8 +10,14 @@ window.onload=async ()=>{
         const original = e.target.files[0];
         document.getElementById("img-preview").src=URL.createObjectURL(original);
     });
+if(id!='nuevo'){
 
     await getProductos()
+}
+    await getCategorias();
+
+
+
 
 
 }
@@ -36,11 +43,11 @@ async function getProductos() {
 
      }
 
-
+     idCat=info[0]['titulo categoria padre'];
    
     document.getElementById('id-preview').value=info[0]['id'];
     document.getElementById('id').value=info[0]['id'];
-    document.getElementById('categoria_padre').value=info[0]['titulo categoria padre'];
+    // document.getElementById('categoria_padre').value=info[0]['titulo categoria padre'];
     document.getElementById('titulo').value=info[0]['titulo'];
     document.getElementById('descripcion').value=info[0]['descripcion'];
     // document.getElementById('puntuacion').value=info[0][5];
@@ -71,4 +78,27 @@ async function eliminar(){
 function nuevo(){
 
     location.href=url.substring(0,url.lastIndexOf("/"))+'/nuevo'
+}
+
+
+
+async function getCategorias(){
+    const response = await fetch('selectCategorias');
+
+    info = await response.json();
+    
+
+    info.forEach(element => {
+      
+        let option =document.createElement("option");
+        option.value=element['id'];
+        option.append(element['titulo']);
+        if(element['titulo']==idCat){
+            option.selected=true;
+        }
+        document.getElementById('categoria_padre').append(option);
+        
+        
+    });
+
 }

@@ -190,6 +190,10 @@ class Bd
 
 
 
+
+
+
+
     //set Objetos categorias comentarios y usuarios
 
     public function setUsuario($datos)
@@ -214,9 +218,36 @@ class Bd
         return false;
     }
 
+    public function setObjeto($datos)
+    {
+
+        try {
+           
+            $db = $this->conexion();
+            $sql = "insert into objeto (nombre,descripcion,id_categoria,precio,latitud,longitud) values (?,?,?,?,?,?)";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($datos);
+            
+          
+           $last=$db->lastInsertId(); 
+           echo $last;
+           $db = null;
+         return $last;
+           
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return false;
+    }
+
 
     public function setCategoria($datos)
     {
+        if($datos[1]==0){
+            $datos[1]=null;
+        }
+
+       
 
         try {
            
@@ -251,7 +282,7 @@ class Bd
                 $indice = $pagina + 10;
             }
             $db = $this->conexion();
-            $sql = "SELECT categoria.titulo,categoria.descripcion, cat2.titulo as categoria_padre,categoria.foto,categoria.id FROM categoria join categoria as cat2 on cat2.id=categoria.categoria_padre Limit $pagina,$indice";
+            $sql = "SELECT categoria.titulo,categoria.descripcion, cat2.titulo as categoria_padre,categoria.foto,categoria.id FROM categoria left join categoria as cat2 on cat2.id=categoria.categoria_padre Limit $pagina,$indice";
             $stmt = $db->prepare($sql);
             $stmt->execute();
 
@@ -277,6 +308,39 @@ class Bd
             echo $e->getMessage();
         }
     }
+    public function getCategoriasSelect()
+    {
+
+
+        try {
+          
+            $db = $this->conexion();
+            $sql = "SELECT categoria.titulo,categoria.id  FROM categoria";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $categoria = [];
+                $categoria['titulo'] = $res[0];
+                $categoria['id'] = $res[1];
+             
+           
+
+                $catalogo[$contador] = $categoria;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+
 
     public function getProductos($pagina)
     {
@@ -461,7 +525,7 @@ class Bd
         try {
        
             $db = $this->conexion();
-            $sql = "SELECT categoria.titulo,categoria.descripcion, cat2.titulo as categoria_padre,categoria.foto,categoria.id FROM categoria join categoria as cat2 on cat2.id=categoria.categoria_padre where categoria.id=$id";
+            $sql = "SELECT categoria.titulo,categoria.descripcion, cat2.titulo as categoria_padre,categoria.foto,categoria.id FROM categoria left join categoria as cat2 on cat2.id=categoria.categoria_padre where categoria.id=$id";
             $stmt = $db->prepare($sql);
             $stmt->execute();
 
@@ -604,17 +668,23 @@ class Bd
 
     public function actualizar_categoria($datos)
     {
-
+        
  
         $consulta="";
         if(sizeof($datos)==4){
-            $consulta="update  categoria set puntuacion=? , titulo=? , descripcion=?   where id=?";
+            if($datos[2]==0){
+                $datos[2]=null;
+            }
+            $consulta="update  categoria set   titulo=? , descripcion=? ,categoria_padre=?  where id=?";
 
         }elseif(sizeof($datos)==2){
             $consulta="update  categoria set  foto=? where id=?";
             
         }else{
-            $consulta="update  categoria set puntuacion=? , titulo=? , descripcion=? , foto=? where id=?";
+            if($datos[2]==0){
+                $datos[2]=null;
+            }
+            $consulta="update  categoria set  titulo=? , descripcion=?  ,categoria_padre=?, foto=? where id=?";
 
         }
         

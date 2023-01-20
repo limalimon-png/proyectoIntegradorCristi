@@ -250,7 +250,21 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="categoria" class=" form-control-label">Categoria</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="categoria" name="categoria" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                        <div class="col-12 col-md-9">
+
+                                           
+                                                <select name="categoria" id="categoria" class="form-control" >
+                                                    <option value="0">Seleccionar</option>
+                                                   
+                                                </select>
+                                            
+
+                                            <small class="form-text text-muted">This is a help text</small>
+                                        </div>
+
+
+
+
                                     </div>
 
                                     <div class="row form-group">
@@ -304,7 +318,7 @@
                                         <button type="back" class="btn btn-secondary btn-sm">
                                             <i class="fa fa-arrow-circle-o-left"></i> Volver
                                         </button>
-                                        <button type="new" class="btn btn-success btn-sm">
+                                        <button type="button" class="btn btn-success btn-sm" onclick="nuevo()">
                                             <i class="fa fa-plus-square-o"></i> Nuevo
                                         </button>
                                         <button type="new" class="btn btn-success btn-sm">

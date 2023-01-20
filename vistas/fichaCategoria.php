@@ -208,7 +208,7 @@
                             <div class="card-body card-block">
                                 <form action="admin/categorias/actualizar" method="post" enctype="multipart/form-data" class="form-horizontal">
 
-                                    
+
                                     <div class="row form-group">
 
 
@@ -232,7 +232,21 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="categoria_padre" class=" form-control-label">Categoria padre</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="categoria_padre" name="categoria_padre" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                        <div class="col-12 col-md-9">
+
+                                           
+                                                <select name="categoria_padre" id="categoria_padre" class="form-control" >
+                                                    <option value="0">Seleccionar</option>
+                                                   
+                                                </select>
+                                            
+
+                                            <small class="form-text text-muted">This is a help text</small>
+                                        </div>
+
+
+
+
                                     </div>
 
                                     <div class="row form-group">
@@ -243,7 +257,7 @@
                                         <div class="col col-md-3"><label for="descripcion" class=" form-control-label">Descripcion</label></div>
                                         <div class="col-12 col-md-9"><input type="text" id="descripcion" name="descripcion" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
                                     </div>
-                                   
+
 
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="puntuacion" class=" form-control-label">Puntuacion categoría</label></div>

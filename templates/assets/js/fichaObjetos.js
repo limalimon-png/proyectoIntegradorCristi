@@ -1,5 +1,6 @@
 let id;
 let url=location.href;
+let idCat;
 
 
 window.onload=async ()=>{
@@ -18,7 +19,13 @@ window.onload=async ()=>{
         document.getElementById("img-preview3").src=URL.createObjectURL(original);
     });
 
-    await getProductos()
+    if(id!='nuevo'){
+
+        await getProductos()
+    }
+        await getCategorias();
+    
+    
 
 
 }
@@ -53,7 +60,7 @@ async function getProductos() {
        document.getElementById('img-preview3').src="../vistas/galeria/objetos/"+id+"/img3/"+info[0]['foto3'];
 
    }
-  
+   idCat=info[0]['categoria'];
     document.getElementById('id-preview').value=info[0]['id'];
     document.getElementById('id').value=info[0]['id'];
     document.getElementById('categoria').value=info[0]['categoria'];
@@ -92,4 +99,27 @@ async function eliminar(){
 function nuevo(){
 
     location.href=url.substring(0,url.lastIndexOf("/"))+'/nuevo'
+}
+
+
+
+async function getCategorias(){
+    const response = await fetch('selectCategorias');
+
+    info = await response.json();
+    
+
+    info.forEach(element => {
+      
+        let option =document.createElement("option");
+        option.value=element['id'];
+        option.append(element['titulo']);
+        if(element['titulo']==idCat){
+            option.selected=true;
+        }
+        document.getElementById('categoria').append(option);
+        
+        
+    });
+
 }

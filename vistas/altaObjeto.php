@@ -192,6 +192,15 @@
             </div>
         </div>
 
+
+
+
+
+
+
+
+
+
         <div class="content mt-3">
             <div class="animated fadeIn">
 
@@ -206,24 +215,33 @@
                                 <strong>Basic Form</strong> Elements
                             </div>
                             <div class="card-body card-block">
-                                <form action="admin/categorias/alta" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <form action="admin/productos/alta" method="post" enctype="multipart/form-data" class="form-horizontal">
 
-                                    
                                     <div class="row form-group">
 
 
                                         <div class="col col-md-3">
-                                            <label for="" class="form-control-label">Imágen</label>
+                                            <label for="" class="form-control-label">Imágenes</label>
                                         </div>
 
                                         <div class="col-12 col-md-9">
                                             <label for="img" class=" form-control-label">
-                                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" id="img-preview" src="../templates/images/admin.jpg">
+                                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" id="img-preview1" src="../templates/images/noImage.png">
                                             </label>
-                                            <div class=""><input type="file" id="img" name="img" accept="image/*" class=" form-control-file" hidden></div>
-                                            <small class="form-text text-muted">Haz click en las imagen para cambiarla</small>
+                                            <label for="img2" class=" form-control-label">
+                                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" id="img-preview2" src="../templates/images/noImage.png">
+                                            </label>
+                                            <label for="img3" class=" form-control-label">
+                                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" id="img-preview3" src="../templates/images/noImage.png">
+                                            </label>
+
+                                            <div class="col-12 col-md-9"><input type="file" id="img" name="img" accept="image/*" class=" form-control-file" hidden></div>
+                                            <div class="col-12 col-md-9"><input type="file" id="img2" name="img2" accept="image/*" class=" form-control-file" hidden></div>
+                                            <div class="col-12 col-md-9"><input type="file" id="img3" name="img3" accept="image/*" class=" form-control-file" hidden></div>
+                                            <small class="form-text text-muted">Haz click en las imagenes para cambiarlas</small>
                                         </div>
                                     </div>
+
 
 
                                     <div class="row form-group">
@@ -231,31 +249,63 @@
                                         <div class="col-12 col-md-9"><input type="text" id="id-preview" name="id-preview" placeholder="Disabled" disabled="" class="form-control"></div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col col-md-3"><label for="categoria_padre" class=" form-control-label">Categoria padre</label></div>
+                                        <div class="col col-md-3"><label for="categoria" class=" form-control-label">Categoria</label></div>
                                         <div class="col-12 col-md-9">
-                                            
-                                      
-                                        <select name="categoria_padre" id="categoria_padre" class="form-control">
+
+                                           
+                                                <select name="categoria" id="categoria" class="form-control" >
                                                     <option value="0">Seleccionar</option>
                                                    
                                                 </select>
-                                            <small class="form-text text-muted">This is a help text</small></div>
+                                            
+
+                                            <small class="form-text text-muted">This is a help text</small>
+                                        </div>
+
+
+
+
                                     </div>
 
                                     <div class="row form-group">
-                                        <div class="col col-md-3"><label for="Titulo" class=" form-control-label">Titulo</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="titulo" name="titulo" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                        <div class="col col-md-3"><label for="nombre" class=" form-control-label">Nombre</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="nombre" name="nombre" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="descripcion" class=" form-control-label">Descripcion</label></div>
                                         <div class="col-12 col-md-9"><input type="text" id="descripcion" name="descripcion" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
                                     </div>
-                                   
-
                                     <div class="row form-group">
-                                        <div class="col col-md-3"><label for="puntuacion" class=" form-control-label">Puntuacion categoría</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" readonly id="puntuacion" name="puntuacion" placeholder="Password" class="form-control"><small class="help-block form-text">Please enter a complex password</small></div>
+                                        <div class="col col-md-3"><label for="precio" class=" form-control-label">Precio</label></div>
+                                        <div class="col-12 col-md-9"><input type="number" id="precio" name="precio" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
                                     </div>
+                                    
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="latitud" class=" form-control-label">latitud</label></div>
+                                        <div class="col-12 col-md-9"><input type="number" id="latitud" name="latitud" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                    </div>
+                                    
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="longitud" class=" form-control-label">longitud</label></div>
+                                        <div class="col-12 col-md-9"><input type="number" id="longitud" name="longitud" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                    </div>
+                                    
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="puntuacion_compra" class=" form-control-label">Puntuación compra</label></div>
+                                        <div class="col-12 col-md-9"><input type="number" id="puntuacion_compra" name="puntuacion_compra" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                    </div>
+                                    
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="puntuacion_comentarios" class=" form-control-label">Puntuación reseña</label></div>
+                                        <div class="col-12 col-md-9"><input type="number" id="puntuacion_comentarios" name="puntuacion_comentarios" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="puntuacion_total" class=" form-control-label">Puntuación total</label></div>
+                                        <div class="col-12 col-md-9"><input type="number" id="puntuacion_total" name="puntuacion_total" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                    </div>
+                                    
+                                    
+                                  
 
                                     <input type="hidden" name="id" id="id">
                                     <div class="card-footer">
@@ -291,7 +341,7 @@
 
                     <script src="../templates/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
                     <script src="../templates/assets/js/main.js"></script>
-                    <script src="../templates/assets/js/fichaCategorias.js"></script>
+                    <script src="../templates/assets/js/fichaObjetos.js"></script>
 </body>
 
 </html>

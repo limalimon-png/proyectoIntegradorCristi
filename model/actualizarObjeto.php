@@ -17,18 +17,8 @@ class ActualizarObj
     var $categoria;
 
 
-    public function __construct()
-    {
 
-
-
-       echo $_FILES['img']['name'];
-       echo $_FILES['img2']['name'];
-       echo $_FILES['img3']['name'];
-
-
-
-
+    public function actualizar(){
         if ($this->comprobar()) {
 
             //crear o modificar carpeta del servidor con la imagen
@@ -113,8 +103,81 @@ class ActualizarObj
             }
             header('location:../productos/'.$this->id);
         }
-    }
 
+    }
+   
+
+
+    public function llegan_datos(){
+        if ($this->comprobarNuevo()) {
+
+            //crear o modificar carpeta del servidor con la imagen
+            //conexion con base de datos
+            $i = 0;
+
+            $datos = [];
+            $datos[$i] = $this->nombre;
+            $i = $i + 1;
+            $datos[$i] = $this->descripcion;
+            $i = $i + 1;
+            $datos[$i] = $this->categoria; 
+            $i = $i + 1;
+            $datos[$i] = $this->precio;
+            $i = $i + 1;
+            $datos[$i] = $this->latitud;
+            $i = $i + 1;
+            $datos[$i] = $this->longitud;
+            $i = $i + 1;
+
+
+
+
+            $bd = new Bd();
+            $this->id = $bd->setObjeto($datos);
+            // echo $this->id;
+            if ($this->id != false) {
+
+                if (isset($_FILES['img']) && $_FILES['img']['size'] != 0 && preg_match("/^image\//", $_FILES['img']['type']) == 1) {
+                    $this->img = $_FILES['img'];
+                    $imagen = [];
+                    $imagen[0] = $this->img['name'];
+                    $imagen[1] = $this->id;
+
+                    //guardar imagen y actualizar con imagen
+                    $this->subirImagen1();
+                    $bd->actualizar_imagen1_objetos($imagen);
+
+                } 
+                if (isset($_FILES['img2']) && $_FILES['img2']['size'] != 0 && preg_match("/^image\//", $_FILES['img2']['type']) == 1) {
+                    $this->img2 = $_FILES['img2'];
+                    $imagen = [];
+                    $imagen[0] = $this->img2['name'];
+                    $imagen[1] = $this->id;
+
+                    //guardar imagen y actualizar con imagen
+                    $this->subirImagen2();
+                    $bd->actualizar_imagen2_objetos($imagen);
+                } 
+
+                if (isset($_FILES['img3']) && $_FILES['img3']['size'] != 0 && preg_match("/^image\//", $_FILES['img3']['type']) == 1) {
+                    $this->img3 = $_FILES['img3'];
+                    $imagen = [];
+                    $imagen[0] = $this->img3['name'];
+                    $imagen[1] = $this->id;
+
+                    //guardar imagen y actualizar con imagen
+                    $this->subirImagen3();
+                    $bd->actualizar_imagen3_objetos($imagen);
+
+                    
+                }
+                header('location:../productos/nuevo');
+            } else {
+                return false;
+            }
+        }
+
+    }
 
 //necesitamos 
     private function subirImagen1()
@@ -217,6 +280,45 @@ class ActualizarObj
         } else {
             return false;
         }
+
+        if (isset($_POST['nombre'])) {
+            $this->nombre = $_POST['nombre'];
+        } else {
+            return false;
+        }
+        if (isset($_POST['descripcion'])) {
+            $this->descripcion = $_POST['descripcion'];
+        } else {
+            return false;
+        }
+        if (isset($_POST['categoria'])) {
+            $this->categoria = $_POST['categoria'];
+        } else {
+            return false;
+        }
+        if (isset($_POST['precio'])) {
+            $this->precio = $_POST['precio'];
+        } else {
+            return false;
+        }
+        if (isset($_POST['latitud'])) {
+            $this->latitud = $_POST['latitud'];
+        } else {
+            return false;
+        }
+        if (isset($_POST['longitud'])) {
+            $this->longitud = $_POST['longitud'];
+        } else {
+            return false;
+        }
+       
+
+        return true;
+    }
+
+    private function comprobarNuevo()
+    {
+        
 
         if (isset($_POST['nombre'])) {
             $this->nombre = $_POST['nombre'];
