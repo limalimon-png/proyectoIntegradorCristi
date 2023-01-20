@@ -126,7 +126,16 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
 
     
 }else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "usuarios"&& isset($array_ruta[2]) && $array_ruta[2]=='nuevo' && !isset($array_ruta[3]) ){   
-$controller->nuevoUsuario();
+$controller->irAltaUsuario();
+}else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "usuarios"&& isset($array_ruta[2]) && $array_ruta[2]=='alta' && !isset($array_ruta[3]) ){   
+    $controller->nuevoUsuario();
+}else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "categorias"&& isset($array_ruta[2]) && $array_ruta[2]=='nuevo' && !isset($array_ruta[3]) ){   
+    $controller->irAltaCategoria();
+    }else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "categorias"&& isset($array_ruta[2]) && $array_ruta[2]=='alta' && !isset($array_ruta[3]) ){   
+        $controller->nuevoCategoria();
+        
+    
+    
 
 
 

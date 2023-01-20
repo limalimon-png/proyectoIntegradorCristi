@@ -3,7 +3,8 @@
 // $n=$_GET["titulo"];
 // $a=$_GET["descripcion"];
 
-
+//crear data set con las categorias padre con ajax  en un for para coger todas
+// https://www.netveloper.com/paginacion-de-registros-desde-mysql
 class ActualizarCat
 {
     var $mega = 1024 * 1024;
@@ -15,62 +16,100 @@ class ActualizarCat
     var $categoria_padre;
 
 
+public function actualizar(){
+    if ($this->comprobar()) {
 
-    public function __construct()
-    {
-
-
-
+        //crear o modificar carpeta del servidor con la imagen
+        //conexion con base de datos
+        $i=0;
+      
+        $datos=[];
+        $datos[$i]=$this->puntuacion;
+        $i=$i+1;
+        $datos[$i]=$this->titulo;
+        $i=$i+1;
+        $datos[$i]=$this->descripcion;
+        $i=$i+1;
+        // $datos[$i]=$this->categoria_padre;
+        // $i=$i+1;
+       
        
 
-
-
-
-        if ($this->comprobar()) {
-
-            //crear o modificar carpeta del servidor con la imagen
-            //conexion con base de datos
-            $i=0;
-          
-            $datos=[];
-            $datos[$i]=$this->puntuacion;
+        $bd=new Bd();
+        if (isset($_FILES['img']) && $_FILES['img']['size']!=0 && preg_match("/^image\//",$_FILES['img']['type'])==1) {
+            $this->img = $_FILES['img'];
+            $datos[$i]=$this->img['name'];
             $i=$i+1;
-            $datos[$i]=$this->titulo;
+            $datos[$i]=$this->id;
             $i=$i+1;
-            $datos[$i]=$this->descripcion;
-            $i=$i+1;
-            // $datos[$i]=$this->categoria_padre;
-            // $i=$i+1;
            
-           
+     
+            //guardar imagen y actualizar con imagen
+            $this->subirImagen();
 
-            $bd=new Bd();
-            if (isset($_FILES['img']) && $_FILES['img']['size']!=0 && preg_match("/^image\//",$_FILES['img']['type'])==1) {
-                $this->img = $_FILES['img'];
-                $datos[$i]=$this->img['name'];
-                $i=$i+1;
-                $datos[$i]=$this->id;
-                $i=$i+1;
-               
+            
+
+            $bd->actualizar_categoria($datos);
+            header('location:../categorias/'.$this->id);
+        } else {
+            $datos[$i]=$this->id;
+            $i=$i+1;
+            $bd->actualizar_categoria($datos);
+            header('location:../categorias/'.$this->id);
          
-                //guardar imagen y actualizar con imagen
-                $this->subirImagen();
-
-                
-
-                $bd->actualizar_categoria($datos);
-                header('location:../categorias/'.$this->id);
-            } else {
-                $datos[$i]=$this->id;
-                $i=$i+1;
-                $bd->actualizar_categoria($datos);
-                header('location:../categorias/'.$this->id);
-             
-                // actualizar sin cambiar imagen
-            }
+            // actualizar sin cambiar imagen
         }
     }
 
+}
+   
+
+public function llegan_datos()
+    {
+        if ($this->comprobarNuevo()) {
+
+            //crear o modificar carpeta del servidor con la imagen
+            //conexion con base de datos
+            $i = 0;
+
+            $datos = [];
+            $datos[$i] = $this->titulo;
+            $i = $i + 1;
+            $datos[$i] = $this->categoria_padre;
+            $i = $i + 1;
+            $datos[$i] = $this->descripcion;
+            $i = $i + 1;
+           
+
+
+
+            $bd = new Bd();
+            $this->id = $bd->setCategoria($datos);
+            // echo $this->id;
+            if ($this->id != false) {
+
+                if (isset($_FILES['img']) && $_FILES['img']['size'] != 0 && preg_match("/^image\//", $_FILES['img']['type']) == 1) {
+                    $this->img = $_FILES['img'];
+                    $imagen = [];
+                    $imagen[0] = $this->img['name'];
+                    $imagen[1] = $this->id;
+
+                    //guardar imagen y actualizar con imagen
+                    $this->subirImagen();
+                    $bd->actualizar_categoria($imagen);
+
+
+
+
+                    header('location:../usuarios/nuevo');
+                } else {
+                    header('location:../usuarios/nuevo');
+                }
+            } else {
+                return false;
+            }
+        }
+    }
 
 
     private function subirImagen()
@@ -124,6 +163,30 @@ class ActualizarCat
         } else {
             return false;
         }
+      
+        if (isset($_POST['categoria_padre'])) {
+            $this->categoria_padre = $_POST['categoria_padre'];
+        } else {
+            return false;
+        }
+
+        return true;
+    }
+    private function comprobarNuevo()
+    {
+       
+
+        if (isset($_POST['titulo'])) {
+            $this->titulo = $_POST['titulo'];
+        } else {
+            return false;
+        }
+        if (isset($_POST['descripcion'])) {
+            $this->descripcion = $_POST['descripcion'];
+        } else {
+            return false;
+        }
+       
       
         if (isset($_POST['categoria_padre'])) {
             $this->categoria_padre = $_POST['categoria_padre'];

@@ -206,20 +206,23 @@
                                 <strong>Basic Form</strong> Elements
                             </div>
                             <div class="card-body card-block">
-                                <form action="admin/usuarios/alta" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <form action="admin/categorias/alta" method="post" enctype="multipart/form-data" class="form-horizontal">
 
+                                    
                                     <div class="row form-group">
 
 
                                         <div class="col col-md-3">
+                                            <label for="" class="form-control-label">Imágen</label>
+                                        </div>
+
+                                        <div class="col-12 col-md-9">
                                             <label for="img" class=" form-control-label">
                                                 <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" id="img-preview" src="../templates/images/admin.jpg">
-
-
                                             </label>
+                                            <div class=""><input type="file" id="img" name="img" accept="image/*" class=" form-control-file" hidden></div>
+                                            <small class="form-text text-muted">Haz click en las imagen para cambiarla</small>
                                         </div>
-                                        <div class="col-12 col-md-9"><input type="file" id="img" name="img" accept="image/*" class=" form-control-file"></div>
-
                                     </div>
 
 
@@ -227,30 +230,27 @@
                                         <div class="col col-md-3"><label for="id-preview" class=" form-control-label">Id</label></div>
                                         <div class="col-12 col-md-9"><input type="text" id="id-preview" name="id-preview" placeholder="Disabled" disabled="" class="form-control"></div>
                                     </div>
-
                                     <div class="row form-group">
-                                        <div class="col col-md-3"><label for="nombre" class=" form-control-label">Usuario</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="nombre" name="nombre" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="apellidos" class=" form-control-label">Apellidos</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="apellidos" name="apellidos" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="email" class=" form-control-label">Correo</label></div>
-                                        <div class="col-12 col-md-9"><input type="email" id="email" name="email" placeholder="Enter Email" class="form-control"><small class="help-block form-text">Please enter your email</small></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="pass" class=" form-control-label">Contraseña</label></div>
-                                        <div class="col-12 col-md-9"><input type="password" id="pass" name="pass" placeholder="Password" class="form-control"><small class="help-block form-text">Please enter a complex password</small></div>
+                                        <div class="col col-md-3"><label for="categoria_padre" class=" form-control-label">Categoria padre</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="categoria_padre" name="categoria_padre" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
                                     </div>
 
                                     <div class="row form-group">
-                                        <div class="col col-md-3"><label for="monedero" class=" form-control-label">Monedero</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="monedero" name="monedero" placeholder="Password" class="form-control"><small class="help-block form-text">Please enter a complex password</small></div>
+                                        <div class="col col-md-3"><label for="Titulo" class=" form-control-label">Titulo</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="titulo" name="titulo" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="descripcion" class=" form-control-label">Descripcion</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="descripcion" name="descripcion" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                    </div>
+                                   
+
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="puntuacion" class=" form-control-label">Puntuacion categoría</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" readonly id="puntuacion" name="puntuacion" placeholder="Password" class="form-control"><small class="help-block form-text">Please enter a complex password</small></div>
                                     </div>
 
-                                    <!-- <input type="hidden" name="id" id="id"> -->
+                                    <input type="hidden" name="id" id="id">
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary btn-sm">
                                             <i class="fa fa-dot-circle-o"></i> Guardar
@@ -267,24 +267,24 @@
 
 
                                 </form>
-                                
-
-                        </div>
-
-                    </div><!-- .content -->
-                </div><!-- /#right-panel -->
-                <!-- Right Panel -->
 
 
-                <script src="../templates/vendors/jquery/dist/jquery.min.js"></script>
-                <script src="../templates/vendors/popper.js/dist/umd/popper.min.js"></script>
+                            </div>
 
-                <script src="../templates/vendors/jquery-validation/dist/jquery.validate.min.js"></script>
-                <!-- <script src="../templates/vendors/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script> -->
+                        </div><!-- .content -->
+                    </div><!-- /#right-panel -->
+                    <!-- Right Panel -->
 
-                <script src="../templates/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-                <script src="../templates/assets/js/main.js"></script>
-                <script src="../templates/assets/js/fichaUsuario.js"></script>
+
+                    <script src="../templates/vendors/jquery/dist/jquery.min.js"></script>
+                    <script src="../templates/vendors/popper.js/dist/umd/popper.min.js"></script>
+
+                    <script src="../templates/vendors/jquery-validation/dist/jquery.validate.min.js"></script>
+                    <!-- <script src="../templates/vendors/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script> -->
+
+                    <script src="../templates/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+                    <script src="../templates/assets/js/main.js"></script>
+                    <script src="../templates/assets/js/fichaCategorias.js"></script>
 </body>
 
 </html>

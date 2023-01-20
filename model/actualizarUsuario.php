@@ -16,13 +16,8 @@ class Actualizar
     var $email;
 
 
-    public function __construct()
+    public function actualizar()
     {
-
-
-
-       
-
 
 
 
@@ -30,59 +25,107 @@ class Actualizar
 
             //crear o modificar carpeta del servidor con la imagen
             //conexion con base de datos
-            $i=0;
-          
-            $datos=[];
-            $datos[$i]=$this->email;
-            $i=$i+1;
-            $datos[$i]=$this->pass;
-            $i=$i+1;
-            $datos[$i]=$this->nombre;
-            $i=$i+1;
-            $datos[$i]=$this->apellidos;
-            $i=$i+1;
-            $datos[$i]=$this->monedero;
-            $i=$i+1;
-           
-           
+            $i = 0;
 
-            $bd=new Bd();
-            if (isset($_FILES['img']) && $_FILES['img']['size']!=0 && preg_match("/^image\//",$_FILES['img']['type'])==1) {
+            $datos = [];
+            $datos[$i] = $this->email;
+            $i = $i + 1;
+            $datos[$i] = $this->pass;
+            $i = $i + 1;
+            $datos[$i] = $this->nombre;
+            $i = $i + 1;
+            $datos[$i] = $this->apellidos;
+            $i = $i + 1;
+            $datos[$i] = $this->monedero;
+            $i = $i + 1;
+
+
+
+            $bd = new Bd();
+            if (isset($_FILES['img']) && $_FILES['img']['size'] != 0 && preg_match("/^image\//", $_FILES['img']['type']) == 1) {
                 $this->img = $_FILES['img'];
-                $datos[$i]=$this->img['name'];
-                $i=$i+1;
-                $datos[$i]=$this->id;
-                $i=$i+1;
-               
-         
+                $datos[$i] = $this->img['name'];
+                $i = $i + 1;
+                $datos[$i] = $this->id;
+                $i = $i + 1;
+
+
                 //guardar imagen y actualizar con imagen
                 $this->subirImagen();
 
-                
+
 
                 $bd->actualizar_usuario($datos);
-                header('location:../'.$this->id);
+                header('location:../' . $this->id);
             } else {
-                $datos[$i]=$this->id;
-                $i=$i+1;
+                $datos[$i] = $this->id;
+                $i = $i + 1;
                 $bd->actualizar_usuario($datos);
-                header('location:../'.$this->id);
-             
+                header('location:../' . $this->id);
+
                 // actualizar sin cambiar imagen
             }
         }
     }
 
 
+    public function llegan_datos()
+    {
+        if ($this->comprobarNuevo()) {
 
+            //crear o modificar carpeta del servidor con la imagen
+            //conexion con base de datos
+            $i = 0;
+
+            $datos = [];
+            $datos[$i] = $this->email;
+            $i = $i + 1;
+            $datos[$i] = $this->pass;
+            $i = $i + 1;
+            $datos[$i] = $this->nombre;
+            $i = $i + 1;
+            $datos[$i] = $this->apellidos;
+            $i = $i + 1;
+            $datos[$i] = $this->monedero || 100;
+            $i = $i + 1;
+
+
+
+            $bd = new Bd();
+            $this->id = $bd->setUsuario($datos);
+            echo $this->id;
+            if ($this->id != false) {
+
+                if (isset($_FILES['img']) && $_FILES['img']['size'] != 0 && preg_match("/^image\//", $_FILES['img']['type']) == 1) {
+                    $this->img = $_FILES['img'];
+                    $imagen = [];
+                    $imagen[0] = $this->img['name'];
+                    $imagen[1] = $this->id;
+
+                    //guardar imagen y actualizar con imagen
+                    $this->subirImagen();
+                    $bd->actualizar_usuario($imagen);
+
+
+
+
+                    header('location:../usuarios/nuevo');
+                } else {
+                    header('location:../usuarios/nuevo');
+                }
+            } else {
+                return false;
+            }
+        }
+    }
     private function subirImagen()
     {
         $tam = $_FILES["img"]["size"];
         if ($tam > $this->mega * 20) { //1024 bytes =1kb => 1024 *1024=1mb
             echo "archivo muy grande excede 20 megas ";
         } else {
-            $aux= substr(dirname(__FILE__),0,strlen(dirname(__FILE__))-5);
-            $dir = $aux."vistas/galeria/usuarios/$this->id/";
+            $aux = substr(dirname(__FILE__), 0, strlen(dirname(__FILE__)) - 5);
+            $dir = $aux . "vistas/galeria/usuarios/$this->id/";
 
             $temporal = $this->img["tmp_name"];
             $path = "$dir" . $this->img["name"];
@@ -90,18 +133,14 @@ class Actualizar
             if (!is_dir($dir)) {
                 mkdir($dir);
             } else {
-                array_map('unlink', glob($dir."*"));
-             
+                array_map('unlink', glob($dir . "*"));
             }
             if (move_uploaded_file($temporal, $path)) {
             } else {
                 //un error
                 echo "no se pudo subir <br>";
             }
-           
         }
-     
-        
     }
     private function comprobar()
     {
@@ -110,6 +149,40 @@ class Actualizar
         } else {
             return false;
         }
+
+        if (isset($_POST['nombre'])) {
+            $this->nombre = $_POST['nombre'];
+        } else {
+            return false;
+        }
+        if (isset($_POST['apellidos'])) {
+            $this->apellidos = $_POST['apellidos'];
+        } else {
+            return false;
+        }
+        if (isset($_POST['pass'])) {
+            $this->pass = $_POST['pass'];
+        } else {
+            return false;
+        }
+        if (isset($_POST['email'])) {
+            $this->email = $_POST['email'];
+        } else {
+            return false;
+        }
+        if (isset($_POST['monedero'])) {
+            $this->monedero = $_POST['monedero'];
+        } else {
+            return false;
+        }
+
+        return true;
+    }
+
+
+    private function comprobarNuevo()
+    {
+
 
         if (isset($_POST['nombre'])) {
             $this->nombre = $_POST['nombre'];

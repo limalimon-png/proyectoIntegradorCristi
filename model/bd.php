@@ -189,6 +189,55 @@ class Bd
     }
 
 
+
+    //set Objetos categorias comentarios y usuarios
+
+    public function setUsuario($datos)
+    {
+
+        try {
+           
+            $db = $this->conexion();
+            $sql = "insert into usuario (email,password,nombre,apellidos,monedero) values (?,sha1(?),?,?,?)";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($datos);
+            
+          
+           $last=$db->lastInsertId(); 
+           echo $last;
+           $db = null;
+         return $last;
+           
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return false;
+    }
+
+
+    public function setCategoria($datos)
+    {
+
+        try {
+           
+            $db = $this->conexion();
+            $sql = "insert into categoria (titulo,categoria_padre,descripcion,puntuacion) values (?,?,?,0)";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($datos);
+            
+          
+           $last=$db->lastInsertId(); 
+          
+           $db = null;
+         return $last;
+           
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return false;
+    }
+
+
     // get con todos los datos paginados
     public function getCategorias($pagina)
     {
@@ -528,6 +577,9 @@ class Bd
         if(sizeof($datos)==6){
             $consulta="update  usuario set email=? , password=sha1(?) , nombre=? , apellidos=? , monedero=? where id=?";
 
+        }elseif(sizeof($datos)==2){
+            $consulta="update  usuario set  foto=? where id=?";
+            
         }else{
             $consulta="update  usuario set email=? , password=sha1(?) , nombre=? , apellidos=? , monedero=? , foto=? where id=?";
             
@@ -550,8 +602,6 @@ class Bd
     }
 
 
-
-
     public function actualizar_categoria($datos)
     {
 
@@ -560,9 +610,12 @@ class Bd
         if(sizeof($datos)==4){
             $consulta="update  categoria set puntuacion=? , titulo=? , descripcion=?   where id=?";
 
+        }elseif(sizeof($datos)==2){
+            $consulta="update  categoria set  foto=? where id=?";
+            
         }else{
             $consulta="update  categoria set puntuacion=? , titulo=? , descripcion=? , foto=? where id=?";
-            
+
         }
         
 
@@ -674,6 +727,7 @@ class Bd
 
 
         try {
+        
 
             $db = $this->conexion();
             //insertamos el pedido

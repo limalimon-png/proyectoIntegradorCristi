@@ -176,6 +176,7 @@ class Controller
 
 
          $act=new Actualizar();
+         $act->actualizar();;
 
     }
 
@@ -192,12 +193,38 @@ class Controller
     public function nuevoUsuario(){
    
  
-
+        $act=new Actualizar();
+        $act->llegan_datos();
 
 
       require('vistas/altaUsuario.php');
 
     }
+    public function irAltaUsuario(){
+   
+ 
+
+      require('vistas/altaUsuario.php');
+
+    }
+    public function nuevoCategoria(){
+   
+ 
+        $act=new ActualizarCat();
+        // $act->llegan_datos();
+
+
+      require('vistas/altaCategoria.php');
+
+    }
+    public function irAltaCategoria(){
+   
+ 
+
+      require('vistas/altaCategoria.php');
+
+    }
+
 
     public function actualizarProducto()
     {
@@ -227,11 +254,7 @@ class Controller
         require("vistas/ficha$info.php");
     }
 
-    // public function cargarVista($contenido, $plantilla)
-    // {
-    //     $this->contenido=$contenido;
-    //     require_once($plantilla);
-    // }
+   
 
     public function autentication()
     {
