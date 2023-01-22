@@ -30,11 +30,11 @@ class Controller
 
     public function porDefecto($vueltas)
     {
-        $cadena="";
-        for ($i=0; $i < $vueltas; $i++) { 
-            $cadena=$cadena.'../';
+        $cadena = "";
+        for ($i = 0; $i < $vueltas; $i++) {
+            $cadena = $cadena . '../';
         }
-        header('location:'.$cadena.'index.php/home');
+        header('location:' . $cadena . 'index.php/home');
     }
     public function index()
     {
@@ -56,14 +56,28 @@ class Controller
 
         $photoPath = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
         $ruta = str_replace("index.php/", "", $photoPath);
-        if(substr($ruta,-1)=='/'){
+        if (substr($ruta, -1) == '/') {
             $this->porDefecto(1);
-        }else{
+        } else {
 
-       
-       //Le paso los datos a la vista
-       require("vistas/publicas/home.html");
+
+            //Le paso los datos a la vista
+            require("vistas/publicas/home.html");
+        }
     }
+
+    public function productos()
+    {
+
+
+        $photoPath = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
+        $ruta = str_replace("index.php/", "", $photoPath);
+        
+
+
+            //Le paso los datos a la vista
+            require("vistas/publicas/listaProductos.html");
+        
     }
 
 
@@ -142,9 +156,10 @@ class Controller
 
 
 
-    public function getDestacados(){
-        $db=new Bd();
-        return json_encode( $db->getProductosDestacados($_GET['id']));
+    public function getDestacados()
+    {
+        $db = new Bd();
+        return json_encode($db->getProductosDestacados($_GET['id']));
     }
 
     // public function categorias()
