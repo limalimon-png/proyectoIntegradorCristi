@@ -180,6 +180,10 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
     } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && !isset($array_ruta[1])  ) {
         $controller->home();
   
+    } else if (isset($array_ruta[0])  && preg_match("/^destacados\?id=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+        //Llamo al método ver pasándole la clave que me están pidiendo
+    
+        echo $controller->getDestacados();
 
 
 

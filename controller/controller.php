@@ -142,6 +142,10 @@ class Controller
 
 
 
+    public function getDestacados(){
+        $db=new Bd();
+        return json_encode( $db->getProductosDestacados($_GET['id']));
+    }
 
     // public function categorias()
     // {

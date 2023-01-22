@@ -14,3 +14,26 @@
 .cats{
     margin: 10px;
 }
+
+#slider{
+    height: 20px!important;
+    width: 100%;
+} 
+
+
+.carousel .item {
+    height: 100px;
+  }
+  
+  .item img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-height: 100px;
+  }
+
+
+  .carousel-item  > .img-fluid{
+    height: 50px;
+
+  }

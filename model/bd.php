@@ -425,6 +425,48 @@ class Bd
 
 
 
+    public function getProductosDestacados($id)
+    {
+        try {
+          $consulta="";
+          if($id!=0){
+            $consulta="SELECT id,foto1,nombre,descripcion,precio FROM `objeto` join comentario on id=id_objeto where id_usuario=$id  order by fecha desc  LIMIT 10;";
+
+          }else{
+
+            $consulta="SELECT id,foto1,nombre,descripcion,precio FROM `objeto`  order by (puntuacion_compra+puntuacion_comentarios) desc LIMIT 10;";
+
+          }
+            
+            $db = $this->conexion();
+            $sql = $consulta;
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $producto = [];
+                $producto['id'] = $res[0];
+                $producto['foto1'] = $res[1];
+                $producto['nombre'] = $res[2];
+                $producto['descripcion'] = $res[3];
+                $producto['precio'] = $res[4];
+           
+
+
+
+                $catalogo[$contador] = $producto;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
     public function getProductos($pagina)
     {
         try {
