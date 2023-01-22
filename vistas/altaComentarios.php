@@ -19,7 +19,6 @@ if (isset($_SESSION["credenciales"])) {
 
 
 ?>
-
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -228,19 +227,36 @@ if (isset($_SESSION["credenciales"])) {
                                 <strong>Basic Form</strong> Elements
                             </div>
                             <div class="card-body card-block">
-                                <form action="admin/comentarios/actualizar" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <form action="admin/comentarios/alta" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="idUsuario" class=" form-control-label">Email usuario</label></div>
+                                        <div class="col-12 col-md-9">
+
+
+                                            <select name="idUsuario" id="idUsuario" class="form-control">
+                                                
+
+                                            </select>
+                                            <small class="form-text text-muted">This is a help text</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="idObjeto" class=" form-control-label">Nombre Producto</label></div>
+                                        <div class="col-12 col-md-9">
+                                            
+                                      
+                                        <select name="idObjeto" id="idObjeto" class="form-control">
+                                                   
+                                                   
+                                                </select>
+                                            <small class="form-text text-muted">This is a help text</small></div>
+                                    </div>
+
+
 
                                    
-
-
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="idUsuario-preview" class=" form-control-label">Email usuario</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="idUsuario-preview" name="idUsuario-preview" placeholder="Disabled" disabled="" class="form-control"></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="idObjeto-preview" class=" form-control-label">Nombre Objeto</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="idObjeto-preview" name="idObjeto-preview" placeholder="Disabled" disabled="" class="form-control"></div>
-                                    </div>
 
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="fecha" class=" form-control-label">Fecha</label></div>
@@ -250,46 +266,43 @@ if (isset($_SESSION["credenciales"])) {
                                         <div class="col col-md-3"><label for="comentario" class=" form-control-label">Reseña</label></div>
                                         <div class="col-12 col-md-9"><input type="text" id="comentario" name="comentario" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
                                     </div>
-                               
 
-                                    <input type="hidden" name="idUsuario" id="idUsuario">
-                                    <input type="hidden" name="idObjeto" id="idObjeto">
+
+
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-dot-circle-o"></i> Actualizar
+                                            <i class="fa fa-dot-circle-o"></i> Guardar
                                         </button>
-                                        <button type="button" class="btn btn-danger btn-sm" onclick="eliminar()">
-                                            <i class="fa fa-ban"></i> Eliminar
+                                        <button type="reset" class="btn btn-danger btn-sm">
+                                            <i class="fa fa-ban"></i> Limpiar
                                         </button>
                                         <button type="button" class="btn btn-secondary btn-sm" onclick="volver()">
                                             <i class="fa fa-arrow-circle-o-left"></i> Volver
                                         </button>
-                                        <button type="button" class="btn btn-success btn-sm" onclick="nuevo()">
-                                            <i class="fa fa-plus-square-o"></i> Nuevo
-                                        </button>
+                                        
                                     
                                     </div>
 
 
                                 </form>
-                                
-
-                        </div>
-
-                    </div><!-- .content -->
-                </div><!-- /#right-panel -->
-                <!-- Right Panel -->
 
 
-                <script src="../templates/vendors/jquery/dist/jquery.min.js"></script>
-                <script src="../templates/vendors/popper.js/dist/umd/popper.min.js"></script>
+                            </div>
 
-                <script src="../templates/vendors/jquery-validation/dist/jquery.validate.min.js"></script>
-                <!-- <script src="../templates/vendors/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script> -->
+                        </div><!-- .content -->
+                    </div><!-- /#right-panel -->
+                    <!-- Right Panel -->
 
-                <script src="../templates/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-                <script src="../templates/assets/js/main.js"></script>
-                <script src="../templates/assets/js/fichaComentarios.js"></script>
+
+                    <!-- <script src="../templates/vendors/jquery/dist/jquery.min.js"></script>
+                    <script src="../templates/vendors/popper.js/dist/umd/popper.min.js"></script>
+
+                    <script src="../templates/vendors/jquery-validation/dist/jquery.validate.min.js"></script>
+                     <script src="../templates/vendors/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script> -->
+
+                    <!-- <script src="../templates/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+                    <script src="../templates/assets/js/main.js"></script> --> 
+                    <script src="../templates/assets/js/fichaComentarios.js"></script>
 </body>
 
 </html>

@@ -36,8 +36,8 @@ class ActualizarObj
             $i=$i+1;
             $datos[$i]=$this->longitud;
             $i=$i+1;
-            // $datos[$i]=$this->categoria;
-            // $i=$i+1;
+            $datos[$i]=$this->categoria;
+            $i=$i+1;
             $datos[$i]=$this->id;
                 $i=$i+1;
            

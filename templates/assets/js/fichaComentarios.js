@@ -3,9 +3,11 @@ let url=location.href;
 
 
 window.onload=async ()=>{
-    id = location.href.substring(location.href.lastIndexOf("/") + 1);
-    idO=id.substring(id.lastIndexOf("_")+1)
-    id=id.substring(0,id.lastIndexOf("_"))
+   
+     id = location.href.substring(location.href.lastIndexOf("/") + 1);
+        idO=id.substring(id.lastIndexOf("_")+1)
+        id=id.substring(0,id.lastIndexOf("_"))
+    
 
 
     
@@ -15,7 +17,12 @@ window.onload=async ()=>{
     //     document.getElementById("img-preview").src=URL.createObjectURL(original);
     // });
 
-    await getProductos()
+    if(location.href.substring(location.href.lastIndexOf("/") + 1)!='nuevo'){
+        await getComentarios()
+    }else{
+         await getUsuarios();
+         await getProductos();
+    }
 
 
 }
@@ -23,7 +30,7 @@ window.onload=async ()=>{
 
 
 
-async function getProductos() {
+async function getComentarios() {
    
   
 
@@ -60,16 +67,53 @@ function volver(){
 }
 
 
-async function eliminar(){
-    
-    const response = await fetch('eliminarUsuario?id='+id);
 
-    let info = await response.json();
-    console.log(info);
-
-}
 
 function nuevo(){
 
     location.href=url.substring(0,url.lastIndexOf("/"))+'/nuevo'
+}
+
+async function getUsuarios(){
+    const response = await fetch('selectUsuarios');
+
+    info = await response.json();
+    
+
+    info.forEach(element => {
+      
+        let option =document.createElement("option");
+        option.value=element['id'];
+        option.append(element['email']);
+       
+        document.getElementById('idUsuario').append(option);
+        
+        
+    });
+
+}
+
+
+async function getProductos(){
+    const response = await fetch('selectProductos');
+
+    info = await response.json();
+    
+
+    info.forEach(element => {
+      
+        let option =document.createElement("option");
+        option.value=element['id'];
+        option.append(element['nombre']);
+        
+        document.getElementById('idObjeto').append(option);
+        
+        
+    });
+
+}
+async function eliminar(){
+
+    location.href='admin/comentarios/eliminarComentario?idU='+id+"&idO="+idO;
+
 }

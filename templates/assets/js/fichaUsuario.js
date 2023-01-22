@@ -60,10 +60,9 @@ function volver(){
 
 async function eliminar(){
     
-    const response = await fetch('eliminarUsuario?id='+id);
+    location.href='admin/usuarios/eliminarUsuario?id='+id;
 
-    let info = await response.json();
-    console.log(info);
+    
 
 }
 

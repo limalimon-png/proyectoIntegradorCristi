@@ -52,13 +52,14 @@ class Cabecera{
         if (isset($_SESSION["credenciales"])) {
             if (empty($_SESSION["credenciales"])) {
                 header('location:login');
-             
+             return false;
             } else {
-              
+              return true;
             }
             
         } else {
             header('location:login');
+            return false;
            
         }
 

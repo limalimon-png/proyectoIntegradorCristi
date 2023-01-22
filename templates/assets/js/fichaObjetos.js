@@ -89,10 +89,7 @@ function volver(){
 
 async function eliminar(){
     
-    // const response = await fetch('eliminarUsuario?id='+id);
-
-    // let info = await response.json();
-    // console.log(info);
+    location.href='eliminarProducto?id='+id;
 
 }
 

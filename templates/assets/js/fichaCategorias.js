@@ -102,3 +102,10 @@ async function getCategorias(){
     });
 
 }
+
+
+async function eliminar(){
+    
+    location.href='eliminarCategoria?id='+id;
+
+}

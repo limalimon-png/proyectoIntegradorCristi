@@ -1,4 +1,25 @@
-<!doctype html>
+
+
+<?php 
+ if(session_status()!=2)
+ session_start();
+if (isset($_SESSION["credenciales"])) {
+ if (empty($_SESSION["credenciales"])) {
+     header('location:../login');
+  
+ } else {
+    
+   
+ }
+ 
+} else {
+  
+ header('location:../login');
+
+}
+
+
+?><!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
@@ -315,7 +336,7 @@
                                         <button type="reset" class="btn btn-danger btn-sm">
                                             <i class="fa fa-ban"></i> Limpiar
                                         </button>
-                                        <button type="back" class="btn btn-secondary btn-sm">
+                                        <button type="button" class="btn btn-secondary btn-sm" onclick="volver()">
                                             <i class="fa fa-arrow-circle-o-left"></i> Volver
                                         </button>
                                         

@@ -5,7 +5,7 @@ use mail\Mailer;
 
 class Controller
 {
-    var $categoria;
+    var $goria;
     var $productos;
     var $coches;
     var $cat;
@@ -28,9 +28,13 @@ class Controller
     //     ];
     // }
 
-    public function porDefecto()
+    public function porDefecto($vueltas)
     {
-        header('location:login');
+        $cadena="";
+        for ($i=0; $i < $vueltas; $i++) { 
+            $cadena=$cadena.'../';
+        }
+        header('location:'.$cadena.'index.php/home');
     }
     public function index()
     {
@@ -44,6 +48,22 @@ class Controller
 
         //Le paso los datos a la vista
         require("view/index.php");
+    }
+
+    public function home()
+    {
+
+
+        $photoPath = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
+        $ruta = str_replace("index.php/", "", $photoPath);
+        if(substr($ruta,-1)=='/'){
+            $this->porDefecto(1);
+        }else{
+
+       
+       //Le paso los datos a la vista
+       require("vistas/publicas/home.html");
+    }
     }
 
 
@@ -75,7 +95,7 @@ class Controller
 
     public function panelControl()
     {
-        $control=new Cabecera();
+        $control = new Cabecera();
         $control->control();
         require("vistas/index.php");
     }
@@ -85,211 +105,12 @@ class Controller
         require("vistas/$name");
     }
 
-    public function listaProductos()
-    {
-        
-        $pagina=0;
-        if (isset($_GET['tabla'])) {
-            $tabla=$_GET['tabla'];
-
-            if(isset($_GET['pagina'])){
-                $pagina=$_GET['pagina'];
-            }
-            
-            $bd=new Bd();
-            return( json_encode($bd->getLista($pagina,$tabla)));
-          }else{
-            return "no llega nada";
-          }
-    }
-    public function infoUsuario()
-    {
-        
-   
-        if (isset($_GET['id'])) {
-            $id=$_GET['id'];
-
-            
-            
-            $bd=new Bd();
-            return( json_encode($bd->getUsuario($id)));
-          }else{
-            return "no llega nada";
-          }
-    }
-
-    public function infoProducto()
-    {
-        
-   
-        if (isset($_GET['id'])) {
-            $id=$_GET['id'];
-
-            
-            
-            $bd=new Bd();
-            return( json_encode($bd->getProducto($id)));
-          }else{
-            return "no llega nada";
-          }
-    }
-
-    public function infoCategoria()
-    {
-        
-   
-        if (isset($_GET['id'])) {
-            $id=$_GET['id'];
-
-            
-            
-            $bd=new Bd();
-            return( json_encode($bd->getCategoria($id)));
-          }else{
-            return "no llega nada";
-          }
-    }
-    public function infoCategorias()
-    {
-        
-   
-
-           
-
-            
-            
-            $bd=new Bd();
-            return json_encode($bd->getCategoriasSelect());
-
-            
-          
-    }
-
-
-    public function infoComentario()
-    {
-        
-   
-        if (isset($_GET['idU'])&&isset($_GET['idO'])) {
-            $idU=$_GET['idU'];
-            $idO=$_GET['idO'];
-
-            
-            
-            $bd=new Bd();
-            return( json_encode($bd->getComentario($idU,$idO)));
-          }else{
-            return "no llega nada";
-          }
-    }
-
-
-    public function actualizarUsuario(){
-   
- 
-
-
-
-         $act=new Actualizar();
-         $act->actualizar();;
-
-    }
-
-    public function actualizarCategoria(){
-   
- 
-
-
-
-        $act=new ActualizarCat();
-        $act->actualizar();
-
-   }
-    
-    public function nuevoUsuario(){
-   
- 
-        $act=new Actualizar();
-        $act->llegan_datos();
-
-
-      require('vistas/altaUsuario.php');
-
-    }
-    public function irAltaUsuario(){
-   
- 
-
-      require('vistas/altaUsuario.php');
-
-    }
-    public function irAltaProducto(){
-   
- 
-
-      require('vistas/altaObjeto.php');
-
-    }
-
-    public function nuevoProducto(){
-   
- 
-        $act=new ActualizarObj();
-        $act->llegan_datos();
-
-
-      require('vistas/altaObjeto.php');
-
-    }
-    public function nuevoCategoria(){
-   
- 
-        $act=new ActualizarCat();
-         $act->llegan_datos();
-
-
-      require('vistas/altaCategoria.php');
-
-    }
-    public function irAltaCategoria(){
-   
- 
-
-      require('vistas/altaCategoria.php');
-
-    }
-
-
-    public function actualizarProducto()
-    {
-        $act=new ActualizarObj();
-        $act->actualizar();
-    }
-    public function actualizarComentario()
-    {
-
-        if(isset($_POST['idUsuario']) &&isset($_POST['idObjeto']) &&isset($_POST['fecha']) &&isset($_POST['comentario']) ){
-            $datos=[];
-            $datos[2]=$_POST['idUsuario'];
-            $datos[3]=$_POST['idObjeto'];
-            $datos[1]=$_POST['fecha'];
-            $datos[0]=$_POST['comentario'];
-            $bd=new Bd();
-            $bd->actualizar_comentarios($datos);
-        }
-        header('location:../comentarios/'.$_POST['idUsuario'].'_'.$_POST['idObjeto']);
-
-        
-    }
-
-
-
     public function verFicha($info)
     {
         require("vistas/ficha$info.php");
     }
 
-   
+
 
     public function autentication()
     {
@@ -320,7 +141,7 @@ class Controller
 
 
 
-    
+
 
     // public function categorias()
     // {
@@ -330,83 +151,83 @@ class Controller
     //     echo Cabecera::menuCategorias();
     //     Cabecera::control();
     // }
-    public function productos($prod)
-    {
-        $bd = new Bd();
-        $this->productos = $bd->getProductos($prod);
-        $this->categoria = $bd->getCategoria($prod);
-        $this->cat = $prod;
+    // public function productos($prod)
+    // {
+    //     $bd = new Bd();
+    //     $this->productos = $bd->getProductos($prod);
+    //     // $this->categoria = $bd->getCategoria($prod);
+    //     $this->cat = $prod;
 
-        require('view/productos.php');
-
-
-
-        echo Cabecera::menuProductos();
-        Cabecera::control();
-    }
-
-    public function agregarProducto()
-    {
-        $agregar = new Agregar();
-    }
-
-    public function verCarrito()
-    {
-        Cabecera::control();
-
-        if (isset($_SESSION['carrito'])) {
-
-            if (!empty($_SESSION['carrito'])) {
-
-                $bd = new Bd();
-
-                $carrito = $_SESSION['carrito'];
-
-
-                $this->productosCarrito = $bd->getProductosCarrito($carrito);
-
-
-                require('view/carrito.php');
-            } else {
-
-                require("view/categorias.php");
-            }
-        } else {
-            require("view/categorias.php");
-        }
-
-        echo Cabecera::menuCarrito();
-    }
+    //     require('view/productos.php');
 
 
 
-    public function procesarPedido()
-    {
-        Cabecera::control();
-        $procesar = new Procesar();
-        $this->pedidoValido = $procesar->getValido();
+    //     echo Cabecera::menuProductos();
+    //     Cabecera::control();
+    // }
+
+    // public function agregarProducto()
+    // {
+    //     $agregar = new Agregar();
+    // }
+
+    // public function verCarrito()
+    // {
+    //     Cabecera::control();
+
+    //     if (isset($_SESSION['carrito'])) {
+
+    //         if (!empty($_SESSION['carrito'])) {
+
+    //             $bd = new Bd();
+
+    //             $carrito = $_SESSION['carrito'];
 
 
-        if ($this->pedidoValido) {
-            $this->pedidoValido = false;
+    //             $this->productosCarrito = $bd->getProductosCarrito($carrito);
 
 
-            Cabecera::control();
+    //             require('view/carrito.php');
+    //         } else {
 
-            $mail = new Mailer();
-            $bd = new Bd();
-            $this->pedido = $bd->getPedido();
+    //             require("view/categorias.php");
+    //         }
+    //     } else {
+    //         require("view/categorias.php");
+    //     }
 
-            $this->body = $_SESSION['credenciales'][0] . "ha realizado el pedido $this->pedido";
-            $mail->enviarEmail(
-                'guillermomartinez1222@gmail.com',
-                'guillermomartinez1222@gmail.com',
-                $this->body,
-                "gomzra@gmail.com"
-            );
-            require('view/correo.php');
-        }
-    }
+    //     echo Cabecera::menuCarrito();
+    // }
+
+
+
+    // public function procesarPedido()
+    // {
+    //     Cabecera::control();
+    //     $procesar = new Procesar();
+    //     $this->pedidoValido = $procesar->getValido();
+
+
+    //     if ($this->pedidoValido) {
+    //         $this->pedidoValido = false;
+
+
+    //         Cabecera::control();
+
+    //         $mail = new Mailer();
+    //         $bd = new Bd();
+    //         $this->pedido = $bd->getPedido();
+
+    //         $this->body = $_SESSION['credenciales'][0] . "ha realizado el pedido $this->pedido";
+    //         $mail->enviarEmail(
+    //             'guillermomartinez1222@gmail.com',
+    //             'guillermomartinez1222@gmail.com',
+    //             $this->body,
+    //             "gomzra@gmail.com"
+    //         );
+    //         require('view/correo.php');
+    //     }
+    // }
 
     public function cerrarSesion()
     {
@@ -416,7 +237,7 @@ class Controller
     }
 
 
-    
+
 
 
     public function registroProcess()

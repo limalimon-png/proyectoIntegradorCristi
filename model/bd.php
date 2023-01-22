@@ -18,9 +18,9 @@ class Bd
     }
 
 
-  
 
-   
+
+
     public  function getProductosCarrito($carrito)
     {
         $cadena = "";
@@ -200,18 +200,17 @@ class Bd
     {
 
         try {
-           
+
             $db = $this->conexion();
             $sql = "insert into usuario (email,password,nombre,apellidos,monedero) values (?,sha1(?),?,?,?)";
             $stmt = $db->prepare($sql);
             $stmt->execute($datos);
-            
-          
-           $last=$db->lastInsertId(); 
-           echo $last;
-           $db = null;
-         return $last;
-           
+
+
+            $last = $db->lastInsertId();
+            echo $last;
+            $db = null;
+            return $last;
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -222,18 +221,17 @@ class Bd
     {
 
         try {
-           
+
             $db = $this->conexion();
             $sql = "insert into objeto (nombre,descripcion,id_categoria,precio,latitud,longitud) values (?,?,?,?,?,?)";
             $stmt = $db->prepare($sql);
             $stmt->execute($datos);
-            
-          
-           $last=$db->lastInsertId(); 
-           echo $last;
-           $db = null;
-         return $last;
-           
+
+
+            $last = $db->lastInsertId();
+            echo $last;
+            $db = null;
+            return $last;
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -243,31 +241,147 @@ class Bd
 
     public function setCategoria($datos)
     {
-        if($datos[1]==0){
-            $datos[1]=null;
+        if ($datos[1] == 0) {
+            $datos[1] = null;
         }
 
-       
+
 
         try {
-           
+
             $db = $this->conexion();
             $sql = "insert into categoria (titulo,categoria_padre,descripcion,puntuacion) values (?,?,?,0)";
             $stmt = $db->prepare($sql);
             $stmt->execute($datos);
-            
-          
-           $last=$db->lastInsertId(); 
-          
-           $db = null;
-         return $last;
-           
+
+
+            $last = $db->lastInsertId();
+
+            $db = null;
+            return $last;
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
         return false;
     }
 
+    public function setComentario($datos)
+    {
+       
+
+
+        try {
+
+            $db = $this->conexion();
+            $sql = "insert into comentario (id_usuario,id_objeto,fecha,comentario) values (?,?,?,?)";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($datos);
+
+
+           
+
+            $db = null;
+          
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return false;
+    }
+
+    //gets para formularios
+    public function getCategoriasSelect()
+    {
+
+
+        try {
+
+            $db = $this->conexion();
+            $sql = "SELECT categoria.titulo,categoria.id  FROM categoria";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $categoria = [];
+                $categoria['titulo'] = $res[0];
+                $categoria['id'] = $res[1];
+
+
+
+                $catalogo[$contador] = $categoria;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+    public function getUsuariosSelect()
+    {
+
+
+        try {
+
+            $db = $this->conexion();
+            $sql = "SELECT email,id  FROM usuario";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $categoria = [];
+                $categoria['email'] = $res[0];
+                $categoria['id'] = $res[1];
+
+
+
+                $catalogo[$contador] = $categoria;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+    public function getProductosSelect()
+    {
+
+
+        try {
+
+            $db = $this->conexion();
+            $sql = "SELECT nombre,id  FROM objeto";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $categoria = [];
+                $categoria['nombre'] = $res[0];
+                $categoria['id'] = $res[1];
+
+
+
+                $catalogo[$contador] = $categoria;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 
     // get con todos los datos paginados
     public function getCategorias($pagina)
@@ -297,38 +411,7 @@ class Bd
                 $categoria['titulo categoria padre'] = $res[2];
                 $categoria['foto'] = $res[3];
                 $categoria['id'] = $res[4];
-           
 
-                $catalogo[$contador] = $categoria;
-                $contador++;
-            }
-            $db = null;
-            return $catalogo;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
-    public function getCategoriasSelect()
-    {
-
-
-        try {
-          
-            $db = $this->conexion();
-            $sql = "SELECT categoria.titulo,categoria.id  FROM categoria";
-            $stmt = $db->prepare($sql);
-            $stmt->execute();
-
-
-            $catalogo = [$stmt->rowCount()];
-            $contador = 0;
-            foreach ($stmt as $res) {
-
-                $categoria = [];
-                $categoria['titulo'] = $res[0];
-                $categoria['id'] = $res[1];
-             
-           
 
                 $catalogo[$contador] = $categoria;
                 $contador++;
@@ -451,7 +534,7 @@ class Bd
                 $comentarios['nombre usuario'] = $res[1];
                 $comentarios['fecha'] = $res[2];
                 $comentarios['comentario'] = $res[3];
-                $comentarios['id'] = $res[4]."_".$res[5];
+                $comentarios['id'] = $res[4] . "_" . $res[5];
 
 
 
@@ -480,14 +563,14 @@ class Bd
     }
 
 
-//get un unico resultado
+    //get un unico resultado
 
     public function getUsuario($id)
     {
 
 
         try {
-          
+
             $db = $this->conexion();
             $sql = "SELECT * from usuario where id=$id";
             $stmt = $db->prepare($sql);
@@ -506,7 +589,7 @@ class Bd
                 $categoria[4] = $res['email'];
                 $categoria[5] = $res['password'];
                 $categoria[6] = $res['monedero'];
-           
+
 
                 $catalogo[$contador] = $categoria;
                 $contador++;
@@ -523,7 +606,7 @@ class Bd
 
 
         try {
-       
+
             $db = $this->conexion();
             $sql = "SELECT categoria.titulo,categoria.descripcion, cat2.titulo as categoria_padre,categoria.foto,categoria.id FROM categoria left join categoria as cat2 on cat2.id=categoria.categoria_padre where categoria.id=$id";
             $stmt = $db->prepare($sql);
@@ -540,7 +623,7 @@ class Bd
                 $categoria['titulo categoria padre'] = $res[2];
                 $categoria['foto'] = $res[3];
                 $categoria['id'] = $res[4];
-           
+
 
                 $catalogo[$contador] = $categoria;
                 $contador++;
@@ -555,7 +638,7 @@ class Bd
     public function getProducto($id)
     {
         try {
-           
+
             $db = $this->conexion();
             $sql = "SELECT objeto.nombre, categoria.titulo as 'categoria', objeto.descripcion, objeto.precio, objeto.latitud, objeto.longitud, objeto.puntuacion_compra,objeto.puntuacion_comentarios, objeto.puntuacion_total , objeto.id , objeto.foto1 , objeto.foto2 , objeto.foto3 FROM objeto join categoria on objeto.id_categoria=categoria.id where objeto.id=$id";
             $stmt = $db->prepare($sql);
@@ -594,13 +677,13 @@ class Bd
     }
 
 
-    public function getComentario($id1,$id2)
+    public function getComentario($id1, $id2)
     {
-        $datos=[];
-        $datos[0]=$id1;
-        $datos[1]=$id2;
+        $datos = [];
+        $datos[0] = $id1;
+        $datos[1] = $id2;
         try {
-          
+
             $db = $this->conexion();
             $sql = "SELECT  usuario.email as email_usuario, objeto.nombre as nombre_producto , fecha, comentario.comentario ,comentario.id_usuario , comentario.id_objeto FROM comentario join usuario on comentario.id_usuario=usuario.id join objeto on objeto.id=comentario.id_objeto  where id_usuario=? and id_objeto=?";
             $stmt = $db->prepare($sql);
@@ -616,7 +699,7 @@ class Bd
                 $comentarios['nombre usuario'] = $res[1];
                 $comentarios['fecha'] = $res[2];
                 $comentarios['comentario'] = $res[3];
-                $comentarios['id'] = $res[4]."_".$res[5];
+                $comentarios['id'] = $res[4] . "_" . $res[5];
 
 
 
@@ -637,16 +720,13 @@ class Bd
     public function actualizar_usuario($datos)
     {
 
-        $consulta="";
-        if(sizeof($datos)==6){
-            $consulta="update  usuario set email=? , password=sha1(?) , nombre=? , apellidos=? , monedero=? where id=?";
-
-        }elseif(sizeof($datos)==2){
-            $consulta="update  usuario set  foto=? where id=?";
-            
-        }else{
-            $consulta="update  usuario set email=? , password=sha1(?) , nombre=? , apellidos=? , monedero=? , foto=? where id=?";
-            
+        $consulta = "";
+        if (sizeof($datos) == 6) {
+            $consulta = "update  usuario set email=? , password=sha1(?) , nombre=? , apellidos=? , monedero=? where id=?";
+        } elseif (sizeof($datos) == 2) {
+            $consulta = "update  usuario set  foto=? where id=?";
+        } else {
+            $consulta = "update  usuario set email=? , password=sha1(?) , nombre=? , apellidos=? , monedero=? , foto=? where id=?";
         }
 
 
@@ -668,26 +748,23 @@ class Bd
 
     public function actualizar_categoria($datos)
     {
-        
- 
-        $consulta="";
-        if(sizeof($datos)==4){
-            if($datos[2]==0){
-                $datos[2]=null;
-            }
-            $consulta="update  categoria set   titulo=? , descripcion=? ,categoria_padre=?  where id=?";
 
-        }elseif(sizeof($datos)==2){
-            $consulta="update  categoria set  foto=? where id=?";
-            
-        }else{
-            if($datos[2]==0){
-                $datos[2]=null;
-            }
-            $consulta="update  categoria set  titulo=? , descripcion=?  ,categoria_padre=?, foto=? where id=?";
 
+        $consulta = "";
+        if (sizeof($datos) == 4) {
+            if ($datos[2] == 0) {
+                $datos[2] = null;
+            }
+            $consulta = "update  categoria set   titulo=? , descripcion=? ,categoria_padre=?  where id=?";
+        } elseif (sizeof($datos) == 2) {
+            $consulta = "update  categoria set  foto=? where id=?";
+        } else {
+            if ($datos[2] == 0) {
+                $datos[2] = null;
+            }
+            $consulta = "update  categoria set  titulo=? , descripcion=?  ,categoria_padre=?, foto=? where id=?";
         }
-        
+
 
 
         try {
@@ -743,10 +820,10 @@ class Bd
     {
 
 
-    
 
 
-      
+
+
 
 
         try {
@@ -766,12 +843,12 @@ class Bd
     public function actualizar_objetos($datos)
     {
 
-        $consulta="";
-       
-            $consulta="update  objeto set   nombre=? , descripcion=? , precio=? , latitud=? , longitud=? where id=?";
+        $consulta = "";
 
-       
-        
+        $consulta = "update  objeto set   nombre=? , descripcion=? , precio=? , latitud=? , longitud=? , id_categoria=? where id=?";
+
+
+
 
 
         try {
@@ -793,11 +870,11 @@ class Bd
     public function actualizar_comentarios($datos)
     {
 
-      
+
 
 
         try {
-        
+
 
             $db = $this->conexion();
             //insertamos el pedido
@@ -813,6 +890,82 @@ class Bd
     }
 
 
+    //delete from
+    public function deleteUsuario($id)
+    {
+
+
+        try {
+
+            $db = $this->conexion();
+            $sql = "delete from usuario where id=?";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($id);
+
+
+         
+            $db = null;
+        
+        } catch (PDOException $e) {
+           return "No se pudo eliminar";
+        }
+    }
+
+    public function deleteCategoria($id)
+    {
+
+
+        try {
+
+            $db = $this->conexion();
+            $sql = "delete FROM categoria  where categoria.id=?";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($id);
+
+
+        
+            $db = null;
+        
+        } catch (PDOException $e) {
+            return "No se pudo eliminar";
+        }
+    }
+
+    public function deleteProducto($id)
+    {
+        try {
+
+            $db = $this->conexion();
+            $sql = "delete from objeto where objeto.id=?";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($id);
+
+
+            $db = null;
+           
+        } catch (PDOException $e) {
+            return "No se pudo eliminar";
+        }
+    }
+
+
+    public function deleteComentario($datos)
+    {
+      
+        try {
+
+            $db = $this->conexion();
+            $sql = "delete from comentario where id_usuario=? and id_objeto=?";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($datos);
+
+           
+            $db = null;
+           
+        } catch (PDOException $e) {
+            return "No se pudo eliminar";
+        }
+    }
 
 
 }

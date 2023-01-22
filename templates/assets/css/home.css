@@ -1,0 +1,16 @@
+#banner{
+    background-image: url(../../images/background/metaverso.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+#containerInfo{
+    background-color: rgba(0, 0, 0, 0.251);
+    
+}
+
+.cats{
+    margin: 10px;
+}
