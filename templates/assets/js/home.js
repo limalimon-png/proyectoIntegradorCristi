@@ -47,6 +47,10 @@ async function getProductos(pag) {
         info = json[pagina]
 
     } else {
+      localStorage.setItem('myCat', 'Tom');
+      const cat = localStorage.getItem('myCat');
+      localStorage.removeItem('myCat');
+      localStorage.clear();
 
         const response = await fetch('destacados?id=0');
 

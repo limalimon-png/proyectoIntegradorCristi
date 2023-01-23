@@ -44,7 +44,7 @@ $array_ruta = array_filter(explode("/", $ruta));
 //Decido la ruta en función de los elementos del array
 if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])) {
     //Llamo al método ver pasándole la clave que me están pidiendo
-    // $controller->login();
+    $controller->loginPublico();
 
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "login" &&   !isset($array_ruta[2])) {
 
@@ -182,11 +182,58 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
     } else if (isset($array_ruta[0]) && $array_ruta[0] == "productos" && !isset($array_ruta[1])  ) {
         $controller->productos();
   
+    } else if (isset($array_ruta[0]) && $array_ruta[0] == "categorias" && !isset($array_ruta[1])  ) {
+        $controller->categorias();
+  
+    } else if (isset($array_ruta[0]) && $array_ruta[0] == "contacto" && !isset($array_ruta[1])  ) {
+        $controller->contacto();
+  
+    } else if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])  ) {
+        $controller->loginPublico();
+  
+    } else if (isset($array_ruta[0]) && $array_ruta[0] == "register" && !isset($array_ruta[1])  ) {
+        $controller->register();
+  
+    } else if (isset($array_ruta[0]) && $array_ruta[0] == "login" && isset($array_ruta[1]) && $array_ruta[1] == "process" &&   !isset($array_ruta[2])) {
+        //Llamo al método ver pasándole la clave que me están pidiendo
+        $controller->autenticationPublica();
+  
   
     } else if (isset($array_ruta[0])  && preg_match("/^destacados\?id=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
         //Llamo al método ver pasándole la clave que me están pidiendo
     
         echo $controller->getDestacados();
+
+    } else if (isset($array_ruta[0])  && preg_match("/^listaPorNombre\?nombre=\w+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+        //Llamo al método ver pasándole la clave que me están pidiendo
+    
+        // echo $controller->getListaPorNombre();
+
+
+
+
+    } else if (isset($array_ruta[0])  && preg_match("/^listaPorCategoria\?nombre=\w+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+        //Llamo al método ver pasándole la clave que me están pidiendo
+    
+        // echo $controller->getListaPorCategoria();
+
+
+    } else if (isset($array_ruta[0])  && preg_match("/^ventas$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+        //Llamo al método ver pasándole la clave que me están pidiendo
+    
+        // echo $controller->getVentas();
+
+
+
+
+    } else if (isset($array_ruta[0])  && preg_match("/^puntuacion$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+        //Llamo al método ver pasándole la clave que me están pidiendo
+    
+        // echo $controller->getPuntuacion();
+
+
+
+
 
 
 
@@ -214,7 +261,7 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
     //Llamo al método por defecto del controlador
 
 
-       $controller->porDefecto(sizeof($array_ruta));
+    //    $controller->porDefecto(sizeof($array_ruta));
 
 
     var_dump($array_ruta);

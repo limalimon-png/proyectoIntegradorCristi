@@ -422,7 +422,120 @@ class Bd
             echo $e->getMessage();
         }
     }
+    public function getCategoriasPorNombre($pagina,$nombre)
+    {
 
+
+        try {
+            $pagina = $pagina * 10;
+            $indice = 10;
+            if ($pagina != 0) {
+
+                $indice = $pagina + 10;
+            }
+            $db = $this->conexion();
+            $sql = "SELECT categoria.titulo,categoria.descripcion, cat2.titulo as categoria_padre,categoria.foto,categoria.id FROM categoria left join categoria as cat2 on cat2.id=categoria.categoria_padre where categoria.titulo like ('%?%') Limit $pagina,$indice";
+            $stmt = $db->prepare($sql);
+            $stmt->execute(array($nombre));
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $categoria = [];
+                $categoria['titulo'] = $res[0];
+                $categoria['descripcion'] = $res[1];
+                $categoria['titulo categoria padre'] = $res[2];
+                $categoria['foto'] = $res[3];
+                $categoria['id'] = $res[4];
+
+
+                $catalogo[$contador] = $categoria;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+    public function getCategoriasPorDescripcion($pagina,$nombre)
+    {
+
+
+        try {
+            $pagina = $pagina * 10;
+            $indice = 10;
+            if ($pagina != 0) {
+
+                $indice = $pagina + 10;
+            }
+            $db = $this->conexion();
+            $sql = "SELECT categoria.titulo,categoria.descripcion, cat2.titulo as categoria_padre,categoria.foto,categoria.id FROM categoria left join categoria as cat2 on cat2.id=categoria.categoria_padre where categoria.descripcion like ('%?%') Limit $pagina,$indice";
+            $stmt = $db->prepare($sql);
+            $stmt->execute(array($nombre));
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $categoria = [];
+                $categoria['titulo'] = $res[0];
+                $categoria['descripcion'] = $res[1];
+                $categoria['titulo categoria padre'] = $res[2];
+                $categoria['foto'] = $res[3];
+                $categoria['id'] = $res[4];
+
+
+                $catalogo[$contador] = $categoria;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+    public function getCategoriasPorPuntuacion($pagina)
+    {
+
+
+        try {
+            $pagina = $pagina * 10;
+            $indice = 10;
+            if ($pagina != 0) {
+
+                $indice = $pagina + 10;
+            }
+            $db = $this->conexion();
+            $sql = "SELECT categoria.titulo,categoria.descripcion, cat2.titulo as categoria_padre,categoria.foto,categoria.id FROM categoria left join categoria as cat2 on cat2.id=categoria.categoria_padre Limit $pagina,$indice";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $categoria = [];
+                $categoria['titulo'] = $res[0];
+                $categoria['descripcion'] = $res[1];
+                $categoria['titulo categoria padre'] = $res[2];
+                $categoria['foto'] = $res[3];
+                $categoria['id'] = $res[4];
+
+
+                $catalogo[$contador] = $categoria;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 
 
     public function getProductosDestacados($id)
@@ -430,7 +543,7 @@ class Bd
         try {
           $consulta="";
           if($id!=0){
-            $consulta="SELECT id,foto1,nombre,descripcion,precio FROM `objeto` join comentario on id=id_objeto where id_usuario=$id  order by fecha desc  LIMIT 10;";
+            $consulta="SELECT id,foto1,nombre,descripcion,precio FROM `objeto` join comentario on id=id_objeto where id_usuario=(select id from usuario where email='$id')  order by fecha desc  LIMIT 10;";
 
           }else{
 
@@ -478,6 +591,177 @@ class Bd
             }
             $db = $this->conexion();
             $sql = "SELECT objeto.nombre, categoria.titulo as 'categoria', objeto.descripcion, objeto.precio, objeto.latitud, objeto.longitud, objeto.puntuacion_compra,objeto.puntuacion_comentarios, objeto.puntuacion_total , objeto.id FROM objeto join categoria on objeto.id_categoria=categoria.id Limit $pagina,$indice";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $producto = [];
+                $producto['nombre'] = $res[0];
+                $producto['categoria'] = $res[1];
+                $producto['descripcion'] = $res[2];
+                $producto['precio'] = $res[3];
+                $producto['latitud'] = $res[4];
+                $producto['longitud'] = $res[5];
+                $producto['puntuacion_compra'] = $res[6];
+                $producto['puntuacion_comentarios'] = $res[7];
+                $producto['puntuacion_total'] = $res[8];
+                $producto['id'] = $res[9];
+
+
+
+                $catalogo[$contador] = $producto;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getProductosPorNombre($pagina,$nombre)
+    {
+        try {
+            $pagina = $pagina * 10;
+            $indice = 10;
+            if ($pagina != 0) {
+
+                $indice = $pagina + 10;
+            }
+            $db = $this->conexion();
+            $sql = "SELECT objeto.nombre, categoria.titulo as 'categoria', objeto.descripcion, objeto.precio, objeto.latitud, objeto.longitud, objeto.puntuacion_compra,objeto.puntuacion_comentarios, objeto.puntuacion_total , objeto.id FROM objeto join categoria on objeto.id_categoria=categoria.id  where objeto.nombre like ('%?%') Limit $pagina,$indice";
+            $stmt = $db->prepare($sql);
+            $stmt->execute(array($nombre));
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $producto = [];
+                $producto['nombre'] = $res[0];
+                $producto['categoria'] = $res[1];
+                $producto['descripcion'] = $res[2];
+                $producto['precio'] = $res[3];
+                $producto['latitud'] = $res[4];
+                $producto['longitud'] = $res[5];
+                $producto['puntuacion_compra'] = $res[6];
+                $producto['puntuacion_comentarios'] = $res[7];
+                $producto['puntuacion_total'] = $res[8];
+                $producto['id'] = $res[9];
+
+
+
+                $catalogo[$contador] = $producto;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+    public function getProductosPorCategoria($pagina,$nombre)
+    {
+        try {
+            $pagina = $pagina * 10;
+            $indice = 10;
+            if ($pagina != 0) {
+
+                $indice = $pagina + 10;
+            }
+            $db = $this->conexion();
+            $sql = "SELECT objeto.nombre, categoria.titulo as 'categoria', objeto.descripcion, objeto.precio, objeto.latitud, objeto.longitud, objeto.puntuacion_compra,objeto.puntuacion_comentarios, objeto.puntuacion_total , objeto.id FROM objeto join categoria on objeto.id_categoria=categoria.id  where categoria.titulo like ('%?%') Limit $pagina,$indice";
+            $stmt = $db->prepare($sql);
+            $stmt->execute(array($nombre));
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $producto = [];
+                $producto['nombre'] = $res[0];
+                $producto['categoria'] = $res[1];
+                $producto['descripcion'] = $res[2];
+                $producto['precio'] = $res[3];
+                $producto['latitud'] = $res[4];
+                $producto['longitud'] = $res[5];
+                $producto['puntuacion_compra'] = $res[6];
+                $producto['puntuacion_comentarios'] = $res[7];
+                $producto['puntuacion_total'] = $res[8];
+                $producto['id'] = $res[9];
+
+
+
+                $catalogo[$contador] = $producto;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getProductosPorPuntuacionTotal($pagina)
+    {
+        try {
+            $pagina = $pagina * 10;
+            $indice = 10;
+            if ($pagina != 0) {
+
+                $indice = $pagina + 10;
+            }
+            $db = $this->conexion();
+            $sql = "SELECT objeto.nombre, categoria.titulo as 'categoria', objeto.descripcion, objeto.precio, objeto.latitud, objeto.longitud, objeto.puntuacion_compra,objeto.puntuacion_comentarios, objeto.puntuacion_total , objeto.id FROM objeto join categoria on objeto.id_categoria=categoria.id ORDER by (objeto.puntuacion_comentarios+objeto.puntuacion_compra) desc Limit $pagina,$indice";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $producto = [];
+                $producto['nombre'] = $res[0];
+                $producto['categoria'] = $res[1];
+                $producto['descripcion'] = $res[2];
+                $producto['precio'] = $res[3];
+                $producto['latitud'] = $res[4];
+                $producto['longitud'] = $res[5];
+                $producto['puntuacion_compra'] = $res[6];
+                $producto['puntuacion_comentarios'] = $res[7];
+                $producto['puntuacion_total'] = $res[8];
+                $producto['id'] = $res[9];
+
+
+
+                $catalogo[$contador] = $producto;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getProductosPorVentas($pagina)
+    {
+        try {
+            $pagina = $pagina * 10;
+            $indice = 10;
+            if ($pagina != 0) {
+
+                $indice = $pagina + 10;
+            }
+            $db = $this->conexion();
+            $sql = "SELECT objeto.nombre, categoria.titulo as 'categoria', objeto.descripcion, objeto.precio, objeto.latitud, objeto.longitud, objeto.puntuacion_compra,objeto.puntuacion_comentarios, objeto.puntuacion_total , objeto.id FROM objeto join categoria on objeto.id_categoria=categoria.id ORDER by objeto.puntuacion_compra desc Limit $pagina,$indice";
             $stmt = $db->prepare($sql);
             $stmt->execute();
 

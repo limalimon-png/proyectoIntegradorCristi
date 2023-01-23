@@ -62,7 +62,7 @@ class Controller
 
 
             //Le paso los datos a la vista
-            require("vistas/publicas/home.html");
+            require("vistas/publicas/home.php");
         }
     }
 
@@ -76,7 +76,60 @@ class Controller
 
 
             //Le paso los datos a la vista
-            require("vistas/publicas/listaProductos.html");
+            require("vistas/publicas/listaProductos.php");
+        
+    }
+
+    public function categorias()
+    {
+
+
+        $photoPath = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
+        $ruta = str_replace("index.php/", "", $photoPath);
+        
+
+
+            //Le paso los datos a la vista
+            require("vistas/publicas/listaCategorias.php");
+        
+    }
+    public function contacto()
+    {
+
+
+        $photoPath = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
+        $ruta = str_replace("index.php/", "", $photoPath);
+        
+
+
+            //Le paso los datos a la vista
+            require("vistas/publicas/contacto.php");
+        
+    }
+    public function loginPublico()
+    {
+
+
+        $photoPath = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
+        $ruta = str_replace("index.php/", "", $photoPath);
+        
+
+
+            //Le paso los datos a la vista
+            require("vistas/publicas/login.php");
+        
+    }
+    public function register()
+    {
+
+
+        $photoPath = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
+        $ruta = str_replace("index.php/", "", $photoPath);
+        
+
+
+            //Le paso los datos a la vista
+            require("vistas/publicas/register.php");
         
     }
 
@@ -139,14 +192,42 @@ class Controller
         $this->mensaje = $aut->getMensaje();
         if ($this->mensaje == 'correcto') {
             // pasa a la siguiente pestaña
-
+            // echo "en el if";
             header('location:../control');
             // $this->cargarVista('contenido.php', 'index.php');
             // //    include('menulateral.php');
             // require('vistas/index.php');
         } else {
             //vuelve
-            $this->mensaje = "prueba";
+         echo   $this->mensaje = "prueba";
+            // require('view/login.php');
+
+            header('location:../login');
+        }
+    }
+
+
+    public function autenticationPublica()
+    {
+
+
+        $user[0] = $_POST["user"];
+        $user[1] = $_POST["pass"];
+
+        $aut = new Sesion();
+        $aut->loginPublico($user);
+
+        $this->mensaje = $aut->getMensaje();
+        if ($this->mensaje == 'correcto') {
+            // pasa a la siguiente pestaña
+            // echo "en el if";
+            header('location:../home');
+            // $this->cargarVista('contenido.php', 'index.php');
+            // //    include('menulateral.php');
+            // require('vistas/index.php');
+        } else {
+            //vuelve
+        //  echo   $this->mensaje = "prueba";
             // require('view/login.php');
 
             header('location:../login');
@@ -155,11 +236,16 @@ class Controller
 
 
 
-
     public function getDestacados()
     {
         $db = new Bd();
-        return json_encode($db->getProductosDestacados($_GET['id']));
+        session_start();
+       if(isset($_SESSION['credencialesPublicas'])){
+           return json_encode($db->getProductosDestacados($_SESSION['credencialesPublicas'][0]));
+
+       }else{
+           return json_encode($db->getProductosDestacados($_GET['id']));
+       }
     }
 
     // public function categorias()
