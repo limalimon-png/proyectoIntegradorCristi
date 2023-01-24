@@ -204,35 +204,50 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
     
         echo $controller->getDestacados();
 
-    } else if (isset($array_ruta[0])  && preg_match("/^listaPorNombre\?nombre=\w+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+    } else if (isset($array_ruta[0])  && preg_match("/^listaPorNombre\?nombre=\w+&pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
         //Llamo al método ver pasándole la clave que me están pidiendo
     
-        // echo $controller->getListaPorNombre();
+        echo $controller->getProductosListaPorNombre();
 
 
 
 
-    } else if (isset($array_ruta[0])  && preg_match("/^listaPorCategoria\?nombre=\w+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+    } else if (isset($array_ruta[0])  && preg_match("/^listaPorCategoria\?nombre=\w+&pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
         //Llamo al método ver pasándole la clave que me están pidiendo
     
-        // echo $controller->getListaPorCategoria();
+        echo $controller->getProductosListaPorCategoria();
 
 
-    } else if (isset($array_ruta[0])  && preg_match("/^ventas$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+    } else if (isset($array_ruta[0])  && preg_match("/^ventas\?pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
         //Llamo al método ver pasándole la clave que me están pidiendo
     
-        // echo $controller->getVentas();
+        echo $controller->getProductosVentas();
 
 
 
 
-    } else if (isset($array_ruta[0])  && preg_match("/^puntuacion$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+    } else if (isset($array_ruta[0])  && preg_match("/^puntuacionProductos\?pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
         //Llamo al método ver pasándole la clave que me están pidiendo
     
-        // echo $controller->getPuntuacion();
+         echo $controller->getProductosPuntuacion();
+    
 
 
 
+    } else if (isset($array_ruta[0])  && preg_match("/^listaPorTitulo\?nombre=\w+&pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+        //Llamo al método ver pasándole la clave que me están pidiendo
+    
+        echo $controller->getCategoriasListaPorTitulo();
+    } else if (isset($array_ruta[0])  && preg_match("/^listaPorDescripcion\?nombre=\w+&pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+        //Llamo al método ver pasándole la clave que me están pidiendo
+    
+        echo $controller->getCategoriasListaPorDecripcion();
+
+    
+    } else if (isset($array_ruta[0])  && preg_match("/^puntuacionCategorias\?pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+        //Llamo al método ver pasándole la clave que me están pidiendo
+    
+        echo $controller->getCategoriasPuntuacion();
 
 
 
@@ -261,7 +276,7 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
     //Llamo al método por defecto del controlador
 
 
-    //    $controller->porDefecto(sizeof($array_ruta));
+       $controller->porDefecto(sizeof($array_ruta));
 
 
     var_dump($array_ruta);

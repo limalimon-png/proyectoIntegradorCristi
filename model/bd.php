@@ -434,9 +434,9 @@ class Bd
                 $indice = $pagina + 10;
             }
             $db = $this->conexion();
-            $sql = "SELECT categoria.titulo,categoria.descripcion, cat2.titulo as categoria_padre,categoria.foto,categoria.id FROM categoria left join categoria as cat2 on cat2.id=categoria.categoria_padre where categoria.titulo like ('%?%') Limit $pagina,$indice";
+            $sql = "SELECT categoria.titulo,categoria.descripcion, cat2.titulo as categoria_padre,categoria.foto,categoria.id FROM categoria left join categoria as cat2 on cat2.id=categoria.categoria_padre where categoria.titulo like ('%$nombre%') Limit $pagina,$indice";
             $stmt = $db->prepare($sql);
-            $stmt->execute(array($nombre));
+            $stmt->execute();
 
 
             $catalogo = [$stmt->rowCount()];
@@ -472,9 +472,9 @@ class Bd
                 $indice = $pagina + 10;
             }
             $db = $this->conexion();
-            $sql = "SELECT categoria.titulo,categoria.descripcion, cat2.titulo as categoria_padre,categoria.foto,categoria.id FROM categoria left join categoria as cat2 on cat2.id=categoria.categoria_padre where categoria.descripcion like ('%?%') Limit $pagina,$indice";
+            $sql = "SELECT categoria.titulo,categoria.descripcion, cat2.titulo as categoria_padre,categoria.foto,categoria.id FROM categoria left join categoria as cat2 on cat2.id=categoria.categoria_padre where categoria.descripcion like ('%$nombre%') Limit $pagina,$indice";
             $stmt = $db->prepare($sql);
-            $stmt->execute(array($nombre));
+            $stmt->execute();
 
 
             $catalogo = [$stmt->rowCount()];
@@ -510,7 +510,9 @@ class Bd
                 $indice = $pagina + 10;
             }
             $db = $this->conexion();
-            $sql = "SELECT categoria.titulo,categoria.descripcion, cat2.titulo as categoria_padre,categoria.foto,categoria.id FROM categoria left join categoria as cat2 on cat2.id=categoria.categoria_padre Limit $pagina,$indice";
+            $sql = "SELECT categoria.titulo,categoria.descripcion, cat2.titulo as categoria_padre,categoria.foto,categoria.id ,
+            (SELECT SUM(puntuacion_compra+puntuacion_comentarios) as puntuacion FROM `objeto` where  id_categoria=categoria.id) as puntuacion
+            FROM categoria left join categoria as cat2 on cat2.id=categoria.categoria_padre  order by puntuacion desc Limit $pagina,$indice";
             $stmt = $db->prepare($sql);
             $stmt->execute();
 
@@ -524,6 +526,7 @@ class Bd
                 $categoria['descripcion'] = $res[1];
                 $categoria['titulo categoria padre'] = $res[2];
                 $categoria['foto'] = $res[3];
+                $categoria['puntuacion'] = $res[5];
                 $categoria['id'] = $res[4];
 
 
@@ -625,6 +628,7 @@ class Bd
 
     public function getProductosPorNombre($pagina,$nombre)
     {
+        
         try {
             $pagina = $pagina * 10;
             $indice = 10;
@@ -633,9 +637,9 @@ class Bd
                 $indice = $pagina + 10;
             }
             $db = $this->conexion();
-            $sql = "SELECT objeto.nombre, categoria.titulo as 'categoria', objeto.descripcion, objeto.precio, objeto.latitud, objeto.longitud, objeto.puntuacion_compra,objeto.puntuacion_comentarios, objeto.puntuacion_total , objeto.id FROM objeto join categoria on objeto.id_categoria=categoria.id  where objeto.nombre like ('%?%') Limit $pagina,$indice";
+            $sql = "SELECT objeto.nombre, categoria.titulo as 'categoria', objeto.descripcion, objeto.precio, objeto.latitud, objeto.longitud, objeto.puntuacion_compra,objeto.puntuacion_comentarios, objeto.puntuacion_total , objeto.id FROM objeto join categoria on objeto.id_categoria=categoria.id  where objeto.nombre like ('%$nombre%') Limit $pagina,$indice";
             $stmt = $db->prepare($sql);
-            $stmt->execute(array($nombre));
+            $stmt->execute();
 
 
             $catalogo = [$stmt->rowCount()];
@@ -675,9 +679,9 @@ class Bd
                 $indice = $pagina + 10;
             }
             $db = $this->conexion();
-            $sql = "SELECT objeto.nombre, categoria.titulo as 'categoria', objeto.descripcion, objeto.precio, objeto.latitud, objeto.longitud, objeto.puntuacion_compra,objeto.puntuacion_comentarios, objeto.puntuacion_total , objeto.id FROM objeto join categoria on objeto.id_categoria=categoria.id  where categoria.titulo like ('%?%') Limit $pagina,$indice";
+            $sql = "SELECT objeto.nombre, categoria.titulo as 'categoria', objeto.descripcion, objeto.precio, objeto.latitud, objeto.longitud, objeto.puntuacion_compra,objeto.puntuacion_comentarios, objeto.puntuacion_total , objeto.id FROM objeto join categoria on objeto.id_categoria=categoria.id  where categoria.titulo like ('%$nombre%') Limit $pagina,$indice";
             $stmt = $db->prepare($sql);
-            $stmt->execute(array($nombre));
+            $stmt->execute();
 
 
             $catalogo = [$stmt->rowCount()];

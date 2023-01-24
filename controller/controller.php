@@ -248,6 +248,86 @@ class Controller
        }
     }
 
+public function getProductosListaPorNombre(){
+   
+   
+
+       
+
+    if(isset($_GET['nombre'])){
+        $pagina = 0;
+        $bd=new Bd();
+        if (isset($_GET['pagina'])) {
+            $pagina = $_GET['pagina'];
+        }
+        return json_encode($bd->getProductosPorNombre($pagina,$_GET['nombre']));
+    }
+}
+public function getProductosListaPorCategoria(){
+    if(isset($_GET['nombre'])){
+         $pagina = 0;
+        $bd=new Bd();
+        if (isset($_GET['pagina'])) {
+            $pagina = $_GET['pagina'];
+        }
+        $bd=new Bd();
+        return json_encode($bd->getProductosPorCategoria($pagina,$_GET['nombre']));
+    }
+}
+public function getProductosVentas(){
+    $bd=new Bd();
+     $pagina = 0;
+        $bd=new Bd();
+        if (isset($_GET['pagina'])) {
+            $pagina = $_GET['pagina'];
+        }
+        return json_encode( $bd->getProductosPorVentas($pagina));
+
+}
+public function getProductosPuntuacion(){
+    $bd=new Bd();
+     $pagina = 0;
+        $bd=new Bd();
+        if (isset($_GET['pagina'])) {
+            $pagina = $_GET['pagina'];
+        }
+        return json_encode( $bd->getProductosPorPuntuacionTotal($pagina));
+
+}
+public function getCategoriasListaPorTitulo(){
+    if(isset($_GET['nombre'])){
+         $pagina = 0;
+        $bd=new Bd();
+        if (isset($_GET['pagina'])) {
+            $pagina = $_GET['pagina'];
+        }
+        $bd=new Bd();
+        return json_encode($bd->getCategoriasPorNombre($pagina,$_GET['nombre']));
+    }
+}
+public function getCategoriasListaPorDecripcion(){
+    if(isset($_GET['nombre'])){
+         $pagina = 0;
+        $bd=new Bd();
+        if (isset($_GET['pagina'])) {
+            $pagina = $_GET['pagina'];
+        }
+        $bd=new Bd();
+        return json_encode($bd->getCategoriasPorDescripcion($pagina,$_GET['nombre']));
+    }
+}
+public function getCategoriasPuntuacion(){
+  
+     $pagina = 0;
+        $bd=new Bd();
+        if (isset($_GET['pagina'])) {
+            $pagina = $_GET['pagina'];
+        }
+        return json_encode( $bd->getCategoriasPorPuntuacion($pagina));
+
+}
+
+
     // public function categorias()
     // {
     //     $db = new Bd();

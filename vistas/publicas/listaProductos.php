@@ -48,10 +48,10 @@
   </div>
   
   <div class="col-12 col-sm-9">
-    <form class="d-flex" role="search" action="listaPorNombre" id="formularioProductos">
+    <form class="d-flex" role="search"  id="formularioProductos" onsubmit="buscar(event)" >
       
       <input class="form-control me-2" type="search" placeholder="Nombre producto" aria-label="Search" id="buscadorListadoProductos">
-      <button class="btn btn-outline-primary" type="submit">Search</button>
+      <button class="btn btn-outline-primary" type="submit" >Search</button>
     </form>
   </div>
 </div>
@@ -283,6 +283,6 @@
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../templates/assets/js/script.min.js"></script>
-    <script src="../templates/assets/js/filtrosListados.js"></script>
+    <script src="../templates/assets/js/filtrosListadoProducto.js"></script>
   </body>
 </html>
