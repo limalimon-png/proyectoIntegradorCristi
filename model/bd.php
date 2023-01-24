@@ -637,7 +637,7 @@ class Bd
                 $indice = $pagina + 10;
             }
             $db = $this->conexion();
-            $sql = "SELECT objeto.nombre, categoria.titulo as 'categoria', objeto.descripcion, objeto.precio, objeto.latitud, objeto.longitud, objeto.puntuacion_compra,objeto.puntuacion_comentarios, objeto.puntuacion_total , objeto.id FROM objeto join categoria on objeto.id_categoria=categoria.id  where objeto.nombre like ('%$nombre%') Limit $pagina,$indice";
+            $sql = "SELECT objeto.nombre, categoria.titulo as 'categoria', objeto.descripcion, objeto.precio, objeto.latitud, objeto.longitud, objeto.puntuacion_compra,objeto.puntuacion_comentarios, objeto.puntuacion_total ,objeto.foto1,objeto.foto2,objeto.foto3, objeto.id FROM objeto join categoria on objeto.id_categoria=categoria.id  where objeto.nombre like ('%$nombre%') Limit $pagina,$indice";
             $stmt = $db->prepare($sql);
             $stmt->execute();
 
@@ -656,7 +656,10 @@ class Bd
                 $producto['puntuacion_compra'] = $res[6];
                 $producto['puntuacion_comentarios'] = $res[7];
                 $producto['puntuacion_total'] = $res[8];
-                $producto['id'] = $res[9];
+                $producto['foto1'] = $res[9];
+                $producto['foto2'] = $res[10];
+                $producto['foto3'] = $res[11];
+                $producto['id'] = $res[12];;
 
 
 
@@ -679,7 +682,7 @@ class Bd
                 $indice = $pagina + 10;
             }
             $db = $this->conexion();
-            $sql = "SELECT objeto.nombre, categoria.titulo as 'categoria', objeto.descripcion, objeto.precio, objeto.latitud, objeto.longitud, objeto.puntuacion_compra,objeto.puntuacion_comentarios, objeto.puntuacion_total , objeto.id FROM objeto join categoria on objeto.id_categoria=categoria.id  where categoria.titulo like ('%$nombre%') Limit $pagina,$indice";
+            $sql = "SELECT objeto.nombre, categoria.titulo as 'categoria', objeto.descripcion, objeto.precio, objeto.latitud, objeto.longitud, objeto.puntuacion_compra,objeto.puntuacion_comentarios, objeto.puntuacion_total ,objeto.foto1,objeto.foto2,objeto.foto3, objeto.id FROM objeto join categoria on objeto.id_categoria=categoria.id  where categoria.titulo like ('%$nombre%') Limit $pagina,$indice";
             $stmt = $db->prepare($sql);
             $stmt->execute();
 
@@ -698,7 +701,10 @@ class Bd
                 $producto['puntuacion_compra'] = $res[6];
                 $producto['puntuacion_comentarios'] = $res[7];
                 $producto['puntuacion_total'] = $res[8];
-                $producto['id'] = $res[9];
+                $producto['foto1'] = $res[9];
+                $producto['foto2'] = $res[10];
+                $producto['foto3'] = $res[11];
+                $producto['id'] = $res[12];
 
 
 
@@ -722,7 +728,7 @@ class Bd
                 $indice = $pagina + 10;
             }
             $db = $this->conexion();
-            $sql = "SELECT objeto.nombre, categoria.titulo as 'categoria', objeto.descripcion, objeto.precio, objeto.latitud, objeto.longitud, objeto.puntuacion_compra,objeto.puntuacion_comentarios, objeto.puntuacion_total , objeto.id FROM objeto join categoria on objeto.id_categoria=categoria.id ORDER by (objeto.puntuacion_comentarios+objeto.puntuacion_compra) desc Limit $pagina,$indice";
+            $sql = "SELECT objeto.nombre, categoria.titulo as 'categoria', objeto.descripcion, objeto.precio, objeto.latitud, objeto.longitud, objeto.puntuacion_compra,objeto.puntuacion_comentarios, objeto.puntuacion_total ,objeto.foto1,objeto.foto2,objeto.foto3, objeto.id FROM objeto join categoria on objeto.id_categoria=categoria.id ORDER by (objeto.puntuacion_comentarios+objeto.puntuacion_compra) desc Limit $pagina,$indice";
             $stmt = $db->prepare($sql);
             $stmt->execute();
 
@@ -741,7 +747,10 @@ class Bd
                 $producto['puntuacion_compra'] = $res[6];
                 $producto['puntuacion_comentarios'] = $res[7];
                 $producto['puntuacion_total'] = $res[8];
-                $producto['id'] = $res[9];
+                $producto['foto1'] = $res[9];
+                $producto['foto2'] = $res[10];
+                $producto['foto3'] = $res[11];
+                $producto['id'] = $res[12];
 
 
 
@@ -765,7 +774,7 @@ class Bd
                 $indice = $pagina + 10;
             }
             $db = $this->conexion();
-            $sql = "SELECT objeto.nombre, categoria.titulo as 'categoria', objeto.descripcion, objeto.precio, objeto.latitud, objeto.longitud, objeto.puntuacion_compra,objeto.puntuacion_comentarios, objeto.puntuacion_total , objeto.id FROM objeto join categoria on objeto.id_categoria=categoria.id ORDER by objeto.puntuacion_compra desc Limit $pagina,$indice";
+            $sql = "SELECT objeto.nombre, categoria.titulo as 'categoria', objeto.descripcion, objeto.precio, objeto.latitud, objeto.longitud, objeto.puntuacion_compra,objeto.puntuacion_comentarios, objeto.puntuacion_total ,objeto.foto1,objeto.foto2,objeto.foto3, objeto.id FROM objeto join categoria on objeto.id_categoria=categoria.id ORDER by objeto.puntuacion_compra desc Limit $pagina,$indice";
             $stmt = $db->prepare($sql);
             $stmt->execute();
 
@@ -784,7 +793,10 @@ class Bd
                 $producto['puntuacion_compra'] = $res[6];
                 $producto['puntuacion_comentarios'] = $res[7];
                 $producto['puntuacion_total'] = $res[8];
-                $producto['id'] = $res[9];
+                $producto['foto1'] = $res[9];
+                $producto['foto2'] = $res[10];
+                $producto['foto3'] = $res[11];
+                $producto['id'] = $res[12];
 
 
 
@@ -865,6 +877,77 @@ class Bd
                 $comentarios['fecha'] = $res[2];
                 $comentarios['comentario'] = $res[3];
                 $comentarios['id'] = $res[4] . "_" . $res[5];
+
+
+
+
+                $catalogo[$contador] = $comentarios;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+
+    public function getComentariosObjeto($pagina,$idObjeto)
+    {
+
+        try {
+            $pagina = $pagina * 3;
+            $indice = 3;
+            if ($pagina != 0) {
+
+                $indice = $pagina + 3;
+            }
+            $db = $this->conexion();
+            $sql = "select comentario from comentario where id_objeto=$idObjeto LIMIT $pagina,$indice ;";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $comentarios = [];
+                $comentarios['comentario'] = $res[0];
+               
+
+
+
+
+                $catalogo[$contador] = $comentarios;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+    public function getComentarioUsuario($idObjeto,$email)
+    {
+
+        try {
+           $datos=[];
+           $datos[0]=$email;
+           $datos[1]=$idObjeto;
+            $db = $this->conexion();
+            $sql = "SELECT comentario from comentario where id_usuario =(select id from usuario where email=?) and id_objeto=?";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($datos);
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $comentarios = [];
+                $comentarios['comentario'] = $res[0];
+               
 
 
 
@@ -1220,6 +1303,29 @@ class Bd
     }
 
 
+    public function actualizar_comentario($datos)
+    {
+
+
+
+
+        try {
+
+
+            $db = $this->conexion();
+            //insertamos el pedido
+            $sql = "update  comentario set comentario=?  where id_usuario=? and id_objeto=?";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($datos);
+
+
+            $db = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+
     //delete from
     public function deleteUsuario($id)
     {
@@ -1286,6 +1392,24 @@ class Bd
 
             $db = $this->conexion();
             $sql = "delete from comentario where id_usuario=? and id_objeto=?";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($datos);
+
+           
+            $db = null;
+           
+        } catch (PDOException $e) {
+            return "No se pudo eliminar";
+        }
+    }
+
+    public function deleteComentarioUsuario($datos)
+    {
+      
+        try {
+
+            $db = $this->conexion();
+            $sql = "delete from comentario where id_usuario=(select id from usuario where email=?) and id_objeto=?";
             $stmt = $db->prepare($sql);
             $stmt->execute($datos);
 

@@ -245,9 +245,24 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
 
     
     } else if (isset($array_ruta[0])  && preg_match("/^puntuacionCategorias\?pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
-        //Llamo al método ver pasándole la clave que me están pidiendo
-    
+
         echo $controller->getCategoriasPuntuacion();
+     
+    } else if (isset($array_ruta[0])  && preg_match("/^getComentariosProducto\?idObjeto=\d+&pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+
+        echo $controller->getComentariosProducto();
+    } else if (isset($array_ruta[0])  && preg_match("/^getComentarioUsuario\?idObjeto=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+
+        echo $controller->getComentarioUsuario();
+    } else if (isset($array_ruta[0])  && preg_match("/^actualizarComentarioUsuario\?idObjeto=\d+&comentario=\w+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+
+        echo $controller->actualizarComentarioUsuario();
+    } else if (isset($array_ruta[0])  && preg_match("/^setComentarioUsuario\?idObjeto=\d+&comentario=\w+&fecha=\d{4}-\d{2}-\d{2}$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+
+        echo $controller->setComentarioUsuario();
+    } else if (isset($array_ruta[0])  && preg_match("/^deleteComentarioUsuario\?idObjeto=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+
+        echo $controller->deleteComentarioUsuario();
 
 
 
@@ -265,7 +280,11 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
 
 
 
-    // }else if (isset($array_ruta[0]) && $array_ruta[0] == "categorias" && !isset($array_ruta[1]) ){   
+    
+    
+    
+    
+        // }else if (isset($array_ruta[0]) && $array_ruta[0] == "categorias" && !isset($array_ruta[1]) ){   
     //     //Llamo al método ver pasándole la clave que me están pidiendo
     //     $controller->categorias();
 
@@ -276,7 +295,7 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
     //Llamo al método por defecto del controlador
 
 
-       $controller->porDefecto(sizeof($array_ruta));
+    //    $controller->porDefecto(sizeof($array_ruta));
 
 
     var_dump($array_ruta);

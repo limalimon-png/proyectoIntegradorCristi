@@ -247,6 +247,86 @@ class Controller
            return json_encode($db->getProductosDestacados($_GET['id']));
        }
     }
+    public function getComentariosProducto()
+    {
+        $db = new Bd();
+       
+    
+       if(isset($_GET['idObjeto']) && isset($_GET['pagina'])){
+
+           return json_encode($db->getComentariosObjeto($_GET['pagina'],$_GET['idObjeto']));
+        }else{
+            $a=[];
+            $a[0]="error";
+            return json_encode($a);
+        }
+
+      
+    }
+    public function getComentarioUsuario()
+    {
+        $db = new Bd();
+        if(isset($_GET['idObjeto'])){
+
+            session_start();
+            if(isset($_SESSION['credencialesPublicas'])){
+                return json_encode($db->getComentarioUsuario($_GET['idObjeto'],$_SESSION['credencialesPublicas'][0]));
+                
+            }
+        }
+    }
+    public function actualizarComentarioUsuario()
+    {
+        if(isset($_GET['idObjeto']) && isset($_GET['comentario'])){
+
+            session_start();
+            if(isset($_SESSION['credencialesPublicas'])){
+                $db = new Bd();
+                $datos=[];
+                $datos[2]=$_GET['idObjeto'];
+                $datos[1]=$_SESSION['credencialesPublicas'][0];
+                $datos[0]=$_GET['comentario'];
+                return json_encode($db->actualizar_comentario($datos));
+                
+            }
+        }
+       
+    }
+    public function setComentarioUsuario()
+    {
+        if(isset($_GET['idObjeto']) && isset($_GET['comentario']) && isset($_GET['fecha'])){
+
+            session_start();
+            if(isset($_SESSION['credencialesPublicas'])){
+                $db = new Bd();
+                $datos=[];
+                $datos[1]=$_GET['idObjeto'];
+                $datos[0]=$_SESSION['credencialesPublicas'][0];
+                $datos[3]=$_GET['comentario'];
+                $datos[2]=$_GET['fecha'];
+                return json_encode($db->setComentario($datos));
+                
+            }
+        }
+        
+    }
+
+    public function deleteComentarioUsuario()
+    {
+        if(isset($_GET['idObjeto'])){
+
+            session_start();
+            if(isset($_SESSION['credencialesPublicas'])){
+                $db = new Bd();
+                $datos=[];
+                $datos[1]=$_GET['idObjeto'];
+                $datos[0]=$_SESSION['credencialesPublicas'][0];
+                return json_encode($db->deleteComentarioUsuario($datos));
+                
+            }
+        }
+       
+    }
 
 public function getProductosListaPorNombre(){
    
