@@ -7,9 +7,7 @@ require("model/añadir.php");
 require "model/bd.php";
 require "model/cabecera.php";
 require "model/logout.php";
-require "model/eliminar.php";
-require "model/procesar_pedido.php";
-require "model/comprobarReseteo.php";
+
 require "model/actualizarUsuario.php";
 require "model/actualizarObjeto.php";
 require "model/actualizarCategoria.php";

@@ -231,7 +231,7 @@ if (isset($_SESSION["credenciales"])) {
                                 <strong>Basic Form</strong> Elements
                             </div>
                             <div class="card-body card-block">
-                                <form action="admin/categorias/alta" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <form action="admin/categorias/alta" method="post" enctype="multipart/form-data" class="form-horizontal" onsubmit="return validarFormulario()">
 
                                     
                                     <div class="row form-group">
@@ -269,11 +269,13 @@ if (isset($_SESSION["credenciales"])) {
 
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="Titulo" class=" form-control-label">Titulo</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="titulo" name="titulo" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="titulo" name="titulo" tipo="nombreConNumero" placeholder="Text" class="form-control"> <div  class="invalid-feedback">Introduce un nombre válido</div></div>
+                                       
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="descripcion" class=" form-control-label">Descripcion</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="descripcion" name="descripcion" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                        <div class="col-12 col-md-9"><input tipo="descripcion" type="text" id="descripcion" name="descripcion" placeholder="Text" class="form-control"> <div  class="invalid-feedback">Introduce una decripcion valida</div></div>
+                                       
                                     </div>
                                    
 
@@ -317,6 +319,7 @@ if (isset($_SESSION["credenciales"])) {
                     <script src="../templates/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
                     <script src="../templates/assets/js/main.js"></script>
                     <script src="../templates/assets/js/fichaCategorias.js"></script>
+                    <script src="../templates/assets/js/validaciones.js"></script>
 </body>
 
 </html>

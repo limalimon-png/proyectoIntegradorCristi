@@ -236,7 +236,7 @@ if (isset($_SESSION["credenciales"])) {
                                 <strong>Basic Form</strong> Elements
                             </div>
                             <div class="card-body card-block">
-                                <form action="admin/productos/actualizar" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <form action="admin/productos/actualizar" method="post" enctype="multipart/form-data" class="form-horizontal" onsubmit="return validarFormulario()">
 
                                     <div class="row form-group">
 
@@ -290,25 +290,25 @@ if (isset($_SESSION["credenciales"])) {
 
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="nombre" class=" form-control-label">Nombre</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="nombre" name="nombre" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="nombre" name="nombre" placeholder="Text"   tipo="nombreConNumero"class="form-control"><div  class="invalid-feedback">Introduce un nombre valido</div></div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="descripcion" class=" form-control-label">Descripcion</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="descripcion" name="descripcion" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="descripcion" name="descripcion" placeholder="Text" tipo="descripcion" class="form-control"><div  class="invalid-feedback">Introduce una descripcion valida</div></div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="precio" class=" form-control-label">Precio</label></div>
-                                        <div class="col-12 col-md-9"><input type="number" id="precio" name="precio" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                        <div class="col-12 col-md-9"><input type="number" id="precio" name="precio" placeholder="Text" tipo="dinero" class="form-control"><div  class="invalid-feedback">introduce un numero valido</div></div>
                                     </div>
                                     
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="latitud" class=" form-control-label">latitud</label></div>
-                                        <div class="col-12 col-md-9"><input type="number" id="latitud" name="latitud" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                        <div class="col-12 col-md-9"><input type="number" id="latitud" name="latitud" placeholder="Text" tipo="numero" class="form-control"><div  class="invalid-feedback">Introduce numeros</div></div>
                                     </div>
                                     
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="longitud" class=" form-control-label">longitud</label></div>
-                                        <div class="col-12 col-md-9"><input type="number" id="longitud" name="longitud" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                        <div class="col-12 col-md-9"><input type="number" id="longitud" name="longitud" placeholder="Text" tipo="numero" class="form-control"><div  class="invalid-feedback">Introduce numeros</div></div>
                                     </div>
                                     
                                     <div class="row form-group">
@@ -368,6 +368,7 @@ if (isset($_SESSION["credenciales"])) {
                     <script src="../templates/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
                     <script src="../templates/assets/js/main.js"></script>
                     <script src="../templates/assets/js/fichaObjetos.js"></script>
+                    <script src="../templates/assets/js/validaciones.js"></script>
 </body>
 
 </html>

@@ -31,11 +31,12 @@
 
 
 
-              <form class="text-center" method="post" action="perfil/actualizar">
-                <div class="mb-3"><input class="form-control" type="text" name="nombre" id="nombre" placeholder="nombre"></div>
-                <div class="mb-3"><input class="form-control" type="text" name="apellidos" id="apellidos" placeholder="apellidos"></div>
-                <div class="mb-3"><input class="form-control" type="email" name="email" id="email" placeholder="Email"></div>
-                <div class="mb-3"><input class="form-control" type="password" name="pass" id="pass" placeholder="Password">
+              <form class="text-center" method="post" action="perfil/actualizar" onsubmit="return validarFormulario()">
+                <div class="mb-3"><input class="form-control" type="text" name="nombre" id="nombre" placeholder="nombre" tipo="nombre"><div  class="invalid-feedback">Introduce un nombre correcto, solo letras</div></div>
+                <div class="mb-3"><input class="form-control" type="text" name="apellidos" id="apellidos" placeholder="apellidos" tipo="apellido"><div id="" class="invalid-feedback">Utiliza solo letras. al menos 2 caracteres</div></div>
+                <div class="mb-3"><input class="form-control" type="email" name="email" id="email" placeholder="Email" tipo="email"><div id="" class="invalid-feedback">Introduce un email válido</div></div>
+                <div class="mb-3"><input class="form-control" type="password" name="pass" id="pass" placeholder="Password" tipo="password">
+                <div  class="invalid-feedback">Debe tener al menos 8 caracteres, al menos una letra minúscula</div>
 
                   <input type="hidden" name="monedero" id="monedero" value="100">
                   <input type="hidden" name="id" id="id" value="">
@@ -66,6 +67,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../templates/assets/js/script.min.js"></script>
   <script src="../templates/assets/js/perfil.js"></script>
+  <script src="../templates/assets/js/validaciones.js"></script>
 </body>
 
 </html>
