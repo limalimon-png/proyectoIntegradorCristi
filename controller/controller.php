@@ -558,18 +558,5 @@ public function getCategoriasPuntuacion(){
 
         require("view/formularioResetear.php");
     }
-    public function comprobar()
-    {
-
-        $comprobar = new Reseteo();
-        $resultado = $comprobar->getResulado();
-
-        if ($resultado) {
-            echo "se cambio correctamente";
-            echo " <a href='../../../login'>Volver al login</a>";
-        } else {
-            echo "lo sentimos el email no es correcto";
-            echo " <a href='../../../login'>Volver al login</a>";
-        }
-    }
+   
 }

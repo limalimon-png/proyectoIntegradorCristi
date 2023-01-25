@@ -8,7 +8,7 @@ class Bd
     public static function conexion()
     {
 
-        return new PDO('mysql:host=localhost;dbname=metabase', 'root', '');
+        return new PDO('mysql:host=localhost', 'gmartinezd02_escalator', 'Super@token18');
     }
 
 
