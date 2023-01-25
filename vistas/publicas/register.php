@@ -36,14 +36,14 @@
                 <div  class="invalid-feedback">Introduce un nombre correcto, solo letras</div> </div>
                 
                 <div class="mb-3"><input class="form-control " type="text" name="apellidos" tipo="apellido" placeholder="apellidos">
-                <div id="" class="invalid-feedback">Utiliza solo letras. al menos 2 caracteres</div></div>
+                <div  class="invalid-feedback">Utiliza solo letras. al menos 2 caracteres</div></div>
               
                 <div class="mb-3"><input class="form-control " type="email" name="email" placeholder="Email" tipo="email">
               
-                <div id="" class="invalid-feedback">Introduce un email válido</div></div>
+                <div  class="invalid-feedback">Introduce un email válido</div></div>
                
                 <div class="mb-3 "><input class="form-control " type="password" name="pass" placeholder="Password" tipo="password">
-                  <div id="" class="invalid-feedback">Debe tener al menos 8 caracteres, al menos una letra minúscula, al menos una letra mayúscula, y al menos un número.</div>
+                  <div  class="invalid-feedback">Debe tener al menos 8 caracteres, al menos una letra minúscula, al menos una letra mayúscula, y al menos un número.</div>
 
                   <input type="hidden" name="monedero" value="100">
                 </div>
@@ -59,6 +59,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../templates/assets/js/script.min.js"></script>
   <script src="../templates/assets/js/validaciones.js"></script>
+  <script>cargarDesdeOtroArchivo();</script>
 </body>
 
 </html>

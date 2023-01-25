@@ -9,15 +9,18 @@ let expNombreConNumero=/^[a-zA-ZÀ-ÿ0-9\s]{2,}$/;
 let expNumeros=/^[0-9].$/;
 
 
-window.onload=()=>{
+// window.onload=()=>{
 
+//     addEventoInputs();
+// }
+function cargarDesdeOtroArchivo(){
     addEventoInputs();
 }
 
 
 
 function validarFormulario(){
-    let inputs = document.querySelectorAll('input');
+    let inputs = document.querySelectorAll('input[tipo]');
     let valido=true;
     inputs.forEach(input => {
         if(input.classList.contains('is-invalid')){
@@ -30,7 +33,9 @@ function validarFormulario(){
 }
 
 function addEventoInputs(){
-    let inputs = document.querySelectorAll('input');
+    //coger todos los inputs que contengan el atributo tipo
+    let inputs = document.querySelectorAll('input[tipo]');
+    
     inputs.forEach(input => {
         input.addEventListener('blur',()=>{validarInput(input)});
     });
@@ -129,6 +134,7 @@ try{
    
 }catch(err){
     //no tiene el atributo tipo
+    console.log(err);
 }
     
 

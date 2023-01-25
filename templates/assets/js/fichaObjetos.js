@@ -75,7 +75,7 @@ async function getProductos() {
 
 
 
-   
+    cargarDesdeOtroArchivo();
 
 }
 

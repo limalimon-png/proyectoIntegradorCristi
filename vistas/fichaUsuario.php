@@ -227,7 +227,7 @@ if (isset($_SESSION["credenciales"])) {
                                 <strong>Basic Form</strong> Elements
                             </div>
                             <div class="card-body card-block">
-                                <form action="admin/usuarios/1/process" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <form action="admin/usuarios/1/process" method="post" enctype="multipart/form-data" class="form-horizontal" onsubmit="return validarFormulario()">
 
                                     <div class="row form-group">
 
@@ -251,24 +251,24 @@ if (isset($_SESSION["credenciales"])) {
 
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="nombre" class=" form-control-label">Usuario</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="nombre" name="nombre" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="nombre" name="nombre" placeholder="Text" class="form-control"tipo="nombre"><div  class="invalid-feedback">Introduce un nombre correcto, solo letras</div> </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="apellidos" class=" form-control-label">Apellidos</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="apellidos" name="apellidos" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="apellidos" name="apellidos" placeholder="Text" class="form-control"tipo="apellido"><div  class="invalid-feedback">Utiliza solo letras. al menos 2 caracteres</div></div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="email" class=" form-control-label">Correo</label></div>
-                                        <div class="col-12 col-md-9"><input type="email" id="email" name="email" placeholder="Enter Email" class="form-control"><small class="help-block form-text">Please enter your email</small></div>
+                                        <div class="col-12 col-md-9"><input type="email" id="email" name="email" placeholder="Enter Email" class="form-control"tipo="email"><div  class="invalid-feedback">Introduce un email válido</div></div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="pass" class=" form-control-label">Contraseña</label></div>
-                                        <div class="col-12 col-md-9"><input type="password" id="pass" name="pass" placeholder="Password" class="form-control"><small class="help-block form-text">Please enter a complex password</small></div>
+                                        <div class="col-12 col-md-9"><input type="password" id="pass" name="pass" placeholder="Password" class="form-control"tipo="password"><div  class="invalid-feedback">Debe tener al menos 8 caracteres, al menos una letra minúscula, al menos una letra mayúscula, y al menos un número.</div></div>
                                     </div>
 
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="monedero" class=" form-control-label">Monedero</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="monedero" name="monedero" placeholder="Password" class="form-control"><small class="help-block form-text">Please enter a complex password</small></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="monedero" name="monedero" placeholder="Dinero" class="form-control"tipo="dinero"><div  class="invalid-feedback">Introduce un numero valido</div></div>
                                     </div>
 
                                     <input type="hidden" name="id" id="id">
@@ -308,6 +308,7 @@ if (isset($_SESSION["credenciales"])) {
                 <script src="../templates/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
                 <script src="../templates/assets/js/main.js"></script>
                 <script src="../templates/assets/js/fichaUsuario.js"></script>
+                <script src="../templates/assets/js/validaciones.js"></script>
 </body>
 
 </html>

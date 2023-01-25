@@ -228,7 +228,7 @@ if (isset($_SESSION["credenciales"])) {
                                 <strong>Basic Form</strong> Elements
                             </div>
                             <div class="card-body card-block">
-                                <form action="admin/comentarios/actualizar" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <form action="admin/comentarios/actualizar" method="post" enctype="multipart/form-data" class="form-horizontal" onsubmit="return validarFormulario()">
 
                                    
 
@@ -244,13 +244,13 @@ if (isset($_SESSION["credenciales"])) {
 
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="fecha" class=" form-control-label">Fecha</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="fecha" name="fecha" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="fecha" name="fecha" placeholder="Text" class="form-control" tipo="fecha"><div  class="invalid-feedback" >Introduce una fecha con formato aaaa-mm-dd</div></div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="comentario" class=" form-control-label">Reseña</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="comentario" name="comentario" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="comentario" name="comentario" placeholder="Text" class="form-control" tipo="descripcion"><div  class="invalid-feedback">Introduce una reseña valida</div></div>
                                     </div>
-                               
+
 
                                     <input type="hidden" name="idUsuario" id="idUsuario">
                                     <input type="hidden" name="idObjeto" id="idObjeto">
@@ -290,6 +290,7 @@ if (isset($_SESSION["credenciales"])) {
                 <script src="../templates/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
                 <script src="../templates/assets/js/main.js"></script>
                 <script src="../templates/assets/js/fichaComentarios.js"></script>
+                <script src="../templates/assets/js/validaciones.js"></script>
 </body>
 
 </html>

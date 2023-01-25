@@ -46,14 +46,16 @@
                 </div>
                 <div class="login-form">
                     
-                    <form action="admin/login/process" method="POST"  >
+                    <form action="admin/login/process" method="POST" onsubmit="return validarFormulario()" >
                         <div class="form-group">
                             <label>Email address</label>
-                            <input type="email" name="user" class="form-control" placeholder="Email">
+                            <input type="email" name="user" class="form-control" placeholder="Email" tipo="email">
+                            <div  class="invalid-feedback">Introduce un email valido </div>
                         </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input type="password" name="pass" class="form-control" placeholder="Password">
+                                <input type="password" name="pass" class="form-control" placeholder="Password" tipo="password">
+                                <div  class="invalid-feedback">Debe tener al menos 8 caracteres, al menos una letra minúscula</div>
                         </div>
                                 <div class="checkbox">
                                     <label>
@@ -89,6 +91,8 @@
     <script src="../templates/vendors/popper.js/dist/umd/popper.min.js"></script>
     <script src="../templates/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../templates/assets/js/main.js"></script>
+    <script src="../templates/assets/js/validaciones.js"></script>
+    <script>cargarDesdeOtroArchivo();</script>
 
 
 </body>

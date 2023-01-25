@@ -24,6 +24,8 @@ window.onload=async ()=>{
          await getProductos();
     }
 
+    cargarDesdeOtroArchivo();
+
 
 }
 

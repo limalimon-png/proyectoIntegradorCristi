@@ -2,7 +2,7 @@ let id;
 let url=location.href;
 
 
-window.onload=async ()=>{
+ window.onload=async ()=>{
     id = location.href.substring(location.href.lastIndexOf("/") + 1);
 
     document.getElementById('img').addEventListener('change', (e) => {
@@ -15,9 +15,9 @@ window.onload=async ()=>{
         await getProductos()
     }
  
+cargarDesdeOtroArchivo();
 
-
-}
+ }
 
 
 

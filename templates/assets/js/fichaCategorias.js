@@ -17,7 +17,7 @@ if(id!='nuevo'){
     await getCategorias();
 
 
-
+    cargarDesdeOtroArchivo();
 
 
 }
