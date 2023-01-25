@@ -4,13 +4,7 @@ class Bd
 {
     private $ultimoId;
 
-    public function getPedido()
-    {
-        $pedido = file_get_contents('store');
-
-        $this->ultimoId = unserialize($pedido);
-        return $this->ultimoId;
-    }
+    
     public static function conexion()
     {
 
@@ -21,172 +15,6 @@ class Bd
 
 
 
-    public  function getProductosCarrito($carrito)
-    {
-        $cadena = "";
-        $cont = 0;
-        foreach ($carrito as $key => $value) {
-            if ($cont == 0) {
-                $cadena = $cadena . "$key";
-                $cont = 1;
-            } else {
-                $cadena = $cadena . ",$key";
-            }
-        }
-        $cadena = ' codProd in (' . $cadena . ')';
-
-
-
-
-        try {
-
-            $db = $this->conexion();
-            $sql = "SELECT * FROM producto where  $cadena ";
-            $stmt = $db->prepare($sql);
-            $stmt->execute();
-
-
-            $catalogo = [];
-            $contador = 0;
-            foreach ($stmt as $res) {
-
-                $producto = [];
-                $producto[0] = $res["nombre"];
-                $producto[1] = $res["descripcion"];
-                $producto[2] = $res["peso"];
-                $producto[3] = $res["stock"];
-                $producto[4] = $res["codProd"];
-
-
-                $catalogo[$contador] = $producto;
-                $contador++;
-            }
-            $db = null;
-            return $catalogo;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
-
-
-
-
-    public  function procesarDetallePedidos($unidades, $codigo)
-    {
-
-
-
-        try {
-
-            $db = $this->conexion();
-
-            $datos[0] = $this->ultimoId;
-            $datos[1] = $codigo;
-            $datos[2] = $unidades;
-
-            $sql = "insert into detallepedido (codPed,codProd,numUnidades) values(?,?,?)";
-            $stmt = $db->prepare($sql);
-            $stmt->execute($datos);
-            $db = null;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
-
-
-    public function procesarPedidos($codRes)
-    {
-
-        $datos[0] = date('Y-m-d');
-        $datos[1] = $codRes;
-
-
-        try {
-
-            $db = $this->conexion();
-            //insertamos el pedido
-            $sql = "insert into pedido (fecha,enviado,codRes) values(?,'noenviado',?)";
-            $stmt = $db->prepare($sql);
-            $stmt->execute($datos);
-            //cogemos el ultimo insertado
-            $this->ultimoId = $db->lastInsertId();
-            $pedido = serialize($this->ultimoId);
-            file_put_contents('store', $pedido);
-
-            $db = null;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
-
-    public function pedidoEnviado()
-    {
-
-        $array[0] = $this->ultimoId;
-
-
-        try {
-
-            $db = $this->conexion();
-            //insertamos el pedido
-            $sql = "update  pedido set enviado=enviado where codPed=?";
-            $stmt = $db->prepare($sql);
-            $stmt->execute($array);
-
-
-            $db = null;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
-
-
-
-    public function resetearPass($email, $pass): bool
-    {
-
-        try {
-
-            $db = $this->conexion();
-            $sql = "SELECT codRes FROM restaurante where sha1(correo)=?";
-            $stmt = $db->prepare($sql);
-            $stmt->execute(array($email));
-
-            $id = 0;
-            $contador = 0;
-            foreach ($stmt as $res) {
-
-
-                $id = $res["codRes"];
-
-
-
-
-                $contador++;
-            }
-            $db = null;
-
-
-            if ($contador == 1) {
-
-
-                $db = $this->conexion();
-                //insertamos el pedido
-                $sql = "update  restaurante set clave=? where codRes=$id";
-                $stmt = $db->prepare($sql);
-                $stmt->execute(array($pass));
-
-
-                $db = null;
-
-                return true;
-            }
-            return false;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            return false;
-        }
-    }
 
 
 
@@ -195,6 +23,24 @@ class Bd
 
 
     //set Objetos categorias comentarios y usuarios
+
+    public function comprarObjeto($idObjeto,$email){
+        $fecha = date("Y-m-d");
+        $datos = array($email,$idObjeto,$fecha);
+        try {
+
+
+            $db = $this->conexion();
+            $sql = "insert into compra  values ((select id from usuario where email=?),?,?)";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($datos);
+            $db = null;
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+    }
 
     public function setUsuario($datos)
     {
@@ -456,7 +302,9 @@ class Bd
                 $indice = $pagina + 10;
             }
             $db = $this->conexion();
-            $sql = "SELECT categoria.titulo,categoria.descripcion, cat2.titulo as categoria_padre,categoria.foto,categoria.id FROM categoria left join categoria as cat2 on cat2.id=categoria.categoria_padre where categoria.titulo like ('%$nombre%') Limit $pagina,$indice";
+            $sql = "SELECT categoria.titulo,categoria.descripcion, cat2.titulo as categoria_padre,categoria.foto,categoria.id ,
+            (SELECT SUM(puntuacion_compra+puntuacion_comentarios) as puntuacion FROM `objeto` where  id_categoria=categoria.id) as puntuacion
+            FROM categoria left join categoria as cat2 on cat2.id=categoria.categoria_padre where categoria.titulo like ('%$nombre%') order by puntuacion desc Limit $pagina,$indice";
             $stmt = $db->prepare($sql);
             $stmt->execute();
 
@@ -471,6 +319,7 @@ class Bd
                 $categoria['titulo categoria padre'] = $res[2];
                 $categoria['foto'] = $res[3];
                 $categoria['id'] = $res[4];
+                $categoria['puntuacion'] = $res[5];
 
 
                 $catalogo[$contador] = $categoria;
@@ -494,7 +343,9 @@ class Bd
                 $indice = $pagina + 10;
             }
             $db = $this->conexion();
-            $sql = "SELECT categoria.titulo,categoria.descripcion, cat2.titulo as categoria_padre,categoria.foto,categoria.id FROM categoria left join categoria as cat2 on cat2.id=categoria.categoria_padre where categoria.descripcion like ('%$nombre%') Limit $pagina,$indice";
+            $sql = "SELECT categoria.titulo,categoria.descripcion, cat2.titulo as categoria_padre,categoria.foto,categoria.id ,
+            (SELECT SUM(puntuacion_compra+puntuacion_comentarios) as puntuacion FROM `objeto` where  id_categoria=categoria.id) as puntuacion
+            FROM categoria left join categoria as cat2 on cat2.id=categoria.categoria_padre where categoria.descripcion like ('%$nombre%') order by puntuacion desc Limit $pagina,$indice";
             $stmt = $db->prepare($sql);
             $stmt->execute();
 
@@ -509,6 +360,7 @@ class Bd
                 $categoria['titulo categoria padre'] = $res[2];
                 $categoria['foto'] = $res[3];
                 $categoria['id'] = $res[4];
+                $categoria['puntuacion'] = $res[5];
 
 
                 $catalogo[$contador] = $categoria;
@@ -913,6 +765,75 @@ class Bd
         }
     }
 
+    public function getComprasUsuario($email){
+        $datos=[];
+        $datos[0]=$email;
+        try {
+           
+            $db = $this->conexion();
+            $sql = "SELECT objeto.nombre,fecha FROM compra join objeto on id_objeto=objeto.id WHERE id_usuario=(select id from usuario where email=?) order by fecha desc";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($datos);
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $comentarios = [];
+                $comentarios['nombre'] = $res[0];
+                $comentarios['fecha'] = $res[1];
+             
+                
+
+
+
+
+                $catalogo[$contador] = $comentarios;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+    }
+    public function getComentariosUsuario($email){
+        $datos=[];
+        $datos[0]=$email;
+        try {
+           
+            $db = $this->conexion();
+            $sql = "SELECT objeto.nombre,fecha,comentario FROM comentario join objeto on id_objeto=objeto.id WHERE id_usuario=(select id from usuario where email=?) order by fecha desc";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($datos);
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $comentarios = [];
+                $comentarios['nombre'] = $res[0];
+                $comentarios['fecha'] = $res[1];
+                $comentarios['comentario'] = $res[2];
+                
+
+
+
+
+                $catalogo[$contador] = $comentarios;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+    }
+
 
     public function getComentariosObjeto($pagina,$idObjeto)
     {
@@ -1000,6 +921,42 @@ class Bd
 
     //get un unico resultado
 
+    public function getUsuarioPorEmail($email)
+    {
+    $datos=[];
+    $datos[0]=$email;
+
+
+        try {
+
+            $db = $this->conexion();
+            $sql = "SELECT id,nombre,apellidos,email,password,monedero from usuario where email=?";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($datos);
+
+
+            $catalogo = [$stmt->rowCount()];
+            $contador = 0;
+            foreach ($stmt as $res) {
+
+                $categoria = [];
+                $categoria['id'] = $res['id'];
+                $categoria['nombre'] = $res['nombre'];
+                $categoria['apellidos'] = $res['apellidos'];
+                $categoria['email'] = $res['email'];
+                $categoria['password'] = $res['password'];
+                $categoria['monedero'] = $res['monedero'];
+
+
+                $catalogo[$contador] = $categoria;
+                $contador++;
+            }
+            $db = null;
+            return $catalogo;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
     public function getUsuario($id)
     {
 

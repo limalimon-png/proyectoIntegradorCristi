@@ -166,7 +166,7 @@ if (isset($_SESSION["credenciales"])) {
 
                             <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
 
-                            <a class="nav-link" href="#"><i class="fa fa-power-off"></i> Logout</a>
+                            <a class="nav-link" href="admin/logout"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>
 

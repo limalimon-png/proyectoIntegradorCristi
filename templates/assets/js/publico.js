@@ -60,3 +60,16 @@ function seleccionar() {
 
     }
 }
+
+
+function redireccionar(e){
+    
+        e.preventDefault();
+        e.stopPropagation();
+        location.href = "productos";
+       
+    
+        
+    
+    
+}

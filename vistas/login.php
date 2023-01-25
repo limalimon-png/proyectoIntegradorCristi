@@ -73,9 +73,13 @@
                 </div>
                 <br>
                 <br>
-                <div class="alert alert-danger" role="alert">
-                    usuario o contraseña incorrecta
-                </div>
+
+                <?php 
+                
+                if(isset($_GET['error'])){
+                    echo ' <div class="alert alert-danger" role="alert">usuario o contraseña incorrecta</div>';
+                }?>
+                
             </div>
         </div>
     </div>

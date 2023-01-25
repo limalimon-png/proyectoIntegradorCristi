@@ -10,28 +10,62 @@
 </head>
 
 <body>
-<?php include('nav.php')?>
-  <section class="py-4 py-xl-5">
+  <?php include('nav.php'); ?>
+  <section class="py-4 py-xl-5 mb-5">
     <div class="container">
-      <div class="row d-flex justify-content-center">
-        <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+      <div class="row mb-5">
+        <div class="col-md-8 col-xl-6 text-center mx-auto">
+          <h2>Perfil usuario</h2>
+          <p>Curae hendrerit donec commodo hendrerit egestas tempus, turpis facilisis nostra nunc. Vestibulum dui eget
+            ultrices.</p>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center ">
+        <div class="col-md-6 col-xl-4">
           <div class="card mb-5">
-            <div class="card-body p-sm-5">
-              <h2 class="text-center mb-4">Contact us</h2>
-              <form method="post">
-                <div class="mb-3"><input class="form-control" type="text" id="name-2" name="name" placeholder="Name"></div>
-                <div class="mb-3"><input class="form-control" type="email" id="email-2" name="email" placeholder="Email"></div>
-                <div class="mb-3"><textarea class="form-control" id="message-2" name="message" rows="6" placeholder="Message"></textarea></div>
-                <div><button class="btn btn-primary d-block w-100" type="submit">Send </button></div>
+            <div class="card-body d-flex flex-column align-items-center">
+              <div class="bs-icon-xl bs-icon-circle bs-icon-primary bs-icon my-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-person">
+                  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z">
+                  </path>
+                </svg></div>
+
+
+
+              <form class="text-center" method="post" action="perfil/actualizar">
+                <div class="mb-3"><input class="form-control" type="text" name="nombre" id="nombre" placeholder="nombre"></div>
+                <div class="mb-3"><input class="form-control" type="text" name="apellidos" id="apellidos" placeholder="apellidos"></div>
+                <div class="mb-3"><input class="form-control" type="email" name="email" id="email" placeholder="Email"></div>
+                <div class="mb-3"><input class="form-control" type="password" name="pass" id="pass" placeholder="Password">
+
+                  <input type="hidden" name="monedero" id="monedero" value="100">
+                  <input type="hidden" name="id" id="id" value="">
+                </div>
+                <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Actualizar</button></div>
+
               </form>
             </div>
           </div>
         </div>
+
+        <section id="compras">
+          <h2 class="text-center mt-3 mb-3">Compras</h2>
+          <table class="table" id="tablaCompra">
+          
+          </table>
+        </section>
+        <section id="comentarios">
+          <h2 class="text-center mt-3 mb-3">Comentarios</h2>
+          <table class="table" id="tablaComentario">
+          
+          </table>
+        </section>
+
       </div>
     </div>
   </section>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../templates/assets/js/script.min.js"></script>
+  <script src="../templates/assets/js/perfil.js"></script>
 </body>
 
 </html>

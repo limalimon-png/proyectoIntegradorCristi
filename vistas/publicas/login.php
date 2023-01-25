@@ -33,9 +33,15 @@
                 <div class="mb-3"><input class="form-control" type="password" name="pass" placeholder="Password">
                 </div>
                 <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Login</button></div>
-                <p class="text-muted">Forgot your password?</p>
+                <p class="text-muted">No tienes cuenta todavía?</p><a href="register"> Registrate aquí</a>
+               
+                
               </form>
             </div>
+            <?php 
+             if(isset($_GET['error'])){
+              echo ' <div class="alert alert-danger" role="alert">usuario o contraseña incorrecta</div>';
+          }?>
           </div>
         </div>
       </div>

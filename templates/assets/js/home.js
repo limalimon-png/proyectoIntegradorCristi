@@ -69,9 +69,11 @@ async function getProductos(pag) {
 let num=1;
 
     info.forEach(element => {
-        if(element['foto1']==null){
-            console.log(null);
-        }
+        if(element['foto1']==undefined){
+            
+        }else{
+
+        
 
 
         sliders.innerHTML += "<div class='swiper-slide ' data-hash='slide"+num+"'>" +
@@ -100,6 +102,7 @@ let num=1;
 
 
             num++;
+        }
     });
 
     $(document).ready(() => {

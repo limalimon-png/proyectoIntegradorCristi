@@ -202,7 +202,7 @@ class Controller
          echo   $this->mensaje = "prueba";
             // require('view/login.php');
 
-            header('location:../login');
+            header('location:../login?error=1');
         }
     }
 
@@ -230,11 +230,25 @@ class Controller
         //  echo   $this->mensaje = "prueba";
             // require('view/login.php');
 
-            header('location:../login');
+            header('location:../login?error=1');
         }
     }
 
+    public function irRegister()
+    {
+        require("vistas/publicas/register.php");
+    }
+    public function irPerfil()
+    {
+        require("vistas/publicas/contacto.php");
+    }
 
+public function autenticationRegister()
+    {
+        $act = new Actualizar();
+        $act->llegan_datosPublicos();
+     
+    }
 
     public function getDestacados()
     {
@@ -275,6 +289,66 @@ class Controller
             }
         }
     }
+
+    public function comprarobjeto()
+    {
+        $db = new Bd();
+        if(isset($_GET['idObjeto'])){
+
+            session_start();
+            if(isset($_SESSION['credencialesPublicas'])){
+                return json_encode($db->comprarObjeto($_GET['idObjeto'],$_SESSION['credencialesPublicas'][0]));
+                
+            }
+        }
+    }
+
+
+    public function getInfoPerfilPublico()
+    {
+        $db = new Bd();
+       
+
+            session_start();
+            if(isset($_SESSION['credencialesPublicas'])){
+                return json_encode($db->getUsuarioPorEmail($_SESSION['credencialesPublicas'][0]));
+                
+            
+        }
+    }
+    public function getComprasPerfilUsuario()
+    {
+        $db = new Bd();
+      
+
+            session_start();
+            if(isset($_SESSION['credencialesPublicas'])){
+                return json_encode($db->getComprasUsuario($_SESSION['credencialesPublicas'][0]));
+                
+            
+        }
+    }
+    public function getComentariosPerfilUsuario()
+    {
+        $db = new Bd();
+        
+
+            session_start();
+            if(isset($_SESSION['credencialesPublicas'])){
+                return json_encode($db->getComentariosUsuario($_SESSION['credencialesPublicas'][0]));
+                
+            
+        }
+    }
+    public function actualizarUsuarioPublico()
+    {
+        $act = new Actualizar();
+        $act->actualizarPublico();
+        
+    }
+
+
+
     public function actualizarComentarioUsuario()
     {
         if(isset($_GET['idObjeto']) && isset($_GET['comentario'])){
@@ -351,6 +425,7 @@ public function getProductosListaPorCategoria(){
             $pagina = $_GET['pagina'];
         }
         $bd=new Bd();
+       
         return json_encode($bd->getProductosPorCategoria($pagina,$_GET['nombre']));
     }
 }
@@ -408,97 +483,19 @@ public function getCategoriasPuntuacion(){
 }
 
 
-    // public function categorias()
-    // {
-    //     $db = new Bd();
-    //     $this->cats = $db->getCategorias();
-    //     require('view/categorias.php');
-    //     echo Cabecera::menuCategorias();
-    //     Cabecera::control();
-    // }
-    // public function productos($prod)
-    // {
-    //     $bd = new Bd();
-    //     $this->productos = $bd->getProductos($prod);
-    //     // $this->categoria = $bd->getCategoria($prod);
-    //     $this->cat = $prod;
-
-    //     require('view/productos.php');
-
-
-
-    //     echo Cabecera::menuProductos();
-    //     Cabecera::control();
-    // }
-
-    // public function agregarProducto()
-    // {
-    //     $agregar = new Agregar();
-    // }
-
-    // public function verCarrito()
-    // {
-    //     Cabecera::control();
-
-    //     if (isset($_SESSION['carrito'])) {
-
-    //         if (!empty($_SESSION['carrito'])) {
-
-    //             $bd = new Bd();
-
-    //             $carrito = $_SESSION['carrito'];
-
-
-    //             $this->productosCarrito = $bd->getProductosCarrito($carrito);
-
-
-    //             require('view/carrito.php');
-    //         } else {
-
-    //             require("view/categorias.php");
-    //         }
-    //     } else {
-    //         require("view/categorias.php");
-    //     }
-
-    //     echo Cabecera::menuCarrito();
-    // }
-
-
-
-    // public function procesarPedido()
-    // {
-    //     Cabecera::control();
-    //     $procesar = new Procesar();
-    //     $this->pedidoValido = $procesar->getValido();
-
-
-    //     if ($this->pedidoValido) {
-    //         $this->pedidoValido = false;
-
-
-    //         Cabecera::control();
-
-    //         $mail = new Mailer();
-    //         $bd = new Bd();
-    //         $this->pedido = $bd->getPedido();
-
-    //         $this->body = $_SESSION['credenciales'][0] . "ha realizado el pedido $this->pedido";
-    //         $mail->enviarEmail(
-    //             'guillermomartinez1222@gmail.com',
-    //             'guillermomartinez1222@gmail.com',
-    //             $this->body,
-    //             "gomzra@gmail.com"
-    //         );
-    //         require('view/correo.php');
-    //     }
-    // }
-
+   
     public function cerrarSesion()
     {
 
         $logout = new Logout();
         require('vistas/login.php');
+         header('location:login');
+    }
+    public function cerrarSesionPublico()
+    {
+
+        $logout = new Logout();
+        header('location:home');
     }
 
 

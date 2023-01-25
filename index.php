@@ -45,8 +45,15 @@ $array_ruta = array_filter(explode("/", $ruta));
 if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])) {
     //Llamo al método ver pasándole la clave que me están pidiendo
     $controller->loginPublico();
+}else if (isset($array_ruta[0]) &&  preg_match("/^login\?error=1$/",$array_ruta[0]) && !isset($array_ruta[1])) {
+    //Llamo al método ver pasándole la clave que me están pidiendo
+    $controller->loginPublico();
 
 } else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && isset($array_ruta[1]) && $array_ruta[1] == "login" &&   !isset($array_ruta[2])) {
+
+    // $controller->productos($array_ruta[1]);
+    $controller->login();
+} else if (isset($array_ruta[0]) && $array_ruta[0] == "admin" && preg_match("/^login\?error=1$/",$array_ruta[1]) &&   !isset($array_ruta[2])) {
 
     // $controller->productos($array_ruta[1]);
     $controller->login();
@@ -176,7 +183,8 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
 
    
  
-  
+    } else if (isset($array_ruta[0]) && $array_ruta[0] == "logout" && !isset($array_ruta[1])  ) {
+        $controller->cerrarSesionPublico();
     } else if (isset($array_ruta[0]) && $array_ruta[0] == "home" && !isset($array_ruta[1])  ) {
         $controller->home();
     } else if (isset($array_ruta[0]) && $array_ruta[0] == "productos" && !isset($array_ruta[1])  ) {
@@ -190,9 +198,16 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
   
     } else if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])  ) {
         $controller->loginPublico();
+    } else if (isset($array_ruta[0]) && $array_ruta[0] == "register" && !isset($array_ruta[1])  ) {
+        $controller->irRegister();
+    } else if (isset($array_ruta[0]) && $array_ruta[0] == "perfil" && !isset($array_ruta[1])  ) {
+        $controller->irperfil();
+  
   
     } else if (isset($array_ruta[0]) && $array_ruta[0] == "register" && !isset($array_ruta[1])  ) {
         $controller->register();
+    } else if (isset($array_ruta[0]) && $array_ruta[0] == "register" && (isset($array_ruta[1]) && $array_ruta[1] == "process" && !isset($array_ruta[2]))  ) {
+        $controller->autenticationRegister();
   
     } else if (isset($array_ruta[0]) && $array_ruta[0] == "login" && isset($array_ruta[1]) && $array_ruta[1] == "process" &&   !isset($array_ruta[2])) {
         //Llamo al método ver pasándole la clave que me están pidiendo
@@ -204,7 +219,7 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
     
         echo $controller->getDestacados();
 
-    } else if (isset($array_ruta[0])  && preg_match("/^listaPorNombre\?nombre=\w+&pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+    } else if (isset($array_ruta[0])  && preg_match("/^listaPorNombre\?nombre=[a-zA-Z0-9%+]+&pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
         //Llamo al método ver pasándole la clave que me están pidiendo
     
         echo $controller->getProductosListaPorNombre();
@@ -212,7 +227,11 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
 
 
 
-    } else if (isset($array_ruta[0])  && preg_match("/^listaPorCategoria\?nombre=\w+&pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+    } else if (isset($array_ruta[0])  && preg_match("/^listaPorCategoria\?nombre=[a-zA-Z0-9%+]+&pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+        //Llamo al método ver pasándole la clave que me están pidiendo
+    
+        echo $controller->getProductosListaPorCategoria();
+    } else if (isset($array_ruta[0]) && $array_ruta[0]=='categorias'  && isset($array_ruta[1])&& preg_match("/^listaPorCategoria\?nombre=[a-zA-Z0-9%+]+&pagina=\d+$/", $array_ruta[1]) == 1 && !isset($array_ruta[2])) {
         //Llamo al método ver pasándole la clave que me están pidiendo
     
         echo $controller->getProductosListaPorCategoria();
@@ -234,11 +253,11 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
 
 
 
-    } else if (isset($array_ruta[0])  && preg_match("/^listaPorTitulo\?nombre=\w+&pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+    } else if (isset($array_ruta[0])  && preg_match("/^listaPorTitulo\?nombre=[a-zA-Z0-9%+]+&pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
         //Llamo al método ver pasándole la clave que me están pidiendo
     
         echo $controller->getCategoriasListaPorTitulo();
-    } else if (isset($array_ruta[0])  && preg_match("/^listaPorDescripcion\?nombre=\w+&pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+    } else if (isset($array_ruta[0])  && preg_match("/^listaPorDescripcion\?nombre=[a-zA-Z0-9%+]+&pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
         //Llamo al método ver pasándole la clave que me están pidiendo
     
         echo $controller->getCategoriasListaPorDecripcion();
@@ -261,8 +280,19 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
       
         echo $controller->setComentarioUsuario();
     } else if (isset($array_ruta[0])  && preg_match("/^deleteComentarioUsuario\?idObjeto=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
-
         echo $controller->deleteComentarioUsuario();
+    
+    } else if (isset($array_ruta[0])  && preg_match("/^infoPerfilUsuario$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+        echo $controller->getInfoPerfilPublico();
+    } else if (isset($array_ruta[0])  && preg_match("/^comprasUsuario$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+        echo $controller->getComprasPerfilUsuario();
+    } else if (isset($array_ruta[0])  && preg_match("/^comentariosUsuario$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+        echo $controller->getComentariosPerfilUsuario();
+    } else if (isset($array_ruta[0])  && preg_match("/^comprar\?idObjeto=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
+        echo $controller->comprarobjeto();
+    } else if (isset($array_ruta[0]) &&$array_ruta[0]='perfil' &&isset($array_ruta[1]) && $array_ruta[1] == 'actualizar' && !isset($array_ruta[2])) {
+
+        echo $controller->actualizarUsuarioPublico();
 
 
 
@@ -285,7 +315,8 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
     
     
         // }else if (isset($array_ruta[0]) && $array_ruta[0] == "categorias" && !isset($array_ruta[1]) ){   
-    //     //Llamo al método ver pasándole la clave que me están pidiendo
+    
+            //     //Llamo al método ver pasándole la clave que me están pidiendo
     //     $controller->categorias();
 
 // } else if (isset($array_ruta[0]) && $array_ruta[0] == "categorias" && isset($array_ruta[1]) && preg_match("/^.+$/", $array_ruta[1]) == 1) {

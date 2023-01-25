@@ -68,6 +68,43 @@ class Actualizar
         }
     }
 
+    public function actualizarPublico()
+    {
+
+
+
+        if ($this->comprobar()) {
+
+            //crear o modificar carpeta del servidor con la imagen
+            //conexion con base de datos
+            $i = 0;
+
+            $datos = [];
+            $datos[$i] = $this->email;
+            $i = $i + 1;
+            $datos[$i] = $this->pass;
+            $i = $i + 1;
+            $datos[$i] = $this->nombre;
+            $i = $i + 1;
+            $datos[$i] = $this->apellidos;
+            $i = $i + 1;
+            $datos[$i] = $this->monedero;
+            $i = $i + 1;
+
+
+
+            $bd = new Bd();
+           
+                $datos[$i] = $this->id;
+                $i = $i + 1;
+                $bd->actualizar_usuario($datos);
+                header('location:../perfil');
+
+                // actualizar sin cambiar imagen
+            
+        }
+    }
+
 
     public function llegan_datos()
     {
@@ -114,6 +151,56 @@ class Actualizar
                     header('location:../usuarios/nuevo');
                 }
             } else {
+                return false;
+            }
+        }
+    }
+    public function llegan_datosPublicos()
+    {
+        if ($this->comprobarNuevo()) {
+
+            //crear o modificar carpeta del servidor con la imagen
+            //conexion con base de datos
+            $i = 0;
+
+            $datos = [];
+            $datos[$i] = $this->email;
+            $i = $i + 1;
+            $datos[$i] = $this->pass;
+            $i = $i + 1;
+            $datos[$i] = $this->nombre;
+            $i = $i + 1;
+            $datos[$i] = $this->apellidos;
+            $i = $i + 1;
+            $datos[$i] = $this->monedero || 100;
+            $i = $i + 1;
+
+
+
+            $bd = new Bd();
+            $this->id = $bd->setUsuario($datos);
+            echo $this->id;
+            if ($this->id != false) {
+
+                if (isset($_FILES['img']) && $_FILES['img']['size'] != 0 && preg_match("/^image\//", $_FILES['img']['type']) == 1) {
+                    $this->img = $_FILES['img'];
+                    $imagen = [];
+                    $imagen[0] = $this->img['name'];
+                    $imagen[1] = $this->id;
+
+                    //guardar imagen y actualizar con imagen
+                    $this->subirImagen();
+                    $bd->actualizar_usuario($imagen);
+
+
+
+
+                    header('location:../login');
+                } else {
+                    header('location:../login');
+                }
+            } else {
+                
                 return false;
             }
         }

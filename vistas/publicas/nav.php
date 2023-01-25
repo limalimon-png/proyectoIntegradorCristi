@@ -40,7 +40,7 @@
               <a id="categorias" class="nav-link" href="categorias">Categorias</a>
             </li>
             <li class="nav-item">
-              <a id="contacto" class="nav-link" href="contacto">Contacto</a>
+              <a id="contacto" class="nav-link" href="contacto">Perfil</a>
             </li>
             <li class="nav-item">
               <a id="login" class="nav-link" href="login">Login</a>
@@ -52,7 +52,7 @@
           </ul>
      
 
-            <form class="d-flex" role="search" action="listaPorNombre" id="buscador">
+            <form class="d-flex" role="search"  onsubmit="redireccionar(event)" id="buscador">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-primary" type="submit">Search</button>
             </form>

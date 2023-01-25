@@ -36,7 +36,7 @@ function puntuacion() {
 }
 
 
-function buscar(e) {
+async function buscar(e) {
     e.preventDefault();
     e.stopPropagation();
     pagina = 0;
@@ -44,7 +44,7 @@ function buscar(e) {
     console.log(busqueda);
     action = direccion + '?nombre=' + busqueda + "&pagina=" + pagina;
 
-    getProductos()
+    await getProductos()
 
 }
 
@@ -61,7 +61,7 @@ async function getProductos() {
 
     const response = await fetch(action);
 
-    info = await response.json();
+   let info3 = await response.json();
 
 
 
@@ -70,40 +70,12 @@ async function getProductos() {
     // let tbody = document.getElementById('bodyLista');
     // tbody.innerHTML = "";
 
-    if (info[0] == 0) {
+    if (info3[0] == 0) {
         return;
     }
-    // info.forEach(element => {
-    //     let tr = document.createElement("tr");
-    //     let td = [];
-    //     for (let i = 0; i < columnas.length-1; i++) {
-    //         td[i] = document.createElement('td');
-    //         td[i].textContent = element[columnas[i]];
-    //     }
+    
 
-    //     tr.append(...td);
-
-
-    //             tr.onclick=()=>{
-    //                 location.href="admin/"+tabla+'/'+element['id'];
-
-
-    //         }
-
-    //     tbody.append(tr);
-    // });
-
-
-    console.log(info[0]['nombre']);
-    console.log(info[0]['categoria']);
-    console.log(info[0]['descripcion']);
-    console.log(info[0]['precio']);
-    console.log(info[0]['latitud']);
-    console.log(info[0]['longitud']);
-    console.log(info[0]['puntuacion_compra']);
-    console.log(info[0]['puntuacion_comentarios']);
-    console.log(info[0]['puntuacion_total']);
-    console.log(info[0]['id']);
+ 
 
     let acordeon = document.getElementById('accordion-1');
 
@@ -111,12 +83,20 @@ async function getProductos() {
 
     let vueltas = 0;
     ids = [];
-    info.forEach(async element => {
+    info3.forEach(async element => {
 
         console.log('id ' + element['id']);
         let combo = { id: element['id'], nPag: 0 }
         ids.push(combo);
-        let comentarioUsuario = await getComentario(element['id']);
+
+         let comentarioUsuario ;
+         try {
+          
+           comentarioUsuario= await getComentario(element['id'])||'';
+         } catch (error) {
+          comentarioUsuario='';
+         }
+ 
 
         contadorItems++;
         let contenido = `<div class="accordion-item">
@@ -188,7 +168,7 @@ async function getProductos() {
                    ${element['descripcion']}
                   </p>
                   <h4>${element['precio']}€</h4>
-                  <button class="btn btn-primary" type="button">Comprar Ya</button>
+                  <button class="btn btn-primary" type="button" onclick="comprar(${element['id']})">Comprar Ya</button>
                 </div>
 
               </div>
@@ -256,9 +236,25 @@ async function getProductos() {
     });
 
 
-    await getComentarios();
+    // await getComentarios();
 
 
+
+
+}
+
+
+function comprar(id) {
+  try {
+    
+    fetch("comprar?idObjeto=" + id);
+  } catch (error) {
+    
+  }
+
+  
+ 
+  
 
 
 }
@@ -326,7 +322,12 @@ async function getComentarios(id) {
                 p.textContent = element['comentario'];
 
                 div.appendChild(p);
-                row.appendChild(div);
+                try{
+
+                  row.appendChild(div);
+                }catch(error){
+
+                }
 
 
 
