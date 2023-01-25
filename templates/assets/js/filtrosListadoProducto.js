@@ -291,7 +291,7 @@ function comentar(id) {
 }
 async function actualizar(id) {
     let comentario = document.getElementById("exampleFormControlTextarea1" + id).value;
-    const response = await fetch("deleteComentactualizarComentarioUsuario?idObjeto=" + id + "&comentario=" + comentario);
+    const response = await fetch("actualizarComentarioUsuario?idObjeto=" + id + "&comentario=" + comentario);
     info = await response.json();
 
 }
@@ -301,13 +301,7 @@ async function eliminar(id) {
 }
 
 
-/*
-<div class="col">
-                <div>
-                  <p class="bg-light border rounded border-0 border-light p-4">Nisi sit justo faucibus nec ornare amet, tortor torquent. Blandit class dapibus, aliquet morbi.</p>
-                </div>
-              </div>
-*/
+
 async function getComentarios(id) {
 
     if (id == undefined) {
@@ -397,6 +391,3 @@ async function setComentario(id, fecha, comentario) {
 }
 
 
-function masComentarios() {
-
-}

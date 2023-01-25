@@ -300,11 +300,11 @@ class Controller
             if(isset($_SESSION['credencialesPublicas'])){
                 $db = new Bd();
                 $datos=[];
-                $datos[1]=$_GET['idObjeto'];
                 $datos[0]=$_SESSION['credencialesPublicas'][0];
-                $datos[3]=$_GET['comentario'];
-                $datos[2]=$_GET['fecha'];
-                return json_encode($db->setComentario($datos));
+                $datos[1]=$_GET['idObjeto'];
+                $datos[3]=$_GET['fecha'];
+                $datos[2]=$_GET['comentario'];
+                return json_encode($db->setComentarioPublico($datos));
                 
             }
         }

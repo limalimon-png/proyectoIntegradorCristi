@@ -288,6 +288,28 @@ class Bd
         return false;
     }
 
+    public function setComentarioPublico($datos)
+    {
+       
+
+
+        try {
+
+            $db = $this->conexion();
+            $sql = "insert into comentario  values ((select id from usuario where email=?),?,?,?)";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($datos);
+
+
+           
+
+            $db = null;
+          
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return false;
+    }
     //gets para formularios
     public function getCategoriasSelect()
     {
@@ -1314,7 +1336,7 @@ class Bd
 
             $db = $this->conexion();
             //insertamos el pedido
-            $sql = "update  comentario set comentario=?  where id_usuario=? and id_objeto=?";
+            $sql = "update  comentario set comentario=?  where id_usuario=(select id from usuario where email=?) and id_objeto=?";
             $stmt = $db->prepare($sql);
             $stmt->execute($datos);
 
