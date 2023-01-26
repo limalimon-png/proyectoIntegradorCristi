@@ -73,8 +73,6 @@ let num=1;
             "  <p class=''>" +
             "  "+element['descripcion']+
             "  </p>" +
-            "  <a class='btn btn-primary btn-lg me-2' role='button' href='#'>Button</a>" +
-            "  <a class='btn btn-outline-primary btn-lg' role='button' href='#'>Button</a>" +
             "</div>" +
             "      </div>" +
             "    </div>" +

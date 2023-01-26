@@ -170,6 +170,12 @@ async function getCategorias() {
   let vueltas = 0;
 
   info.forEach(async element => {
+    
+  if(element['foto']==null){
+    element['foto']='../vistas/galeria/noImage.png';
+  }else{
+    element['foto']= "../vistas/galeria/categorias/" + element['id'] + "/" + element['foto']
+  }
 
     // //console.log('id ' + element['id']);
     // let combo = { id: element['id'], nPag: 0 }
@@ -183,7 +189,7 @@ async function getCategorias() {
 
         <div class="container-fluid row">
           <div class="col-3">
-            <img class="" alt='imagen' src="${"../vistas/galeria/categorias/" + element['id'] + "/" + element['foto1']}" style="max-height: 60px" />
+            <img class="" alt='imagen' src="${  element['foto']}" style="max-height: 60px" />
 
           </div>
 
