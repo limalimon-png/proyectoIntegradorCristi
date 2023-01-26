@@ -113,6 +113,11 @@ async function getComentarios() {
     } catch (error) {
         
     }
+
+    
+}
+function eliminar(){
+     location.href="eliminarUsuarioPublico";
    
 }
 

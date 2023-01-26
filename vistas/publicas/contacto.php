@@ -41,6 +41,7 @@
                   <input type="hidden" name="id" id="id" value="">
                 </div>
                 <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Actualizar</button></div>
+                <div class="mb-3"><button class="btn btn-danger d-block w-100" type="button" onclick="eliminar()">Eliminar usuario</button></div>
 
               </form>
             </div>

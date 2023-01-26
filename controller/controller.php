@@ -5,18 +5,8 @@ use mail\Mailer;
 
 class Controller
 {
-    var $goria;
-    var $productos;
-    var $coches;
-    var $cat;
-    var $cats;
-    var $pedidoValido = false;
-    var $pedido;
-    var $credencial;
-    var $body;
-    var $productosCarrito;
-    var $mensaje;
-    var $contenido;
+
+
 
     // function __construct()
     // {
@@ -72,12 +62,11 @@ class Controller
 
         $photoPath = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
         $ruta = str_replace("index.php/", "", $photoPath);
-        
 
 
-            //Le paso los datos a la vista
-            require("vistas/publicas/listaProductos.php");
-        
+
+        //Le paso los datos a la vista
+        require("vistas/publicas/listaProductos.php");
     }
 
     public function categorias()
@@ -86,12 +75,11 @@ class Controller
 
         $photoPath = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
         $ruta = str_replace("index.php/", "", $photoPath);
-        
 
 
-            //Le paso los datos a la vista
-            require("vistas/publicas/listaCategorias.php");
-        
+
+        //Le paso los datos a la vista
+        require("vistas/publicas/listaCategorias.php");
     }
     public function contacto()
     {
@@ -99,12 +87,11 @@ class Controller
 
         $photoPath = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
         $ruta = str_replace("index.php/", "", $photoPath);
-        
 
 
-            //Le paso los datos a la vista
-            require("vistas/publicas/contacto.php");
-        
+
+        //Le paso los datos a la vista
+        require("vistas/publicas/contacto.php");
     }
     public function loginPublico()
     {
@@ -112,12 +99,11 @@ class Controller
 
         $photoPath = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
         $ruta = str_replace("index.php/", "", $photoPath);
-        
 
 
-            //Le paso los datos a la vista
-            require("vistas/publicas/login.php");
-        
+
+        //Le paso los datos a la vista
+        require("vistas/publicas/login.php");
     }
     public function register()
     {
@@ -125,12 +111,11 @@ class Controller
 
         $photoPath = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
         $ruta = str_replace("index.php/", "", $photoPath);
-        
 
 
-            //Le paso los datos a la vista
-            require("vistas/publicas/register.php");
-        
+
+        //Le paso los datos a la vista
+        require("vistas/publicas/register.php");
     }
 
 
@@ -185,6 +170,11 @@ class Controller
 
         $user[0] = $_POST["user"];
         $user[1] = $_POST["pass"];
+        if(preg_match("/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/",$user[0])==1 &&preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/",$user[1])==1 ){
+            header('location:../login?error=1');
+        }else{
+
+     
 
         $aut = new Sesion();
         $aut->login($user);
@@ -199,11 +189,12 @@ class Controller
             // require('vistas/index.php');
         } else {
             //vuelve
-         echo   $this->mensaje = "prueba";
+            echo   $this->mensaje = "prueba";
             // require('view/login.php');
 
             header('location:../login?error=1');
         }
+    }
     }
 
 
@@ -227,7 +218,7 @@ class Controller
             // require('vistas/index.php');
         } else {
             //vuelve
-        //  echo   $this->mensaje = "prueba";
+            //  echo   $this->mensaje = "prueba";
             // require('view/login.php');
 
             header('location:../login?error=1');
@@ -243,253 +234,94 @@ class Controller
         require("vistas/publicas/contacto.php");
     }
 
-public function autenticationRegister()
+    public function autenticationRegister()
     {
         $act = new Actualizar();
         $act->llegan_datosPublicos();
-     
     }
 
-    public function getDestacados()
-    {
-        $db = new Bd();
-        session_start();
-       if(isset($_SESSION['credencialesPublicas'])){
-           return json_encode($db->getProductosDestacados($_SESSION['credencialesPublicas'][0]));
-
-       }else{
-           return json_encode($db->getProductosDestacados($_GET['id']));
-       }
-    }
-    public function getComentariosProducto()
-    {
-        $db = new Bd();
-       
     
-       if(isset($_GET['idObjeto']) && isset($_GET['pagina'])){
-
-           return json_encode($db->getComentariosObjeto($_GET['pagina'],$_GET['idObjeto']));
-        }else{
-            $a=[];
-            $a[0]="error";
-            return json_encode($a);
-        }
-
-      
-    }
-    public function getComentarioUsuario()
-    {
-        $db = new Bd();
-        if(isset($_GET['idObjeto'])){
-
-            session_start();
-            if(isset($_SESSION['credencialesPublicas'])){
-                return json_encode($db->getComentarioUsuario($_GET['idObjeto'],$_SESSION['credencialesPublicas'][0]));
-                
-            }
-        }
-    }
 
     public function comprarobjeto()
     {
         $db = new Bd();
-        if(isset($_GET['idObjeto'])){
+        if (isset($_GET['idObjeto'])) {
 
             session_start();
-            if(isset($_SESSION['credencialesPublicas'])){
-                return json_encode($db->comprarObjeto($_GET['idObjeto'],$_SESSION['credencialesPublicas'][0]));
-                
+            if (isset($_SESSION['credencialesPublicas'])) {
+                return json_encode($db->comprarObjeto($_GET['idObjeto'], $_SESSION['credencialesPublicas'][0]));
             }
         }
     }
 
 
-    public function getInfoPerfilPublico()
-    {
-        $db = new Bd();
-       
-
-            session_start();
-            if(isset($_SESSION['credencialesPublicas'])){
-                return json_encode($db->getUsuarioPorEmail($_SESSION['credencialesPublicas'][0]));
-                
-            
-        }
-    }
-    public function getComprasPerfilUsuario()
-    {
-        $db = new Bd();
-      
-
-            session_start();
-            if(isset($_SESSION['credencialesPublicas'])){
-                return json_encode($db->getComprasUsuario($_SESSION['credencialesPublicas'][0]));
-                
-            
-        }
-    }
-    public function getComentariosPerfilUsuario()
-    {
-        $db = new Bd();
-        
-
-            session_start();
-            if(isset($_SESSION['credencialesPublicas'])){
-                return json_encode($db->getComentariosUsuario($_SESSION['credencialesPublicas'][0]));
-                
-            
-        }
-    }
+   
     public function actualizarUsuarioPublico()
     {
         $act = new Actualizar();
         $act->actualizarPublico();
-        
     }
 
 
 
     public function actualizarComentarioUsuario()
     {
-        if(isset($_GET['idObjeto']) && isset($_GET['comentario'])){
+        if (isset($_GET['idObjeto']) && isset($_GET['comentario'])) {
 
             session_start();
-            if(isset($_SESSION['credencialesPublicas'])){
+            if (isset($_SESSION['credencialesPublicas'])) {
                 $db = new Bd();
-                $datos=[];
-                $datos[2]=$_GET['idObjeto'];
-                $datos[1]=$_SESSION['credencialesPublicas'][0];
-                $datos[0]=$_GET['comentario'];
+                $datos = [];
+                $datos[2] = $_GET['idObjeto'];
+                $datos[1] = $_SESSION['credencialesPublicas'][0];
+                $datos[0] = $_GET['comentario'];
                 return json_encode($db->actualizar_comentario($datos));
-                
             }
         }
-       
     }
     public function setComentarioUsuario()
     {
-        if(isset($_GET['idObjeto']) && isset($_GET['comentario']) && isset($_GET['fecha'])){
+        if (isset($_GET['idObjeto']) && isset($_GET['comentario']) && isset($_GET['fecha'])) {
 
             session_start();
-            if(isset($_SESSION['credencialesPublicas'])){
+            if (isset($_SESSION['credencialesPublicas'])) {
                 $db = new Bd();
-                $datos=[];
-                $datos[0]=$_SESSION['credencialesPublicas'][0];
-                $datos[1]=$_GET['idObjeto'];
-                $datos[3]=$_GET['fecha'];
-                $datos[2]=$_GET['comentario'];
+                $datos = [];
+                $datos[0] = $_SESSION['credencialesPublicas'][0];
+                $datos[1] = $_GET['idObjeto'];
+                $datos[3] = $_GET['fecha'];
+                $datos[2] = $_GET['comentario'];
                 return json_encode($db->setComentarioPublico($datos));
-                
             }
         }
-        
     }
 
     public function deleteComentarioUsuario()
     {
-        if(isset($_GET['idObjeto'])){
+        if (isset($_GET['idObjeto'])) {
 
             session_start();
-            if(isset($_SESSION['credencialesPublicas'])){
+            if (isset($_SESSION['credencialesPublicas'])) {
                 $db = new Bd();
-                $datos=[];
-                $datos[1]=$_GET['idObjeto'];
-                $datos[0]=$_SESSION['credencialesPublicas'][0];
+                $datos = [];
+                $datos[1] = $_GET['idObjeto'];
+                $datos[0] = $_SESSION['credencialesPublicas'][0];
                 return json_encode($db->deleteComentarioUsuario($datos));
-                
             }
         }
-       
     }
 
-public function getProductosListaPorNombre(){
-   
-   
-
-       
-
-    if(isset($_GET['nombre'])){
-        $pagina = 0;
-        $bd=new Bd();
-        if (isset($_GET['pagina'])) {
-            $pagina = $_GET['pagina'];
-        }
-        return json_encode($bd->getProductosPorNombre($pagina,$_GET['nombre']));
-    }
-}
-public function getProductosListaPorCategoria(){
-    if(isset($_GET['nombre'])){
-         $pagina = 0;
-        $bd=new Bd();
-        if (isset($_GET['pagina'])) {
-            $pagina = $_GET['pagina'];
-        }
-        $bd=new Bd();
-       
-        return json_encode($bd->getProductosPorCategoria($pagina,$_GET['nombre']));
-    }
-}
-public function getProductosVentas(){
-    $bd=new Bd();
-     $pagina = 0;
-        $bd=new Bd();
-        if (isset($_GET['pagina'])) {
-            $pagina = $_GET['pagina'];
-        }
-        return json_encode( $bd->getProductosPorVentas($pagina));
-
-}
-public function getProductosPuntuacion(){
-    $bd=new Bd();
-     $pagina = 0;
-        $bd=new Bd();
-        if (isset($_GET['pagina'])) {
-            $pagina = $_GET['pagina'];
-        }
-        return json_encode( $bd->getProductosPorPuntuacionTotal($pagina));
-
-}
-public function getCategoriasListaPorTitulo(){
-    if(isset($_GET['nombre'])){
-         $pagina = 0;
-        $bd=new Bd();
-        if (isset($_GET['pagina'])) {
-            $pagina = $_GET['pagina'];
-        }
-        $bd=new Bd();
-        return json_encode($bd->getCategoriasPorNombre($pagina,$_GET['nombre']));
-    }
-}
-public function getCategoriasListaPorDecripcion(){
-    if(isset($_GET['nombre'])){
-         $pagina = 0;
-        $bd=new Bd();
-        if (isset($_GET['pagina'])) {
-            $pagina = $_GET['pagina'];
-        }
-        $bd=new Bd();
-        return json_encode($bd->getCategoriasPorDescripcion($pagina,$_GET['nombre']));
-    }
-}
-public function getCategoriasPuntuacion(){
-  
-     $pagina = 0;
-        $bd=new Bd();
-        if (isset($_GET['pagina'])) {
-            $pagina = $_GET['pagina'];
-        }
-        return json_encode( $bd->getCategoriasPorPuntuacion($pagina));
-
-}
 
 
-   
+
+
+
     public function cerrarSesion()
     {
 
         $logout = new Logout();
         require('vistas/login.php');
-         header('location:login');
+        header('location:login');
     }
     public function cerrarSesionPublico()
     {
@@ -553,10 +385,19 @@ public function getCategoriasPuntuacion(){
         // require('view/correo.php');
 
     }
-    public function formularioPass()
-    {
 
-        require("view/formularioResetear.php");
+
+
+    public function eliminarUsuarioPublico(){
+        $db = new Bd();
+
+
+        session_start();
+        if (isset($_SESSION['credencialesPublicas'])) {
+        $db->deleteUsuarioPublico($_SESSION['credencialesPublicas'][0]);
+         $this->cerrarSesionPublico();
+        header('location:contacto');
+        }
+
     }
-   
 }

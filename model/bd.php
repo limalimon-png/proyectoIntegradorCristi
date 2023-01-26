@@ -1326,6 +1326,26 @@ class Bd
            return "No se pudo eliminar";
         }
     }
+    public function deleteUsuarioPublico($email)
+    {
+
+        $datos=[];
+        $datos[0]=$email;
+        try {
+
+            $db = $this->conexion();
+            $sql = "delete from usuario where email=$email)";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+
+
+         
+            $db = null;
+        
+        } catch (PDOException $e) {
+           return "No se pudo eliminar";
+        }
+    }
 
     public function deleteCategoria($id)
     {

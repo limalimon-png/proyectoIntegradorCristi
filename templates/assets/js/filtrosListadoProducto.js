@@ -184,7 +184,7 @@ async function getProductos() {
                    ${element['descripcion']}
                   </p>
                   <h4>${element['precio']}€</h4>
-                  <button class="btn btn-primary" type="button" onclick="comprar(${element['id']})">Comprar Ya</button>
+                  <button class="btn btn-primary" type="button" id="compra${element['id']}" onclick="comprar(${element['id']})">Comprar Ya</button>
                 </div>
 
               </div>
@@ -264,9 +264,12 @@ function comprar(id) {
   try {
     
     fetch("comprar?idObjeto=" + id);
+    
   } catch (error) {
     
   }
+  document.getElementById('compra'+id).classList.add('btn-success');
+  document.getElementById('compra'+id).classList.remove('btn-primary');
 
   
  

@@ -18,6 +18,7 @@ require("./controller/controllerProduct.php");
 require("./controller/controllerUser.php");
 require("./controller/controllerCats.php");
 require("./controller/controllerComent.php");
+require("./controller/controllerGetsPublicos.php");
 require("composer/mailer.php");
 
 
@@ -27,6 +28,7 @@ $controllerComentarios = new ControllerComentarios;
 $controllerCategorias = new ControllerCategorias;
 $controllerProductos = new ControllerProductos;
 $controllerUsuarios = new ControllerUsuarios;
+$controllerGets = new controllerGetsPublicos;
 
 //Ruta de la home
 $home = "/proyecto2eva/proyecto/index.php/";
@@ -215,12 +217,12 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
     } else if (isset($array_ruta[0])  && preg_match("/^destacados\?id=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
         //Llamo al método ver pasándole la clave que me están pidiendo
     
-        echo $controller->getDestacados();
+        echo $controllerGets->getDestacados();
 
     } else if (isset($array_ruta[0])  && preg_match("/^listaPorNombre\?nombre=[a-zA-Z0-9%+]+&pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
         //Llamo al método ver pasándole la clave que me están pidiendo
     
-        echo $controller->getProductosListaPorNombre();
+        echo $controllerGets->getProductosListaPorNombre();
 
 
 
@@ -228,17 +230,17 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
     } else if (isset($array_ruta[0])  && preg_match("/^listaPorCategoria\?nombre=[a-zA-Z0-9%+]+&pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
         //Llamo al método ver pasándole la clave que me están pidiendo
     
-        echo $controller->getProductosListaPorCategoria();
+        echo $controllerGets->getProductosListaPorCategoria();
     } else if (isset($array_ruta[0]) && $array_ruta[0]=='categorias'  && isset($array_ruta[1])&& preg_match("/^listaPorCategoria\?nombre=[a-zA-Z0-9%+]+&pagina=\d+$/", $array_ruta[1]) == 1 && !isset($array_ruta[2])) {
         //Llamo al método ver pasándole la clave que me están pidiendo
     
-        echo $controller->getProductosListaPorCategoria();
+        echo $controllerGets->getProductosListaPorCategoria();
 
 
     } else if (isset($array_ruta[0])  && preg_match("/^ventas\?pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
         //Llamo al método ver pasándole la clave que me están pidiendo
     
-        echo $controller->getProductosVentas();
+        echo $controllerGets->getProductosVentas();
 
 
 
@@ -246,7 +248,7 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
     } else if (isset($array_ruta[0])  && preg_match("/^puntuacionProductos\?pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
         //Llamo al método ver pasándole la clave que me están pidiendo
     
-         echo $controller->getProductosPuntuacion();
+         echo $controllerGets->getProductosPuntuacion();
     
 
 
@@ -254,23 +256,23 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
     } else if (isset($array_ruta[0])  && preg_match("/^listaPorTitulo\?nombre=[a-zA-Z0-9%+]+&pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
         //Llamo al método ver pasándole la clave que me están pidiendo
     
-        echo $controller->getCategoriasListaPorTitulo();
+        echo $controllerGets->getCategoriasListaPorTitulo();
     } else if (isset($array_ruta[0])  && preg_match("/^listaPorDescripcion\?nombre=[a-zA-Z0-9%+]+&pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
         //Llamo al método ver pasándole la clave que me están pidiendo
     
-        echo $controller->getCategoriasListaPorDecripcion();
+        echo $controllerGets->getCategoriasListaPorDecripcion();
 
     
     } else if (isset($array_ruta[0])  && preg_match("/^puntuacionCategorias\?pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
 
-        echo $controller->getCategoriasPuntuacion();
+        echo $controllerGets->getCategoriasPuntuacion();
      
     } else if (isset($array_ruta[0])  && preg_match("/^getComentariosProducto\?idObjeto=\d+&pagina=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
 
-        echo $controller->getComentariosProducto();
+        echo $controllerGets->getComentariosProducto();
     } else if (isset($array_ruta[0])  && preg_match("/^getComentarioUsuario\?idObjeto=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
 
-        echo $controller->getComentarioUsuario();
+        echo $controllerGets->getComentarioUsuario();
     } else if (isset($array_ruta[0])  && preg_match("/^actualizarComentarioUsuario\?idObjeto=\d+&comentario=[\w %]+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
 
         echo $controller->actualizarComentarioUsuario();
@@ -281,16 +283,20 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
         echo $controller->deleteComentarioUsuario();
     
     } else if (isset($array_ruta[0])  && preg_match("/^infoPerfilUsuario$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
-        echo $controller->getInfoPerfilPublico();
+        echo $controllerGets->getInfoPerfilPublico();
     } else if (isset($array_ruta[0])  && preg_match("/^comprasUsuario$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
-        echo $controller->getComprasPerfilUsuario();
+        echo $controllerGets->getComprasPerfilUsuario();
     } else if (isset($array_ruta[0])  && preg_match("/^comentariosUsuario$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
-        echo $controller->getComentariosPerfilUsuario();
+        echo $controllerGets->getComentariosPerfilUsuario();
     } else if (isset($array_ruta[0])  && preg_match("/^comprar\?idObjeto=\d+$/", $array_ruta[0]) == 1 && !isset($array_ruta[1])) {
         echo $controller->comprarobjeto();
     } else if (isset($array_ruta[0]) &&$array_ruta[0]='perfil' &&isset($array_ruta[1]) && $array_ruta[1] == 'actualizar' && !isset($array_ruta[2])) {
 
         echo $controller->actualizarUsuarioPublico();
+
+    } else if (isset($array_ruta[0]) &&$array_ruta[0]='eliminarUsuarioPublico') {
+
+        echo $controller->eliminarUsuarioPublico();
 
 
 
@@ -324,7 +330,7 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
     //Llamo al método por defecto del controlador
 
 
-       $controller->porDefecto(sizeof($array_ruta));
+    //    $controller->porDefecto(sizeof($array_ruta));
 
 
     var_dump($array_ruta);
