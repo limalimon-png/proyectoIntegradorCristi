@@ -31,7 +31,7 @@ function puntuacion() {
     pagina = 0;
     action = "puntuacionProductos?pagina=" + pagina;
     getProductos()
-    console.log('puntuacion');
+    // console.log('puntuacion');
 
 }
 
@@ -41,11 +41,10 @@ async function buscar(e) {
     e.stopPropagation();
     pagina = 0;
     let busqueda = document.getElementById('buscadorListadoProductos').value;
-    console.log(busqueda);
     action = direccion + '?nombre=' + busqueda + "&pagina=" + pagina;
-
-    await getProductos()
-
+    
+if(busqueda==''){}else{
+    await getProductos()}
 }
 
 
@@ -84,8 +83,25 @@ async function getProductos() {
     let vueltas = 0;
     ids = [];
     info3.forEach(async element => {
+      if(element['foto1']==null){
+        element['foto1']='../vistas/galeria/noImage.png';
+      }else{
+        element['foto1']= "../vistas/galeria/objetos/" + element['id'] + "/img1/" + element['foto1']
+      }
 
-        console.log('id ' + element['id']);
+    
+      if(element['foto2']==null){
+        element['foto2']='../vistas/galeria/noImage.png';
+      }else{
+        element['foto2']= "../vistas/galeria/objetos/" + element['id'] + "/img2/" + element['foto2']
+      }
+      if(element['foto3']==null){
+        element['foto3']='../vistas/galeria/noImage.png';
+      }else{
+        element['foto3']= "../vistas/galeria/objetos/" + element['id'] + "/img3/" + element['foto3']
+      }
+
+        // console.log('id ' + element['id']);
         let combo = { id: element['id'], nPag: 0 }
         ids.push(combo);
 
@@ -105,7 +121,7 @@ async function getProductos() {
 
         <div class="container-fluid row">
           <div class="col-3">
-            <img class="" src="${"../vistas/galeria/objetos/" + element['id'] + "/img1/" + element['foto1']}" style="max-height: 60px" />
+            <img class="" alt='imagen' src="${element['foto1']}" style="max-height: 60px" />
 
           </div>
 
@@ -135,19 +151,19 @@ async function getProductos() {
               <div class="row">
 
                 <div class="col-12">
-                  <img class="rounded w-100 h-100 fit-cover" style="min-height: 300px" src="${"../vistas/galeria/objetos/" + element['id'] + "/img1/" + element['foto1']}" />
+                  <img class="rounded w-100 h-100 fit-cover" style="min-height: 300px" src="${element['foto1']}" />
                 </div>
                 <div class="col-12">
                   <button>
-                    <img class="" src="${"../vistas/galeria/objetos/" + element['id'] + "/img1/" + element['foto1']}" style="max-height: 60px" />
+                    <img class="" alt='imagen' src="${element['foto1']}" style="max-height: 60px" />
 
                   </button>
                   <button>
-                    <img class="" src="${"../vistas/galeria/objetos/" + element['id'] + "/img2/" + element['foto2']}" style="max-height: 60px" />
+                    <img class="" alt='imagen' src="${element['foto2']}" style="max-height: 60px" />
 
                   </button>
                   <button>
-                    <img class="" src="${"../vistas/galeria/objetos/" + element['id'] + "/img3/" + element['foto3']}" style="max-height: 60px" />
+                    <img class="" alt='imagen' src="${element['foto3']}" style="max-height: 60px" />
 
                   </button>
                 </div>
@@ -270,7 +286,7 @@ function cargarMas() {
 
 
 function comentar(id) {
-    console.log(id);
+    // console.log(id);
     //mostrar fecha con formato aaaa-mm-dd
     let fecha = new Date();
     let dia = fecha.getDate();
@@ -278,7 +294,7 @@ function comentar(id) {
     let anio = fecha.getFullYear();
     let fechaActual = anio + "-" + mes + "-" + dia;
     let comentario = document.getElementById("exampleFormControlTextarea1" + id).value;
-    console.log(fechaActual);
+    // console.log(fechaActual);
 
     setComentario(id, fechaActual, comentario);
 
@@ -286,14 +302,24 @@ function comentar(id) {
 
 }
 async function actualizar(id) {
+  try {
+    
     let comentario = document.getElementById("exampleFormControlTextarea1" + id).value;
     const response = await fetch("actualizarComentarioUsuario?idObjeto=" + id + "&comentario=" + comentario);
     info = await response.json();
+  } catch (error) {
+    
+  }
 
 }
 async function eliminar(id) {
+  try {
     const response = await fetch("deleteComentarioUsuario?idObjeto=" + id);
     info = await response.json();
+    
+  } catch (error) {
+    
+  }
 }
 
 
@@ -314,7 +340,7 @@ async function getComentarios(id) {
             let info2 = await response.json();
             info2.forEach(element => {
                 let row = document.getElementById("comentariosOtrosUsuarios" + ids[i].id);
-                console.log("info2", element);
+                // console.log("info2", element);
                 let div = document.createElement("div");
                 div.className = "col";
                 let p = document.createElement("p");
@@ -350,7 +376,7 @@ async function getComentarios(id) {
                 if(info2==0){return}
                 info2.forEach(element => {
                     let row = document.getElementById("comentariosOtrosUsuarios" + ids[i].id);
-                    console.log("info2", element);
+                    // console.log("info2", element);
                     let div = document.createElement("div");
                     div.className = "col";
                     let p = document.createElement("p");
@@ -385,8 +411,13 @@ async function getComentario(id) {
 }
 
 async function setComentario(id, fecha, comentario) {
+  try {
     const response = await fetch("setComentarioUsuario?idObjeto=" + id + "&comentario=" + comentario + "&fecha=" + fecha);
     info = await response.json();
+    
+  } catch (error) {
+    
+  }
 
 
 }

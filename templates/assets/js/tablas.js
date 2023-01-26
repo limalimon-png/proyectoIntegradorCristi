@@ -82,7 +82,7 @@ async function getProductos(pag) {
     let tbody = document.getElementById('bodyLista');
     tbody.innerHTML = "";
 
-console.log(info);
+// console.log(info);
     info.forEach(element => {
         let tr = document.createElement("tr");
         let td = [];

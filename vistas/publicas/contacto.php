@@ -16,8 +16,7 @@
       <div class="row mb-5">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
           <h2>Perfil usuario</h2>
-          <p>Curae hendrerit donec commodo hendrerit egestas tempus, turpis facilisis nostra nunc. Vestibulum dui eget
-            ultrices.</p>
+          <p>Bienvenido a tu perfil en CHRISTIE'S & META! Este es el lugar donde puedes ver todas tus compras, comentarios y modificar tu información personal.</p>
         </div>
       </div>
       <div class="row d-flex justify-content-center ">
@@ -68,6 +67,7 @@
   <script src="../templates/assets/js/script.min.js"></script>
   <script src="../templates/assets/js/perfil.js"></script>
   <script src="../templates/assets/js/validaciones.js"></script>
+  <script>cargarDesdeOtroArchivo();</script>
 </body>
 
 </html>

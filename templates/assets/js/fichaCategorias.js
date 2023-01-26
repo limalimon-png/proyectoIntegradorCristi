@@ -33,7 +33,7 @@ async function getProductos() {
 
         info = await response.json();
 
-        console.log(info);
+       // console.log(info);
 
      if(info[0]['foto']==0 || info[0]['foto']==undefined){
 

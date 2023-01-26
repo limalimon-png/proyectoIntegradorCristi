@@ -260,7 +260,7 @@ if (isset($_SESSION["credenciales"])) {
 
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="fecha" class=" form-control-label">Fecha</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="fecha" name="fecha" tipo="fecha" placeholder="Text" class="form-control"><div  class="invalid-feedback" >Introduce una fecha con formato aaaa-mm-dd</div></div>
+                                        <div class="col-12 col-md-9"><input type="date" id="fecha" name="fecha" tipo="fecha" placeholder="Text" class="form-control"><div  class="invalid-feedback" >Introduce una fecha con formato aaaa-mm-dd</div></div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="comentario" class=" form-control-label">Reseña</label></div>

@@ -13,7 +13,7 @@ async function getDatos() {
 
         let info4 = await response.json();
         info4.forEach(element => {
-            console.log(element);
+            // console.log(element);
             document.getElementById("nombre").value = element['nombre'];
             document.getElementById("apellidos").value = element['apellidos'];
             document.getElementById("email").value = element['email'];

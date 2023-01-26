@@ -134,7 +134,7 @@ try{
    
 }catch(err){
     //no tiene el atributo tipo
-    console.log(err);
+    // console.log(err);
 }
     
 

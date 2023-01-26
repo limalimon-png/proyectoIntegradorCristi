@@ -31,7 +31,7 @@ function puntuacion() {
   pagina = 0;
   action = "puntuacionCategorias?pagina=" + pagina;
   getCategorias()
-  console.log('puntuacion');
+  //console.log('puntuacion');
 
 }
 
@@ -43,7 +43,10 @@ function buscarCategoria(e) {
   let busqueda = document.getElementById('buscadorListadoCategorias').value;
   action = direccion + '?nombre=' + busqueda + "&pagina=" + pagina;
 
-  getCategorias()
+  if(busqueda==''){}else{
+    getCategorias()}
+
+
 
 }
 
@@ -162,13 +165,13 @@ async function getCategorias() {
 
   let acordeon = document.getElementById('accordion-2');
 
-  console.log(info);
+  //console.log(info);
 
   let vueltas = 0;
 
   info.forEach(async element => {
 
-    // console.log('id ' + element['id']);
+    // //console.log('id ' + element['id']);
     // let combo = { id: element['id'], nPag: 0 }
     // ids.push(combo);
     // let comentarioUsuario = await getComentario(element['id']);
@@ -180,7 +183,7 @@ async function getCategorias() {
 
         <div class="container-fluid row">
           <div class="col-3">
-            <img class="" src="${"../vistas/galeria/categorias/" + element['id'] + "/" + element['foto1']}" style="max-height: 60px" />
+            <img class="" alt='imagen' src="${"../vistas/galeria/categorias/" + element['id'] + "/" + element['foto1']}" style="max-height: 60px" />
 
           </div>
 
@@ -224,7 +227,12 @@ async function getCategorias() {
       acordeon.innerHTML += contenido;
 
     }
-    await getProductos(element['titulo'], element['id']);
+    try {
+      
+      await getProductos(element['titulo'], element['id']);
+    } catch (error) {
+      
+    }
   });
 
 
@@ -246,7 +254,7 @@ function cargarMas() {
 
 
 function comentar(id) {
-  console.log(id);
+  //console.log(id);
   //mostrar fecha con formato aaaa-mm-dd
   let fecha = new Date();
   let dia = fecha.getDate();
@@ -254,7 +262,7 @@ function comentar(id) {
   let anio = fecha.getFullYear();
   let fechaActual = anio + "-" + mes + "-" + dia;
   let comentario = document.getElementById("exampleFormControlTextarea1" + id).value;
-  console.log(fechaActual);
+  //console.log(fechaActual);
 
   setComentario(id, fechaActual, comentario);
 
@@ -290,7 +298,7 @@ async function getComentarios(id) {
       let info2 = await response.json();
       info2.forEach(element => {
         let row = document.getElementById("comentariosOtrosUsuarios" + ids[i].id);
-        console.log("info2", element);
+        //console.log("info2", element);
         let div = document.createElement("div");
         div.className = "col";
         let p = document.createElement("p");
@@ -321,7 +329,7 @@ async function getComentarios(id) {
         if (info2 == 0) { return }
         info2.forEach(element => {
           let row = document.getElementById("comentariosOtrosUsuarios" + ids[i].id);
-          console.log("info2", element);
+          //console.log("info2", element);
           let div = document.createElement("div");
           div.className = "col";
           let p = document.createElement("p");

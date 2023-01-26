@@ -523,7 +523,7 @@
 
     <script src="../templates/vendors/chart.js/dist/Chart.bundle.min.js"></script>
     <script src="../templates/assets/js/dashboard.js"></script>
-    <script src="../templates/assets/js/widgets.js"></script>
+    <!-- <script src="../templates/assets/js/widgets.js"></script> -->
     <script src="../templates/vendors/jqvmap/dist/jquery.vmap.min.js"></script>
     <script src="../templates/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <script src="../templates/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>

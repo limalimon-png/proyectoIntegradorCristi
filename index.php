@@ -324,7 +324,7 @@ if (isset($array_ruta[0]) && $array_ruta[0] == "login" && !isset($array_ruta[1])
     //Llamo al método por defecto del controlador
 
 
-    //    $controller->porDefecto(sizeof($array_ruta));
+       $controller->porDefecto(sizeof($array_ruta));
 
 
     var_dump($array_ruta);

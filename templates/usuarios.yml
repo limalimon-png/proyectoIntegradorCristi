@@ -1,0 +1,17 @@
+"Juan Perez" - juan.perez@gmail.com - Contraseña: P3r3zJuan12
+"Maria Garcia" - maria.garcia@hotmail.com - Contraseña: GARCIAm12
+"Pedro Martinez" - pedro.martinez@yahoo.com - Contraseña: MartiNEzP3dr012
+"Ana Rodriguez" - ana.rodriguez@gmail.com - Contraseña: R0driguezAna12
+"Carlos Hernandez" - carlos.hernandez@hotmail.com - Contraseña: H3rnandezCarlos12
+"Gabriela Sanchez" - gabriela.sanchez@yahoo.com - Contraseña: SANCHEZgabriela12
+"Jorge Lopez" - jorge.lopez@gmail.com - Contraseña: L0pezJorge12
+"Sofia Perez" - sofia.perez@hotmail.com - Contraseña: P3r3zSofia12
+
+insert into usuario (nombre,apellidos,email,password,monedero) values('Juan','Perez','juan.perez@gmail.com',sha1('P3r3zJuan12'),100);
+insert into usuario (nombre,apellidos,email,password,monedero) values('Maria','Garcia','maria.garcia@hotmail.com',sha1('GARCIAm12'),100);
+insert into usuario (nombre,apellidos,email,password,monedero) values('Pedro','Martinez','pedro.martinez@yahoo.com',sha1('MartiNEzP3dr012'),100);
+insert into usuario (nombre,apellidos,email,password,monedero) values('Ana','Rodriguez','ana.rodriguez@gmail.com',sha1('R0driguezAna12'),100);
+insert into usuario (nombre,apellidos,email,password,monedero) values('Carlos','Hernandez','carlos.hernandez@hotmail.com',sha1('H3rnandezCarlos12'),100);
+insert into usuario (nombre,apellidos,email,password,monedero) values('Gabriela','Sanchez','gabriela.sanchez@yahoo.com',sha1('SANCHEZgabriela12'),100);
+insert into usuario (nombre,apellidos,email,password,monedero) values('Jorge','Lopez','jorge.lopez@gmail.com',sha1('L0pezJorge12'),100);
+insert into usuario (nombre,apellidos,email,password,monedero) values('Sofia','Perez','sofia.perez@hotmail.com',sha1('P3r3zSofia12'),100);

@@ -50,13 +50,14 @@
                   Bienvenido a <br />Christie's & Meta
                 </h1>
                 <p class="mb-4">
-                  Etiam a rutrum, mauris lectus aptent convallis. Fusce
-                  vulputate aliquam, sagittis odio metus. Nulla porttitor
-                  vivamus viverra laoreet, aliquam netus.
+                Estamos emocionados de tenerte aquí. Nuestra página web es el lugar perfecto para encontrar las mejores opciones de compra en el metaverso. Ofrecemos una amplia variedad de opciones para comprar cualquier cosa en el mundo virtual, desde arte y objetos de colección hasta activos virtuales y experiencias inmersivas. Explora nuestra selección única y encuentra exactamente lo que estás buscando. ¡Gracias por visitarnos y disfruta tu tiempo en CHRISTIE'S & META!"
                 </p>
-                <button class="btn btn-light fs-5 py-2 px-4" type="button">
-                  Button
-                </button>
+                <a href="login">
+
+                  <button class="btn btn-light fs-5 py-2 px-4" type="button">
+                    iniciar sesion
+                  </button>
+                </a>
               </div>
             </div>
           </div>
@@ -77,16 +78,16 @@
         <div class="container-fluid  row mt-3">
 
           <div class="d-grid gap-4 col-md-3 col-6 mx-auto ">
-            <button class="btn btn-primary  cats" type="button">Button</button>
+            <button class="btn btn-primary  cats" type="button">Coches</button>
           </div>
           <div class="d-grid gap-4 col-md-3 col-6 mx-auto ">
-            <button class="btn btn-primary cats" type="button">Button</button>
+            <button class="btn btn-primary cats" type="button">Comida</button>
           </div>
           <div class="d-grid gap-4 col-md-3 col-6 mx-auto ">
-            <button class="btn btn-primary cats" type="button">Button</button>
+            <button class="btn btn-primary cats" type="button">Deportes</button>
           </div>
           <div class="d-grid gap-4 col-md-3 col-6 mx-auto ">
-            <button class="btn btn-primary cats" type="button">Button</button>
+            <button class="btn btn-primary cats" type="button">Islas</button>
           </div>
          
         </div>
